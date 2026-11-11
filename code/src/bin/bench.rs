@@ -51,8 +51,7 @@ fn main() {
             for _ in 0..50 {
                 let t = Instant::now();
                 let (d0, f0) = sys.share(&mut r, 0, &c1); let (d1, f1) = sys.share(&mut r, 1, &c1);
-                assert!(sys.judge_share(0, &c1, &d0, &f0) && sys.judge_share(1, &c1, &d1, &f1));
-                assert!(sys.open(&c2, [(0, d0), (1, d1)]) == sys.g_uid(42));
+                assert!(sys.judge(&c1, &c2, [(0, d0, f0), (1, d1, f1)], &[7, 9, 42, 43]) == Ok(42));
                 op.push(ms(t));
             }
             json!({"n_msgs": NCLS + 12, "bench_n": n_runs, "issue_root": issue, "present": p0, "verify": v0, "present_esc": p1, "verify_esc": v1,
