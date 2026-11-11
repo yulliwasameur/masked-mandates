@@ -454,6 +454,13 @@ impl System {
         ms.add_witness_equality(eq(&[(0, I_S), (idx, 0)]));
         st.add(BoundCheckBpp::new_statement_from_params(j + 1, MAXV, self.bpp.clone()).map_err(|e| format!("{e:?}"))?);
         ms.add_witness_equality(eq(&[(0, self.y.k()), (idx + 1, 0)]));
+        idx += 2;
+        // child's own numeric values in [0, 2^40): rules out wrap-around modulo p (x' = x - d + 1 < 0)
+        for mi in [self.y.budget(), self.y.k(), self.y.exp()] {
+            st.add(BoundCheckBpp::new_statement_from_params(0, MAXV, self.bpp.clone()).map_err(|e| format!("{e:?}"))?);
+            ms.add_witness_equality(eq(&[(6, cw(mi)), (idx, 0)]));
+            idx += 1;
+        }
         Ok((st, ms))
     }
 
@@ -483,6 +490,7 @@ impl System {
         }
         w.add(Witness::PedersenCommitment(vec![p.s]));
         w.add(Witness::BoundCheckBpp(pm[self.y.k()]));
+        for mi in [self.y.budget(), self.y.k(), self.y.exp()] { w.add(Witness::BoundCheckBpp(cmv[&mi])); }
         let spec = ProofSpec::new(st, ms, vec![], Some(ctx.to_vec()));
         Ok(guard(|| Proof::new::<StdRng, Blake2b512>(rng, spec, w, None, Default::default()).map_err(|e| format!("deleg prove: {e:?}")))?.0)
     }

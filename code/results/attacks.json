@@ -130,10 +130,10 @@
     },
     {
       "attack": "delegation: child budget wrapped around the group order",
-      "by": "ACCEPTED",
+      "by": "prover",
       "class": "A2",
-      "detail": "",
-      "rejected": false
+      "detail": "deleg prove: UnsupportedValue(\"Only supports 64 bit values Bulletproofs++ range proof but found 524358751751261904794477",
+      "rejected": true
     },
     {
       "attack": "same presentation, same tool (replay)",
@@ -422,6 +422,6 @@
   "n_attacks": 48,
   "n_checks": 17,
   "n_checks_ok": 17,
-  "n_rejected": 47,
+  "n_rejected": 48,
   "seed": 20261109
 }
