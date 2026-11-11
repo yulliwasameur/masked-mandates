@@ -129,6 +129,13 @@
       "rejected": true
     },
     {
+      "attack": "delegation: child budget wrapped around the group order",
+      "by": "ACCEPTED",
+      "class": "A2",
+      "detail": "",
+      "rejected": false
+    },
+    {
       "attack": "same presentation, same tool (replay)",
       "by": "verifier",
       "class": "A3",
@@ -412,7 +419,7 @@
       "ok": true
     }
   ],
-  "n_attacks": 47,
+  "n_attacks": 48,
   "n_checks": 17,
   "n_checks_ok": 17,
   "n_rejected": 47,

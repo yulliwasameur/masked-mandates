@@ -139,6 +139,11 @@ fn main() {
         atk_cause!("A2", "delegation proof reused with another child commitment", sys.deleg_issue(r, &swapped, &n1).map(|_| Ok(())), "deleg verify");
         let n2 = b"issuer-session-2".to_vec();
         atk_cause!("A2", "delegation request replayed in a new issuer session", sys.deleg_issue(r, &req, &n2).map(|_| Ok(())), "deleg verify"); }
+    // wrap-around (Thm. 1, case iv): d_budget = x - x' + 1 lies in [1, 2^40) but x' = -4 mod p; without a range proof
+    // on the child's own values the issuer would sign a child whose budget is not <= the parent's as an integer.
+    {   let n3 = b"issuer-session-3".to_vec();
+        atk!("A2", "delegation: child budget wrapped around the group order", sys.deleg_request_wrapped(r, &root, &Attrs { id: 0, ..base() }, 22, 0, &n3)
+            .and_then(|(q, _)| sys.deleg_issue(r, &q, &n3)).map(|_| Ok(()))); }
     // A3 — replay
     let i_ok = inv("hotel2", 1, 10, 9, 1_000_000, &nonce());
     let p_ok = sys.present(r, &child, &i_ok, 0, false).unwrap();

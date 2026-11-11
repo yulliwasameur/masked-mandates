@@ -1,0 +1,427 @@
+{
+  "attacks": [
+    {
+      "attack": "class outside the mandate's scope",
+      "by": "verifier",
+      "class": "A2",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "amount above budget",
+      "by": "prover",
+      "class": "A2",
+      "detail": "prove: BulletproofsPlusPlus(IncorrectBounds(\"value=300 should be >= min=301\"))",
+      "rejected": true
+    },
+    {
+      "attack": "use after expiry",
+      "by": "prover",
+      "class": "A2",
+      "detail": "prove: BulletproofsPlusPlus(IncorrectBounds(\"value=1500000 should be >= min=1500001\"))",
+      "rejected": true
+    },
+    {
+      "attack": "inflate budget under an existing signature",
+      "by": "verifier",
+      "class": "A2",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "add a scope bit under an existing signature",
+      "by": "verifier",
+      "class": "A2",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "mandate signed by an unrecognised issuer",
+      "by": "verifier",
+      "class": "A2",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child gets a class the parent lacks",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=0 should be >= min=1\"))",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child budget above parent",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=0 should be >= min=1\"))",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child quota above parent",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=0 should be >= min=1\"))",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child expiry after parent",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=0 should be >= min=1\"))",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: depth skip (+2)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: SchnorrProofContributionFailed(7, InvalidResponse)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: beyond maximum depth 4",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=5 should be < max=5\"))",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: ancestry erasure (anc' cleared)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: SchnorrProofContributionFailed(6, InvalidResponse)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: ancestry rewrite (wrong grandparent)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: SchnorrProofContributionFailed(6, InvalidResponse)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: principal change (uid')",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: SchnorrProofContributionFailed(6, InvalidResponse)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation from a forged parent (attributes not signed)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation proof reused with another child commitment",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "expected_cause": "deleg verify",
+      "rejected": true
+    },
+    {
+      "attack": "delegation request replayed in a new issuer session",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "expected_cause": "deleg verify",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child budget wrapped around the group order",
+      "by": "ACCEPTED",
+      "class": "A2",
+      "detail": "",
+      "rejected": false
+    },
+    {
+      "attack": "same presentation, same tool (replay)",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "pseudonym replay",
+      "rejected": true
+    },
+    {
+      "attack": "same presentation sent to another tool",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, different call arguments",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, different tool nonce",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, another epoch",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, larger amount",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, other action class",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "reuse a counter j within the epoch (fresh proof)",
+      "by": "verifier",
+      "class": "A4",
+      "detail": "pseudonym replay",
+      "rejected": true
+    },
+    {
+      "attack": "counter j = k (beyond quota)",
+      "by": "prover",
+      "class": "A4",
+      "detail": "prove: BulletproofsPlusPlus(IncorrectBounds(\"value=2 should be >= min=3\"))",
+      "rejected": true
+    },
+    {
+      "attack": "counter j far beyond quota",
+      "by": "prover",
+      "class": "A4",
+      "detail": "prove: BulletproofsPlusPlus(IncorrectBounds(\"value=2 should be >= min=1001\"))",
+      "rejected": true
+    },
+    {
+      "attack": "claim another counter for an existing proof",
+      "by": "verifier",
+      "class": "A4",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "re-randomise the pseudonym of an accepted proof",
+      "by": "verifier",
+      "class": "A4",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation pseudonym reuse (same epoch and counter)",
+      "by": "issuer",
+      "class": "A4",
+      "detail": "delegation pseudonym replay",
+      "rejected": true
+    },
+    {
+      "attack": "delegation counter beyond the parent's quota",
+      "by": "prover",
+      "class": "A4",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=3 should be >= min=4\"))",
+      "rejected": true
+    },
+    {
+      "attack": "refresh the witness of a revoked id from public data",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "refreshed witness does not verify",
+      "rejected": true
+    },
+    {
+      "attack": "present after own revocation",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "verify: VBAccumProofContributionFailed(5, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(5,",
+      "rejected": true
+    },
+    {
+      "attack": "present with a stale accumulator value",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    },
+    {
+      "attack": "present after parent revocation (own witness up to date)",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "verify: VBAccumProofContributionFailed(6, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(6,",
+      "rejected": true
+    },
+    {
+      "attack": "delegate after own revocation",
+      "by": "issuer",
+      "class": "A5",
+      "detail": "deleg verify: VBAccumProofContributionFailed(1, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(1,",
+      "rejected": true
+    },
+    {
+      "attack": "present after grandparent revocation (own and parent witnesses up to date)",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "verify: VBAccumProofContributionFailed(7, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(7,",
+      "rejected": true
+    },
+    {
+      "attack": "child of a revoked root delegates a new sub-agent",
+      "by": "issuer",
+      "class": "A5",
+      "detail": "deleg verify: VBAccumProofContributionFailed(2, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(2,",
+      "rejected": true
+    },
+    {
+      "attack": "escrow ciphertext encrypts another principal",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "verify: SchnorrProofContributionFailed(11, InvalidResponse)",
+      "rejected": true
+    },
+    {
+      "attack": "omit escrow where the tool requires it",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "escrow required",
+      "rejected": true
+    },
+    {
+      "attack": "corrupt member forges the second share to frame principal 43 (reuses the honest proof)",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "Judge: invalid share proof from member 2",
+      "expected_cause": "invalid share proof from member 2",
+      "rejected": true
+    },
+    {
+      "attack": "corrupt member forges the second share to frame principal 43 (random proof)",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "Judge: invalid share proof from member 2",
+      "expected_cause": "invalid share proof from member 2",
+      "rejected": true
+    },
+    {
+      "attack": "malicious member submits a wrong decryption share",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "Judge: invalid share proof from member 1",
+      "expected_cause": "invalid share proof from member 1",
+      "rejected": true
+    },
+    {
+      "attack": "share with a proof made for another member",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "Judge: invalid share proof from member 2",
+      "expected_cause": "invalid share proof from member 2",
+      "rejected": true
+    },
+    {
+      "attack": "corrupt member submits its own share twice",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "Judge: two distinct committee members required",
+      "expected_cause": "two distinct committee members",
+      "rejected": true
+    },
+    {
+      "attack": "graft another presentation's escrow ciphertext",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "rejected": true
+    }
+  ],
+  "checks": [
+    {
+      "check": "honest presentation, depth 0",
+      "ok": true
+    },
+    {
+      "check": "honest presentation, depth 1",
+      "ok": true
+    },
+    {
+      "check": "honest presentation, depth 2",
+      "ok": true
+    },
+    {
+      "check": "honest presentation, depth 3",
+      "ok": true
+    },
+    {
+      "check": "honest presentation, depth 4",
+      "ok": true
+    },
+    {
+      "check": "escrow presentation, root",
+      "ok": true
+    },
+    {
+      "check": "escrow presentation, depth 2",
+      "ok": true
+    },
+    {
+      "check": "all k=3 counters accepted within quota",
+      "ok": true
+    },
+    {
+      "check": "2-of-3 opening with members 1+2 returns the root principal",
+      "ok": true
+    },
+    {
+      "check": "2-of-3 opening with members 1+3 returns the root principal",
+      "ok": true
+    },
+    {
+      "check": "2-of-3 opening with members 2+3 returns the root principal",
+      "ok": true
+    },
+    {
+      "check": "delegated identifiers are random, non-zero and distinct (none equals the value requested by the caller)",
+      "ok": true
+    },
+    {
+      "check": "after a revocation, the revoked holder cannot refresh its own witness (only position 0 is stuck)",
+      "ok": true
+    },
+    {
+      "check": "honest presentation after a revocation (sibling of the revoked mandate, refreshed witnesses)",
+      "ok": true
+    },
+    {
+      "check": "after a parent revocation, the child refreshes its own witness but not the parent's (only position 1 is stuck)",
+      "ok": true
+    },
+    {
+      "check": "after a root revocation, descendants refresh all witnesses except the root's (positions 1 and 2)",
+      "ok": true
+    },
+    {
+      "check": "identifier 0 (no ancestor) cannot be revoked",
+      "ok": true
+    }
+  ],
+  "n_attacks": 48,
+  "n_checks": 17,
+  "n_checks_ok": 17,
+  "n_rejected": 47,
+  "seed": 20261109
+}

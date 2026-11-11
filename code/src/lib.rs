@@ -347,6 +347,16 @@ impl System {
     /// any `id` in `child` is ignored. The issuer learns id' only when the child fetches its witness.
     pub fn deleg_request(&self, rng: &mut StdRng, parent: &Mandate, child: &Attrs, epoch: u64, j: u64, issuer_nonce: &[u8])
         -> Result<(DelegReq, DelegSecret), String> {
+        self.deleg_request_opt(rng, parent, child, epoch, j, issuer_nonce, false)
+    }
+    /// Attack hook: the cheating parent sets the child's budget to parent.budget - (parent.budget + 5) + 1,
+    /// i.e. -4 mod p, so that d_budget = parent.budget + 5 lies in [1, 2^40) although the child's budget wraps around.
+    pub fn deleg_request_wrapped(&self, rng: &mut StdRng, parent: &Mandate, child: &Attrs, epoch: u64, j: u64, issuer_nonce: &[u8])
+        -> Result<(DelegReq, DelegSecret), String> {
+        self.deleg_request_opt(rng, parent, child, epoch, j, issuer_nonce, true)
+    }
+    fn deleg_request_opt(&self, rng: &mut StdRng, parent: &Mandate, child: &Attrs, epoch: u64, j: u64, issuer_nonce: &[u8], wrap: bool)
+        -> Result<(DelegReq, DelegSecret), String> {
         let mut child = child.clone();
         child.id = loop { let x = rng.next_u64(); if x != 0 { break x; } };
         let child = &child;
@@ -356,11 +366,12 @@ impl System {
         let Cc = self.sp.commit_to_messages(vec![(I_S, &s2)], &r1).map_err(|e| format!("{e:?}"))?;
         // parent: commit to child attributes m'_1..uid
         let r2 = Fr::rand(rng);
-        let cm = child.msgs_1_uid();
-        let Cp = self.sp.commit_to_messages(cm.iter().map(|(i, v)| (*i, v)).collect::<Vec<_>>(), &r2).map_err(|e| format!("{e:?}"))?;
+        let mut cmv: BTreeMap<usize, Fr> = child.msgs_1_uid().into_iter().collect();
+        if wrap { cmv.insert(self.y.budget(), fr(parent.a.budget) - fr(parent.a.budget + 5) + Fr::one()); }
+        let Cp = self.sp.commit_to_messages(cmv.iter().map(|(i, v)| (*i, v)).collect::<Vec<_>>(), &r2).map_err(|e| format!("{e:?}"))?;
         let ctx = deleg_ctx(issuer_nonce, &Cc, &Cp);
         let nymD = (deleg_base(epoch, j).into_group() * parent.s).into_affine();
-        let pf = self.deleg_proof(rng, parent, child, r2, &Cp, &nymD, epoch, j, &ctx)?;
+        let pf = self.deleg_proof(rng, parent, &cmv, r2, &Cp, &nymD, epoch, j, &ctx)?;
         // child: PoK of opening of Cc, same context
         let cpf = self.child_pok(rng, &Cc, r1, s2, &ctx)?;
         Ok((DelegReq { Cc, Cp, nymD, epoch, j, pf, cpf }, DelegSecret { s2, r1, r2, child: child.clone() }))
@@ -399,7 +410,7 @@ impl System {
         Ok(m)
     }
 
-    fn deleg_statements(&self, Cp: &G1Affine, nymD: &G1Affine, j: u64, prover: bool) -> Result<(Statements<E>, MetaStatements), String> {
+    fn deleg_statements(&self, Cp: &G1Affine, nymD: &G1Affine, epoch: u64, j: u64, prover: bool) -> Result<(Statements<E>, MetaStatements), String> {
         let mut st = Statements::<E>::new();
         let mut ms = MetaStatements::new();
         if prover { st.add(BbsP::new_statement_from_params(self.sp.clone(), BTreeMap::new())); }
@@ -439,7 +450,7 @@ impl System {
             idx += 2;
         }
         // delegation pseudonym and quota: nymD = H(delegate|e|j)^s, k in [j+1, 2^40)
-        st.add(PedStmt::new_statement_from_params(vec![deleg_base(0, 0)], *nymD)); // placeholder base replaced below
+        st.add(PedStmt::new_statement_from_params(vec![deleg_base(epoch, j)], *nymD));
         ms.add_witness_equality(eq(&[(0, I_S), (idx, 0)]));
         st.add(BoundCheckBpp::new_statement_from_params(j + 1, MAXV, self.bpp.clone()).map_err(|e| format!("{e:?}"))?);
         ms.add_witness_equality(eq(&[(0, self.y.k()), (idx + 1, 0)]));
@@ -447,20 +458,12 @@ impl System {
     }
 
     fn deleg_statements_full(&self, Cp: &G1Affine, nymD: &G1Affine, epoch: u64, j: u64, prover: bool) -> Result<(Statements<E>, MetaStatements), String> {
-        let (st, ms) = self.deleg_statements(Cp, nymD, j, prover)?;
-        // rebuild with the right pseudonym base (statements are append-only; reconstruct)
-        let mut st2 = Statements::<E>::new();
-        let n = st.0.len();
-        for (i, s) in st.0.into_iter().enumerate() {
-            if i == n - 2 { st2.add(PedStmt::new_statement_from_params(vec![deleg_base(epoch, j)], *nymD)); } else { st2.add(s); }
-        }
-        Ok((st2, ms))
+        self.deleg_statements(Cp, nymD, epoch, j, prover)
     }
 
-    fn deleg_proof(&self, rng: &mut StdRng, p: &Mandate, c: &Attrs, r2: Fr, Cp: &G1Affine, nymD: &G1Affine, epoch: u64, j: u64, ctx: &[u8]) -> Result<Proof<E>, String> {
+    fn deleg_proof(&self, rng: &mut StdRng, p: &Mandate, cmv: &BTreeMap<usize, Fr>, r2: Fr, Cp: &G1Affine, nymD: &G1Affine, epoch: u64, j: u64, ctx: &[u8]) -> Result<Proof<E>, String> {
         let (st, ms) = self.deleg_statements_full(Cp, nymD, epoch, j, true)?;
         let pm = p.msgs();
-        let cmv: BTreeMap<usize, Fr> = c.msgs_1_uid().into_iter().collect();
         let mut w = Witnesses::new();
         w.add(BbsWit::new_as_witness(p.sig.clone(), pm.iter().enumerate().map(|(i, v)| (i, *v)).collect()));
         for (i, id) in p.ids().iter().enumerate() {
