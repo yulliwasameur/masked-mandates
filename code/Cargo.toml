@@ -2,6 +2,8 @@
 name = "mmcore"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "Masked Mandates: unlinkable, attenuable and accountable delegation for LLM agents (research prototype)"
 
 [dependencies]
 proof_system = "=0.34.0"

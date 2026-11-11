@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite the paper and this archived version."
+title: "Masked Mandates: artifact (code, scripts and results)"
+type: software
+version: 1.0.0
+date-released: 2026-11-12  # to be updated on release
+license: MIT
+authors:
+  - family-names: Ameur
+    given-names: Yulliwas
+    orcid: "https://orcid.org/0000-0003-1435-2982"
+    affiliation: "Efrei Research Lab, Université Paris-Panthéon-Assas; Cédric, Cnam"
+    email: yulliwas.ameur@efrei.fr
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.XXXXXXX"  # to be filled after the Zenodo deposit
+keywords:
+  - anonymous credentials
+  - delegation
+  - zero-knowledge proofs
+  - revocation
+  - autonomous agents
+preferred-citation:
+  type: article
+  title: "Masked Mandates: Unlinkable, Attenuable and Accountable Delegation for LLM Agents"
+  authors:
+    - family-names: Ameur
+      given-names: Yulliwas
+      orcid: "https://orcid.org/0000-0003-1435-2982"
+  journal: "IEEE Transactions on Information Forensics and Security"
+  year: 2026
+  notes: "Submitted"
