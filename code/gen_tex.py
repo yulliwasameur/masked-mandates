@@ -30,7 +30,7 @@ for a in A["attacks"]:
     by = "P" if a["by"] == "prover" else "V"
     rows.append(f"\\parbox[t]{{0.8\\columnwidth}}{{\\raggedright {lab[a['class']]}: {a['attack']}}} & rejected ({by})\\\\")
 rows.append(f"\\midrule {A['n_checks']} correctness checks & all pass\\\\ \\bottomrule")
-rows.append(r"\multicolumn{2}{@{}l}{\scriptsize P: the cheating prover cannot build the proof; V: rejected by the tool, the issuer or the Judge.}\\")
+rows.append(r"\multicolumn{2}{@{}l}{\scriptsize P: cheating prover cannot build the proof; V: rejected by tool, issuer or Judge.}\\")
 open(f"{O}/tab_attacks.tex", "w").write("\n".join(rows) + "\n")
 
 # ---------------- costs
