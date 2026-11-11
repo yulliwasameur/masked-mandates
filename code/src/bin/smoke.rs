@@ -14,7 +14,7 @@ fn main() {
     let t = Instant::now(); sys.verify(&mut r, &mut tool, &inv, &p).unwrap(); println!("verify {:?}", t.elapsed());
     println!("replay rejected: {}", sys.verify(&mut r, &mut tool, &inv, &p).is_err());
     let mut cs = [false; NCLS]; cs[1] = true;
-    let child_a = Attrs { id: 202, anc: [101,0,0,0], depth: 1, scope: cs.to_vec(), budget: 300, k: 5, exp: 1_500_000, uid: 42 };
+    let child_a = Attrs { id: 0, anc: [101,0,0,0], depth: 1, scope: cs.to_vec(), budget: 300, k: 5, exp: 1_500_000, uid: 42 };
     let (child, pm, im) = sys.delegate(&mut r, &root, &child_a, 7, 0).unwrap();
     println!("delegate parent {:.0} ms issuer {:.0} ms", pm, im);
     let inv2 = Invocation { nonce: "n2".into(), ..inv.clone() };

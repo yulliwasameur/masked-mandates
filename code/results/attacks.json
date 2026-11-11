@@ -388,6 +388,10 @@
       "ok": true
     },
     {
+      "check": "delegated identifiers are random, non-zero and distinct (none equals the value requested by the caller)",
+      "ok": true
+    },
+    {
       "check": "after a revocation, the revoked holder cannot refresh its own witness (only position 0 is stuck)",
       "ok": true
     },
@@ -409,8 +413,8 @@
     }
   ],
   "n_attacks": 47,
-  "n_checks": 16,
-  "n_checks_ok": 16,
+  "n_checks": 17,
+  "n_checks_ok": 17,
   "n_rejected": 47,
   "seed": 20261109
 }

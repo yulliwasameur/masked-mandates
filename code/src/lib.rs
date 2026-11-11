@@ -338,13 +338,18 @@ impl System {
         let t1 = std::time::Instant::now();
         let blind = self.deleg_issue(rng, &req, &issuer_nonce)?;
         let issuer_ms = t1.elapsed().as_secs_f64() * 1e3;
-        let m = self.deleg_finish(parent, child, &sec, blind)?;
+        let m = self.deleg_finish(parent, &sec, blind)?;
         Ok((m, parent_ms, issuer_ms))
     }
 
     /// Parent + child side of a delegation session bound to the issuer's nonce.
+    /// The parent draws the child's identifier id' uniformly at random (non-zero 64-bit value);
+    /// any `id` in `child` is ignored. The issuer learns id' only when the child fetches its witness.
     pub fn deleg_request(&self, rng: &mut StdRng, parent: &Mandate, child: &Attrs, epoch: u64, j: u64, issuer_nonce: &[u8])
         -> Result<(DelegReq, DelegSecret), String> {
+        let mut child = child.clone();
+        child.id = loop { let x = rng.next_u64(); if x != 0 { break x; } };
+        let child = &child;
         // child: commit to its link secret
         let s2 = Fr::rand(rng);
         let r1 = Fr::rand(rng);
@@ -358,7 +363,7 @@ impl System {
         let pf = self.deleg_proof(rng, parent, child, r2, &Cp, &nymD, epoch, j, &ctx)?;
         // child: PoK of opening of Cc, same context
         let cpf = self.child_pok(rng, &Cc, r1, s2, &ctx)?;
-        Ok((DelegReq { Cc, Cp, nymD, epoch, j, pf, cpf }, DelegSecret { s2, r1, r2 }))
+        Ok((DelegReq { Cc, Cp, nymD, epoch, j, pf, cpf }, DelegSecret { s2, r1, r2, child: child.clone() }))
     }
 
     /// Child's proof of knowledge of the opening of its commitment, under the session context.
@@ -382,8 +387,8 @@ impl System {
     }
 
     /// Child unblinds, checks the signature and assembles its witnesses.
-    pub fn deleg_finish(&self, parent: &Mandate, child: &Attrs, sec: &DelegSecret, blind: SignatureG1<E>) -> Result<Mandate, String> {
-        let (s2, r1, r2) = (sec.s2, sec.r1, sec.r2);
+    pub fn deleg_finish(&self, parent: &Mandate, sec: &DelegSecret, blind: SignatureG1<E>) -> Result<Mandate, String> {
+        let (s2, r1, r2, child) = (sec.s2, sec.r1, sec.r2, &sec.child);
         let sig = blind.unblind(&(r1 + r2));
         let mut m = Mandate { s: s2, a: child.clone(), ver: self.ver, sig, nm: vec![] };
         m.sig.verify(&m.msgs(), self.ikp.public_key.clone(), self.sp.clone()).map_err(|e| format!("child sig: {e:?}"))?;
@@ -533,7 +538,7 @@ impl System {
 /// Messages of a delegation session (parent + child -> issuer).
 pub struct DelegReq { pub Cc: G1Affine, pub Cp: G1Affine, pub nymD: G1Affine, pub epoch: u64, pub j: u64, pub pf: Proof<E>, pub cpf: Proof<E> }
 /// Secrets kept by parent and child for unblinding.
-pub struct DelegSecret { pub s2: Fr, pub r1: Fr, pub r2: Fr }
+pub struct DelegSecret { pub s2: Fr, pub r1: Fr, pub r2: Fr, pub child: Attrs }
 
 /// Session context: issuer nonce and both commitments.
 pub fn deleg_ctx(issuer_nonce: &[u8], Cc: &G1Affine, Cp: &G1Affine) -> Vec<u8> {

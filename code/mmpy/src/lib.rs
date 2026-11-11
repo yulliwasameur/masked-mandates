@@ -19,9 +19,9 @@ impl Wallet {
         let mut r2 = rng(seed + 1);
         let root = sys.issue_root(&mut r2, &Attrs { id: 11, anc: [0; 4], depth: 0, scope: sc(&[0, 1, 2]), budget: 10_000, k: 1_000_000, exp: u64::MAX >> 25, uid: 42 })
             .map_err(pyo3::exceptions::PyValueError::new_err)?;
-        let (a1, _, _) = sys.delegate(&mut r2, &root, &Attrs { id: 12, anc: [11, 0, 0, 0], depth: 1, scope: sc(&[0, 1]), budget: 5_000, k: 500_000, exp: (u64::MAX >> 25) - 1, uid: 42 }, 0, 0)
+        let (a1, _, _) = sys.delegate(&mut r2, &root, &Attrs { id: 0, anc: [11, 0, 0, 0], depth: 1, scope: sc(&[0, 1]), budget: 5_000, k: 500_000, exp: (u64::MAX >> 25) - 1, uid: 42 }, 0, 0)
             .map_err(pyo3::exceptions::PyValueError::new_err)?;
-        let (a2, _, _) = sys.delegate(&mut r2, &a1, &Attrs { id: 13, anc: [12, 11, 0, 0], depth: 2, scope: sc(&[1]), budget: 1_000, k: 100_000, exp: (u64::MAX >> 25) - 2, uid: 42 }, 0, 0)
+        let (a2, _, _) = sys.delegate(&mut r2, &a1, &Attrs { id: 0, anc: [a1.a.id, 11, 0, 0], depth: 2, scope: sc(&[1]), budget: 1_000, k: 100_000, exp: (u64::MAX >> 25) - 2, uid: 42 }, 0, 0)
             .map_err(pyo3::exceptions::PyValueError::new_err)?;
         Ok(Wallet { sys, m: a2, r: rng(seed + 2), j: Default::default() })
     }

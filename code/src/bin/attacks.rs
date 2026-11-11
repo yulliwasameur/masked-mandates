@@ -34,9 +34,9 @@ fn main() {
     let sys = &mut c.sys;
     let root_a = Attrs { id: 101, anc: [0; 4], depth: 0, scope: scope(&[0, 1, 2]), budget: 800, k: 3, exp: 2_000_000, uid: 42 };
     let root = sys.issue_root(r, &root_a).unwrap();
-    let child_a = Attrs { id: 202, anc: [101, 0, 0, 0], depth: 1, scope: scope(&[1]), budget: 300, k: 2, exp: 1_500_000, uid: 42 };
+    let child_a = Attrs { id: 0, anc: [101, 0, 0, 0], depth: 1, scope: scope(&[1]), budget: 300, k: 2, exp: 1_500_000, uid: 42 };
     let (child, _, _) = sys.delegate(r, &root, &child_a, 7, 0).unwrap();
-    let gc_a = Attrs { id: 303, anc: [202, 101, 0, 0], depth: 2, scope: scope(&[1]), budget: 100, k: 1, exp: 1_400_000, uid: 42 };
+    let gc_a = Attrs { id: 0, anc: [child.a.id, 101, 0, 0], depth: 2, scope: scope(&[1]), budget: 100, k: 1, exp: 1_400_000, uid: 42 };
     let (gchild, _, _) = sys.delegate(r, &child, &gc_a, 7, 0).unwrap();
 
     let mut checks = vec![];
@@ -82,6 +82,11 @@ fn main() {
         checks.push(json!({"check": format!("2-of-3 opening with members {}+{} returns the root principal", a + 1, b + 1), "ok": ok}));
     }
 
+    // delegated identifiers are drawn at random by the parent (Sec. IV, Delegate)
+    { let ids: Vec<u64> = [&child, &gchild].iter().map(|m| m.a.id).chain(chain[1..].iter().map(|m| m.a.id)).collect();
+      let mut u = ids.clone(); u.sort(); u.dedup();
+      checks.push(json!({"check": "delegated identifiers are random, non-zero and distinct (none equals the value requested by the caller)",
+                         "ok": u.len() == ids.len() && ids.iter().all(|&x| x != 0 && x != 202 && x != 303 && !(1001..=1004).contains(&x))})); }
     // ---------------- attacks ----------------
     macro_rules! atk { ($cls:expr, $name:expr, $res:expr) => {{ let (rej, by, why) = outcome($res); attacks.push(json!({"class": $cls, "attack": $name, "rejected": rej, "by": by, "detail": why.chars().take(120).collect::<String>()})); }} }
     // atk_cause!: the attack counts as rejected only if it fails for the expected reason
@@ -115,9 +120,9 @@ fn main() {
     atk!("A2", "delegation: child quota above parent", dl(sys, r, &root, Attrs { id: 5003, k: 4, ..base() }));
     atk!("A2", "delegation: child expiry after parent", dl(sys, r, &root, Attrs { id: 5004, exp: 2_000_001, ..base() }));
     atk!("A2", "delegation: depth skip (+2)", dl(sys, r, &root, Attrs { id: 5005, depth: 2, ..base() }));
-    atk!("A2", "delegation: beyond maximum depth 4", dl(sys, r, &chain[4], Attrs { id: 5006, depth: 5, anc: [1004, 1003, 1002, 1001], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 7 }));
+    atk!("A2", "delegation: beyond maximum depth 4", dl(sys, r, &chain[4], Attrs { id: 5006, depth: 5, anc: [chain[4].a.id, chain[4].a.anc[0], chain[4].a.anc[1], chain[4].a.anc[2]], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 7 }));
     atk!("A2", "delegation: ancestry erasure (anc' cleared)", dl(sys, r, &child, Attrs { id: 5007, depth: 2, anc: [0, 0, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }));
-    atk!("A2", "delegation: ancestry rewrite (wrong grandparent)", dl(sys, r, &child, Attrs { id: 5008, depth: 2, anc: [202, 999, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }));
+    atk!("A2", "delegation: ancestry rewrite (wrong grandparent)", dl(sys, r, &child, Attrs { id: 5008, depth: 2, anc: [child.a.id, 999, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }));
     atk!("A2", "delegation: principal change (uid')", dl(sys, r, &root, Attrs { id: 5009, uid: 43, ..base() }));
     { let mut fp = Mandate { s: root.s, a: root.a.clone(), ver: root.ver, sig: root.sig.clone(), nm: root.nm.clone() }; fp.a.budget = 1 << 30;
       atk!("A2", "delegation from a forged parent (attributes not signed)", dl(sys, r, &fp, Attrs { id: 5010, budget: 1 << 29, ..base() })); }
@@ -159,10 +164,10 @@ fn main() {
     // a witness for a just-revoked identifier cannot be refreshed. Each attack must fail on the
     // non-membership statement of the revoked identifier: presentation statements 5 (own id), 6 (anc1), 7 (anc2);
     // delegation statements 1 (parent id), 2 (parent's anc1).
-    let gc2_a = Attrs { id: 304, anc: [202, 101, 0, 0], depth: 2, scope: scope(&[1]), budget: 50, k: 1, exp: 1_400_000, uid: 42 };
+    let gc2_a = Attrs { id: 0, anc: [child.a.id, 101, 0, 0], depth: 2, scope: scope(&[1]), budget: 50, k: 1, exp: 1_400_000, uid: 42 };
     let (gc2, _, _) = sys.delegate(r, &child, &gc2_a, 8, 0).unwrap();
     let old_acc: G1Affine = *sys.acc.value();
-    let (om, ad) = sys.revoke(&[303]).unwrap();
+    let (om, ad) = sys.revoke(&[gchild.a.id]).unwrap();
     let mut root = root; let mut child = child; let mut gchild = gchild; let mut gc2 = gc2;
     root.refresh(&ad, &om).unwrap(); child.refresh(&ad, &om).unwrap(); gc2.refresh(&ad, &om).unwrap();
     let stuck_gc = gchild.refresh_partial(&ad, &om);
@@ -171,28 +176,28 @@ fn main() {
       let ok = sys.present(r, &gc2, &i, 0, false).and_then(|p| sys.verify(r, &mut t1, &i, &p)).is_ok();
       checks.push(json!({"check": "honest presentation after a revocation (sibling of the revoked mandate, refreshed witnesses)", "ok": ok})); }
     let grefok = { let mut g = Mandate { s: gchild.s, a: gchild.a.clone(), ver: gchild.ver, sig: gchild.sig.clone(), nm: gchild.nm.clone() };
-        g.refresh(&ad, &om).is_ok() && sys.acc.verify_non_membership(&fr(303), &g.nm[0], &sys.akp.public_key, &sys.ap) };
+        g.refresh(&ad, &om).is_ok() && sys.acc.verify_non_membership(&fr(gchild.a.id), &g.nm[0], &sys.akp.public_key, &sys.ap) };
     atk!("A5", "refresh the witness of a revoked id from public data", Ok(if grefok { Ok(()) } else { Err("refreshed witness does not verify".into()) }));
     atk_cause!("A5", "present after own revocation", pv(sys, r, &gchild, &inv("hotel2", 1, 10, 11, 1_000_000, &nonce()), 0, false, &mut t1), "VBAccumProofContributionFailed(5,");
     atk!("A5", "present with a stale accumulator value", { let i = inv("hotel2", 1, 10, 11, 1_000_000, &nonce());
         sys.present_cheat(r, &gchild, &i, 0, false, &Cheat { acc_value: Some(old_acc), ..Default::default() }).map(|p| sys.verify(r, &mut t1, &i, &p)) });
-    // revoke the parent 202: its child gc2 (304) is not revoked itself and refreshes its own witness
-    let (om, ad) = sys.revoke(&[202]).unwrap(); root.refresh(&ad, &om).unwrap();
+    // revoke the parent (child.a.id): its child gc2 is not revoked itself and refreshes its own witness
+    let (om, ad) = sys.revoke(&[child.a.id]).unwrap(); root.refresh(&ad, &om).unwrap();
     let stuck_c = child.refresh_partial(&ad, &om);
     let stuck_gc2 = gc2.refresh_partial(&ad, &om);
     checks.push(json!({"check": "after a parent revocation, the child refreshes its own witness but not the parent's (only position 1 is stuck)", "ok": stuck_gc2 == vec![1] && stuck_c == vec![0]}));
     atk_cause!("A5", "present after parent revocation (own witness up to date)", pv(sys, r, &gc2, &inv("hotel2", 1, 10, 12, 1_000_000, &nonce()), 0, false, &mut t1), "VBAccumProofContributionFailed(6,");
-    atk_cause!("A5", "delegate after own revocation", sys.delegate(r, &child, &Attrs { id: 5014, depth: 2, anc: [202, 101, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }, 12, 1).map(|_| Ok(())), "VBAccumProofContributionFailed(1,");
-    // grandparent revocation: chain 7000 -> 7001 -> 7002, revoke 7000
+    atk_cause!("A5", "delegate after own revocation", sys.delegate(r, &child, &Attrs { id: 5014, depth: 2, anc: [child.a.id, 101, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }, 12, 1).map(|_| Ok(())), "VBAccumProofContributionFailed(1,");
+    // grandparent revocation: chain 7000 (root) -> g1 -> g2, revoke 7000
     let g0 = sys.issue_root(r, &Attrs { id: 7000, anc: [0; 4], depth: 0, scope: scope(&[1]), budget: 100, k: 2, exp: 2_000_000, uid: 9 }).unwrap();
     let (g1, _, _) = sys.delegate(r, &g0, &Attrs { id: 7001, anc: [7000, 0, 0, 0], depth: 1, scope: scope(&[1]), budget: 90, k: 2, exp: 1_900_000, uid: 9 }, 13, 0).unwrap();
-    let (g2, _, _) = sys.delegate(r, &g1, &Attrs { id: 7002, anc: [7001, 7000, 0, 0], depth: 2, scope: scope(&[1]), budget: 80, k: 2, exp: 1_800_000, uid: 9 }, 13, 0).unwrap();
+    let (g2, _, _) = sys.delegate(r, &g1, &Attrs { id: 7002, anc: [g1.a.id, 7000, 0, 0], depth: 2, scope: scope(&[1]), budget: 80, k: 2, exp: 1_800_000, uid: 9 }, 13, 0).unwrap();
     let (om, ad) = sys.revoke(&[7000]).unwrap(); root.refresh(&ad, &om).unwrap();
     let (mut g1, mut g2) = (g1, g2);
     let stuck_g1 = g1.refresh_partial(&ad, &om); let stuck_g2 = g2.refresh_partial(&ad, &om);
     checks.push(json!({"check": "after a root revocation, descendants refresh all witnesses except the root's (positions 1 and 2)", "ok": stuck_g1 == vec![1] && stuck_g2 == vec![2]}));
     atk_cause!("A5", "present after grandparent revocation (own and parent witnesses up to date)", pv(sys, r, &g2, &inv("hotel2", 1, 10, 13, 1_000_000, &nonce()), 0, false, &mut t1), "VBAccumProofContributionFailed(7,");
-    atk_cause!("A5", "child of a revoked root delegates a new sub-agent", sys.delegate(r, &g1, &Attrs { id: 7003, anc: [7001, 7000, 0, 0], depth: 2, scope: scope(&[1]), budget: 70, k: 1, exp: 1_700_000, uid: 9 }, 14, 1).map(|_| Ok(())), "VBAccumProofContributionFailed(2,");
+    atk_cause!("A5", "child of a revoked root delegates a new sub-agent", sys.delegate(r, &g1, &Attrs { id: 7003, anc: [g1.a.id, 7000, 0, 0], depth: 2, scope: scope(&[1]), budget: 70, k: 1, exp: 1_700_000, uid: 9 }, 14, 1).map(|_| Ok(())), "VBAccumProofContributionFailed(2,");
     checks.push(json!({"check": "identifier 0 (no ancestor) cannot be revoked", "ok": sys.revoke(&[0]).is_err()}));
     // A6 — accountability. Openings go through the full Judge (distinct members, Chaum–Pedersen proofs,
     // registered principal). Member 1 (index 0) is corrupt; the target is principal 43, who made no presentation.
