@@ -1,4 +1,3 @@
-   Compiling mmcore v0.1.0 (/Users/yulliwas/Claude outputs/95-masked-mandates-2026-11-11/corrige/code)
 warning: unused variable: `j`
   --> src/bin/bench.rs:10:20
    |
@@ -8,17 +7,17 @@ warning: unused variable: `j`
    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
 
 warning: `mmcore` (bin "bench") generated 1 warning (run `cargo fix --bin "bench" -p mmcore` to apply 1 suggestion)
-    Finished `release` profile [optimized] target(s) in 2.37s
+    Finished `release` profile [optimized] target(s) in 0.25s
 warning: the following packages contain code that will be rejected by a future version of Rust: proc-macro-error2 v2.0.1
 note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
-2026-11-11 23:01:57 power: Now drawing from 'AC Power'
-2026-11-11 23:01:57 start e1 costs
+2026-11-11 23:36:44 power: Now drawing from 'AC Power'
+2026-11-11 23:36:44 start e1 costs
 costs written
-2026-11-11 23:03:25 end e1 costs
-2026-11-11 23:03:25 start e1 depth
+2026-11-11 23:38:12 end e1 costs
+2026-11-11 23:38:12 start e1 depth
 depth written
-2026-11-11 23:04:14 end e1 depth
-2026-11-11 23:04:14 start e1 msgs
+2026-11-11 23:39:00 end e1 depth
+2026-11-11 23:39:00 start e1 msgs
 msgs 16 done
 msgs 20 done
 msgs 24 done
@@ -29,31 +28,16 @@ msgs 48 done
 msgs 56 done
 msgs 64 done
 msgs written
-2026-11-11 23:08:09 end e1 msgs
-2026-11-11 23:08:09 start e1 rev
-setup for 1000000 in 153 ms
+2026-11-11 23:42:53 end e1 msgs
+2026-11-11 23:42:53 start e1 rev
+setup for 1000000 in 149 ms
 rev 1000 done
 rev 10000 done
 rev 100000 done
 rev 1000000 done
 rev written
-2026-11-11 23:08:21 end e1 rev
-2026-11-11 23:08:21 start e2
-./run_campaign.sh:12: no such file or directory: /Users/yulliwas/Claude outputs/95-masked-mandates-2026-11-11/corrige/code/.venv/bin/python
-warning: unused variable: `j`
-  --> src/bin/bench.rs:10:20
-   |
-10 | fn inv(tool: &str, j: u64, nonce: u64) -> Invocation {
-   |                    ^ help: if this is intentional, prefix it with an underscore: `_j`
-   |
-   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
-
-warning: `mmcore` (bin "bench") generated 1 warning (run `cargo fix --bin "bench" -p mmcore` to apply 1 suggestion)
-    Finished `release` profile [optimized] target(s) in 0.30s
-warning: the following packages contain code that will be rejected by a future version of Rust: proc-macro-error2 v2.0.1
-note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
-2026-11-11 23:08:49 power: Now drawing from 'AC Power'
-2026-11-11 23:08:49 start e2
+2026-11-11 23:43:05 end e1 rev
+2026-11-11 23:43:05 start e2
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -274,7 +258,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-none median total 1.39 ms replay same/other accepted: True True
+none median total 1.34 ms replay same/other accepted: True True
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -495,7 +479,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-jwt median total 1.64 ms replay same/other accepted: False False
+jwt median total 1.55 ms replay same/other accepted: False False
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -716,7 +700,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-biscuit median total 1.64 ms replay same/other accepted: False False
+biscuit median total 1.78 ms replay same/other accepted: False False
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -937,7 +921,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-macaroon median total 1.67 ms replay same/other accepted: False False
+macaroon median total 1.57 ms replay same/other accepted: False False
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -1158,7 +1142,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-mm median total 295.88 ms replay same/other accepted: False False
+mm median total 296.77 ms replay same/other accepted: False False
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -1379,7 +1363,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-mm_esc median total 297.07 ms replay same/other accepted: False False
-2026-11-11 23:11:10 end e2
-2026-11-11 23:11:10 power: Now drawing from 'AC Power'
-2026-11-11 23:11:11 done
+mm_esc median total 296.81 ms replay same/other accepted: False False
+2026-11-11 23:45:27 end e2
+2026-11-11 23:45:27 power: Now drawing from 'AC Power'
+2026-11-11 23:45:28 done
