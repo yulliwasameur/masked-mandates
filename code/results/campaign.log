@@ -7,17 +7,17 @@ warning: unused variable: `j`
    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
 
 warning: `mmcore` (bin "bench") generated 1 warning (run `cargo fix --bin "bench" -p mmcore` to apply 1 suggestion)
-    Finished `release` profile [optimized] target(s) in 0.25s
+    Finished `release` profile [optimized] target(s) in 0.18s
 warning: the following packages contain code that will be rejected by a future version of Rust: proc-macro-error2 v2.0.1
 note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
-2026-11-11 23:36:44 power: Now drawing from 'AC Power'
-2026-11-11 23:36:44 start e1 costs
+2026-11-12 00:02:44 power: Now drawing from 'AC Power'
+2026-11-12 00:02:44 start e1 costs
 costs written
-2026-11-11 23:38:12 end e1 costs
-2026-11-11 23:38:12 start e1 depth
+2026-11-12 00:04:16 end e1 costs
+2026-11-12 00:04:16 start e1 depth
 depth written
-2026-11-11 23:39:00 end e1 depth
-2026-11-11 23:39:00 start e1 msgs
+2026-11-12 00:05:05 end e1 depth
+2026-11-12 00:05:05 start e1 msgs
 msgs 16 done
 msgs 20 done
 msgs 24 done
@@ -28,16 +28,16 @@ msgs 48 done
 msgs 56 done
 msgs 64 done
 msgs written
-2026-11-11 23:42:53 end e1 msgs
-2026-11-11 23:42:53 start e1 rev
-setup for 1000000 in 149 ms
+2026-11-12 00:09:11 end e1 msgs
+2026-11-12 00:09:11 start e1 rev
+setup for 1000000 in 150 ms
 rev 1000 done
 rev 10000 done
 rev 100000 done
 rev 1000000 done
 rev written
-2026-11-11 23:43:05 end e1 rev
-2026-11-11 23:43:05 start e2
+2026-11-12 00:09:23 end e1 rev
+2026-11-12 00:09:23 start e2
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -258,7 +258,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-none median total 1.34 ms replay same/other accepted: True True
+none median total 1.28 ms replay same/other accepted: True True
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -479,7 +479,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-jwt median total 1.55 ms replay same/other accepted: False False
+jwt median total 1.54 ms replay same/other accepted: False False
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -700,7 +700,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-biscuit median total 1.78 ms replay same/other accepted: False False
+biscuit median total 1.57 ms replay same/other accepted: False False
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -921,7 +921,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-macaroon median total 1.57 ms replay same/other accepted: False False
+macaroon median total 1.41 ms replay same/other accepted: False False
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -1142,7 +1142,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-mm median total 296.77 ms replay same/other accepted: False False
+mm median total 291.39 ms replay same/other accepted: False False
 Processing request of type CallToolRequest
 Processing request of type ListToolsRequest
 Processing request of type CallToolRequest
@@ -1363,7 +1363,7 @@ Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
 Processing request of type CallToolRequest
-mm_esc median total 296.81 ms replay same/other accepted: False False
-2026-11-11 23:45:27 end e2
-2026-11-11 23:45:27 power: Now drawing from 'AC Power'
-2026-11-11 23:45:28 done
+mm_esc median total 293.21 ms replay same/other accepted: False False
+2026-11-12 00:11:43 end e2
+2026-11-12 00:11:43 power: Now drawing from 'AC Power'
+2026-11-12 00:11:43 done
