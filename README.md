@@ -74,8 +74,19 @@ child's values were added (47/48).
 
 ## Provenance
 
-<!-- AUTHOR DECISION (B4/I5): state here, consistently with the paper's AI-use
-     acknowledgement, how this prototype was produced and checked. -->
+This is the second implementation of Masked Mandates. The author wrote the first one, which was lost
+before release. This one was rebuilt on 11 November 2026 from Section IV of the paper with an AI assistant
+(Claude, Anthropic), then corrected and re-measured:
+- revocation tests now check that each attack fails on the revoked identifier itself;
+- delegation proofs are checked against reuse with another child commitment or in another issuer session;
+- openings go through a full Judge;
+- delegated identifiers are drawn at random;
+- delegated values carry range proofs against wrap-around modulo the group order
+  (`code/results/attacks_before_wraparound_fix.json` shows the attack before the fix).
+
+Every number in the paper comes from this implementation (`code/results/`, `env.json`, `SHA256SUMS`).
+The commit history and `docs/reconstruction-notes-2026-11-11-fr.md` record how it was built. The author
+reviewed the code on 12 November 2026.
 
 ## Licence
 
