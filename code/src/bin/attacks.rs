@@ -2,9 +2,13 @@
 use vb_accumulator::prelude::Accumulator;
 use ark_bls12_381::{Fr, G1Affine};
 use ark_ec::{AffineRepr, CurveGroup};
+use ark_ff::Field;
 use ark_std::UniformRand;
 use mmcore::*;
 use serde_json::json;
+
+/// Principals registered with the escrow committee.
+const REGISTERED: &[u64] = &[7, 9, 42, 43];
 
 struct Ctx { sys: System, r: rand::rngs::StdRng }
 
@@ -15,7 +19,9 @@ fn inv(tool: &str, class: usize, amt: u64, epoch: u64, t: u64, nonce: &str) -> I
 /// Outcome of an attempted attack: who stopped it.
 fn outcome(r: Result<Result<(), String>, String>) -> (bool, &'static str, String) {
     match r {
-        Err(e) => (true, "prover/issuer", e),
+        // errors raised by the issuer's checks (delegation proof, child PoK, seen-set, root attributes)
+        Err(e) if ["deleg verify", "child pok", "delegation pseudonym replay", "root:"].iter().any(|p| e.starts_with(p)) => (true, "issuer", e),
+        Err(e) => (true, "prover", e),
         Ok(Err(e)) => (true, "verifier", e),
         Ok(Ok(())) => (false, "ACCEPTED", String::new()),
     }
@@ -72,12 +78,18 @@ fn main() {
     let (c1, c2) = p.esc.unwrap();
     for (a, b) in [(0usize, 1usize), (0, 2), (1, 2)] {
         let (da, pa) = sys.share(r, a, &c1); let (db, pb) = sys.share(r, b, &c1);
-        let ok = sys.judge_share(a, &c1, &da, &pa) && sys.judge_share(b, &c1, &db, &pb) && sys.open(&c2, [(a, da), (b, db)]) == sys.g_uid(42);
+        let ok = sys.judge(&c1, &c2, [(a, da, pa), (b, db, pb)], REGISTERED) == Ok(42);
         checks.push(json!({"check": format!("2-of-3 opening with members {}+{} returns the root principal", a + 1, b + 1), "ok": ok}));
     }
 
     // ---------------- attacks ----------------
     macro_rules! atk { ($cls:expr, $name:expr, $res:expr) => {{ let (rej, by, why) = outcome($res); attacks.push(json!({"class": $cls, "attack": $name, "rejected": rej, "by": by, "detail": why.chars().take(120).collect::<String>()})); }} }
+    // atk_cause!: the attack counts as rejected only if it fails for the expected reason
+    // (e.g. the non-membership statement of the revoked ancestor, not a stale witness of the holder itself).
+    macro_rules! atk_cause { ($cls:expr, $name:expr, $res:expr, $why:expr) => {{ let (rej, by, why) = outcome($res);
+        let good = rej && why.contains($why);
+        attacks.push(json!({"class": $cls, "attack": $name, "rejected": good, "by": if good { by } else if rej { "OTHER CAUSE" } else { by },
+                            "expected_cause": $why, "detail": why.chars().take(120).collect::<String>()})); }} }
     let mut t1 = Tool::new("hotel2", false);
     let mut t2 = Tool::new("air2", false);
     let pv = |sys: &System, r: &mut rand::rngs::StdRng, m: &Mandate, i: &Invocation, j: u64, e: bool, t: &mut Tool| -> Result<Result<(), String>, String> {
@@ -109,15 +121,19 @@ fn main() {
     atk!("A2", "delegation: principal change (uid')", dl(sys, r, &root, Attrs { id: 5009, uid: 43, ..base() }));
     { let mut fp = Mandate { s: root.s, a: root.a.clone(), ver: root.ver, sig: root.sig.clone(), nm: root.nm.clone() }; fp.a.budget = 1 << 30;
       atk!("A2", "delegation from a forged parent (attributes not signed)", dl(sys, r, &fp, Attrs { id: 5010, budget: 1 << 29, ..base() })); }
-    // mix-and-match: reuse a parent's delegation proof with another child commitment -> emulate by a child with a different link secret is not possible through the API;
-    // instead check that a parent proof bound to context C1 fails under context C2 (same statements)
-    atk!("A2", "delegation proof replayed with another child commitment", {
+    // mix-and-match (Thm. 1, case i): a parent's delegation proof is bound to the session context
+    // H(issuer nonce, Cc, Cp); it cannot be reused with another child commitment or in another session.
+    {   let n1 = b"issuer-session-1".to_vec();
         let a = Attrs { id: 5011, ..base() };
-        let s2 = Fr::rand(r); let r1 = Fr::rand(r);
-        let cc = sys.sp.commit_to_messages(vec![(I_S, &s2)], &r1).unwrap();
-        let bases = vec![sys.sp.h_0, sys.sp.h[I_S]];
-        let pf = ped_pok(r, &bases, &cc, vec![r1, s2], b"ctx-A").unwrap();
-        let _ = a; Ok(ped_verify(r, &bases, &cc, &pf, b"ctx-B")) });
+        let (req, _sec) = sys.deleg_request(r, &root, &a, 21, 0, &n1).unwrap();
+        // adversarial child: fresh commitment with a valid PoK under the new context, parent proof unchanged
+        let s3 = Fr::rand(r); let r3 = Fr::rand(r);
+        let cc3 = sys.sp.commit_to_messages(vec![(I_S, &s3)], &r3).unwrap();
+        let cpf3 = sys.child_pok(r, &cc3, r3, s3, &deleg_ctx(&n1, &cc3, &req.Cp)).unwrap();
+        let swapped = DelegReq { Cc: cc3, Cp: req.Cp, nymD: req.nymD, epoch: req.epoch, j: req.j, pf: req.pf.clone(), cpf: cpf3 };
+        atk_cause!("A2", "delegation proof reused with another child commitment", sys.deleg_issue(r, &swapped, &n1).map(|_| Ok(())), "deleg verify");
+        let n2 = b"issuer-session-2".to_vec();
+        atk_cause!("A2", "delegation request replayed in a new issuer session", sys.deleg_issue(r, &req, &n2).map(|_| Ok(())), "deleg verify"); }
     // A3 — replay
     let i_ok = inv("hotel2", 1, 10, 9, 1_000_000, &nonce());
     let p_ok = sys.present(r, &child, &i_ok, 0, false).unwrap();
@@ -139,29 +155,47 @@ fn main() {
       atk!("A4", "re-randomise the pseudonym of an accepted proof", Ok(sys.verify(r, &mut t1, &i_ok, &pp))); }
     atk!("A4", "delegation pseudonym reuse (same epoch and counter)", sys.delegate(r, &root, &Attrs { id: 5012, ..base() }, 7, 0).map(|_| Ok(())));
     atk!("A4", "delegation counter beyond the parent's quota", sys.delegate(r, &root, &Attrs { id: 5013, ..base() }, 7, 3).map(|_| Ok(())));
-    // A5 — revocation
+    // A5 — revocation. Holders refresh every witness they can from public data (refresh_partial);
+    // a witness for a just-revoked identifier cannot be refreshed. Each attack must fail on the
+    // non-membership statement of the revoked identifier: presentation statements 5 (own id), 6 (anc1), 7 (anc2);
+    // delegation statements 1 (parent id), 2 (parent's anc1).
+    let gc2_a = Attrs { id: 304, anc: [202, 101, 0, 0], depth: 2, scope: scope(&[1]), budget: 50, k: 1, exp: 1_400_000, uid: 42 };
+    let (gc2, _, _) = sys.delegate(r, &child, &gc2_a, 8, 0).unwrap();
     let old_acc: G1Affine = *sys.acc.value();
     let (om, ad) = sys.revoke(&[303]).unwrap();
-    let mut root = root; let mut child = child; root.refresh(&ad, &om).unwrap(); child.refresh(&ad, &om).unwrap();
+    let mut root = root; let mut child = child; let mut gchild = gchild; let mut gc2 = gc2;
+    root.refresh(&ad, &om).unwrap(); child.refresh(&ad, &om).unwrap(); gc2.refresh(&ad, &om).unwrap();
+    let stuck_gc = gchild.refresh_partial(&ad, &om);
+    checks.push(json!({"check": "after a revocation, the revoked holder cannot refresh its own witness (only position 0 is stuck)", "ok": stuck_gc == vec![0]}));
+    { let i = inv("hotel2", 1, 10, 11, 1_000_000, &nonce());
+      let ok = sys.present(r, &gc2, &i, 0, false).and_then(|p| sys.verify(r, &mut t1, &i, &p)).is_ok();
+      checks.push(json!({"check": "honest presentation after a revocation (sibling of the revoked mandate, refreshed witnesses)", "ok": ok})); }
     let grefok = { let mut g = Mandate { s: gchild.s, a: gchild.a.clone(), ver: gchild.ver, sig: gchild.sig.clone(), nm: gchild.nm.clone() };
         g.refresh(&ad, &om).is_ok() && sys.acc.verify_non_membership(&fr(303), &g.nm[0], &sys.akp.public_key, &sys.ap) };
     atk!("A5", "refresh the witness of a revoked id from public data", Ok(if grefok { Ok(()) } else { Err("refreshed witness does not verify".into()) }));
-    atk!("A5", "present after own revocation", pv(sys, r, &gchild, &inv("hotel2", 1, 10, 11, 1_000_000, &nonce()), 0, false, &mut t1));
+    atk_cause!("A5", "present after own revocation", pv(sys, r, &gchild, &inv("hotel2", 1, 10, 11, 1_000_000, &nonce()), 0, false, &mut t1), "VBAccumProofContributionFailed(5,");
     atk!("A5", "present with a stale accumulator value", { let i = inv("hotel2", 1, 10, 11, 1_000_000, &nonce());
         sys.present_cheat(r, &gchild, &i, 0, false, &Cheat { acc_value: Some(old_acc), ..Default::default() }).map(|p| sys.verify(r, &mut t1, &i, &p)) });
+    // revoke the parent 202: its child gc2 (304) is not revoked itself and refreshes its own witness
     let (om, ad) = sys.revoke(&[202]).unwrap(); root.refresh(&ad, &om).unwrap();
-    atk!("A5", "present after parent revocation", pv(sys, r, &child, &inv("hotel2", 1, 10, 11, 1_000_000, &nonce()), 1, false, &mut t1));
-    atk!("A5", "delegate after own revocation", sys.delegate(r, &child, &Attrs { id: 5014, depth: 2, anc: [202, 101, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }, 12, 0).map(|_| Ok(())));
-    // grandparent revocation: build fresh chain 7000->7001->7002, revoke 7000
+    let stuck_c = child.refresh_partial(&ad, &om);
+    let stuck_gc2 = gc2.refresh_partial(&ad, &om);
+    checks.push(json!({"check": "after a parent revocation, the child refreshes its own witness but not the parent's (only position 1 is stuck)", "ok": stuck_gc2 == vec![1] && stuck_c == vec![0]}));
+    atk_cause!("A5", "present after parent revocation (own witness up to date)", pv(sys, r, &gc2, &inv("hotel2", 1, 10, 12, 1_000_000, &nonce()), 0, false, &mut t1), "VBAccumProofContributionFailed(6,");
+    atk_cause!("A5", "delegate after own revocation", sys.delegate(r, &child, &Attrs { id: 5014, depth: 2, anc: [202, 101, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }, 12, 1).map(|_| Ok(())), "VBAccumProofContributionFailed(1,");
+    // grandparent revocation: chain 7000 -> 7001 -> 7002, revoke 7000
     let g0 = sys.issue_root(r, &Attrs { id: 7000, anc: [0; 4], depth: 0, scope: scope(&[1]), budget: 100, k: 2, exp: 2_000_000, uid: 9 }).unwrap();
     let (g1, _, _) = sys.delegate(r, &g0, &Attrs { id: 7001, anc: [7000, 0, 0, 0], depth: 1, scope: scope(&[1]), budget: 90, k: 2, exp: 1_900_000, uid: 9 }, 13, 0).unwrap();
     let (g2, _, _) = sys.delegate(r, &g1, &Attrs { id: 7002, anc: [7001, 7000, 0, 0], depth: 2, scope: scope(&[1]), budget: 80, k: 2, exp: 1_800_000, uid: 9 }, 13, 0).unwrap();
     let (om, ad) = sys.revoke(&[7000]).unwrap(); root.refresh(&ad, &om).unwrap();
-    let mut g0 = g0; let g0r = g0.refresh(&ad, &om); let _ = g0r;
-    atk!("A5", "present after grandparent revocation", pv(sys, r, &g2, &inv("hotel2", 1, 10, 13, 1_000_000, &nonce()), 0, false, &mut t1));
-    atk!("A5", "revoked root's sibling chain via refreshed witnesses", { // holder tries to refresh its witness for a revoked id: impossible
-        Err::<Result<(), String>, String>(if sys.nm_witness(7000).is_none() { "no non-membership witness exists for a revoked id".into() } else { "witness obtained".into() }) });
-    // A6 — accountability
+    let (mut g1, mut g2) = (g1, g2);
+    let stuck_g1 = g1.refresh_partial(&ad, &om); let stuck_g2 = g2.refresh_partial(&ad, &om);
+    checks.push(json!({"check": "after a root revocation, descendants refresh all witnesses except the root's (positions 1 and 2)", "ok": stuck_g1 == vec![1] && stuck_g2 == vec![2]}));
+    atk_cause!("A5", "present after grandparent revocation (own and parent witnesses up to date)", pv(sys, r, &g2, &inv("hotel2", 1, 10, 13, 1_000_000, &nonce()), 0, false, &mut t1), "VBAccumProofContributionFailed(7,");
+    atk_cause!("A5", "child of a revoked root delegates a new sub-agent", sys.delegate(r, &g1, &Attrs { id: 7003, anc: [7001, 7000, 0, 0], depth: 2, scope: scope(&[1]), budget: 70, k: 1, exp: 1_700_000, uid: 9 }, 14, 1).map(|_| Ok(())), "VBAccumProofContributionFailed(2,");
+    checks.push(json!({"check": "identifier 0 (no ancestor) cannot be revoked", "ok": sys.revoke(&[0]).is_err()}));
+    // A6 — accountability. Openings go through the full Judge (distinct members, Chaum–Pedersen proofs,
+    // registered principal). Member 1 (index 0) is corrupt; the target is principal 43, who made no presentation.
     let mut pt = Tool::new("pay2", true);
     atk!("A6", "escrow ciphertext encrypts another principal", { let i = inv("pay2", 1, 10, 14, 1_000_000, &nonce());
         sys.present_cheat(r, &root, &i, 0, true, &Cheat { esc_uid: Some(43), ..Default::default() }).map(|p| sys.verify(r, &mut pt, &i, &p)) });
@@ -170,13 +204,18 @@ fn main() {
     let p6 = sys.present(r, &root, &i6, 0, true).unwrap();
     sys.verify(r, &mut pt, &i6, &p6).unwrap();
     let (c1, c2) = p6.esc.unwrap();
-    { let (mut d, pf) = sys.share(r, 0, &c1); d = (d.into_group() * Fr::from(3u64)).into_affine();
-      atk!("A6", "malicious member submits a wrong decryption share", Ok(if sys.judge_share(0, &c1, &d, &pf) { Ok(()) } else { Err("Judge rejects the share".into()) })); }
-    { let (d, _) = sys.share(r, 1, &c1); let (_, pf2) = sys.share(r, 2, &c1);
-      atk!("A6", "share with a proof made for another member", Ok(if sys.judge_share(1, &c1, &d, &pf2) { Ok(()) } else { Err("Judge rejects the proof".into()) })); }
-    { let (d0, _) = sys.share(r, 0, &c1); let fake = (G1Affine::generator().into_group() * Fr::rand(r)).into_affine();
-      let res = sys.open(&c2, [(0, d0), (1, fake)]) == sys.g_uid(42) || sys.open(&c2, [(0, d0), (1, fake)]) == sys.g_uid(43);
-      atk!("A6", "single member frames a principal with a fabricated second share", Ok(if res { Ok(()) } else { Err("opening does not yield any registered principal".into()) })); }
+    let judged = |res: Result<u64, String>| -> Result<Result<(), String>, String> { Ok(match res { Ok(u) if u == 43 => Ok(()), Ok(u) => Err(format!("Judge opens to {u}, not the target")), Err(e) => Err(e) }) };
+    let (d0, pf0) = sys.share(r, 0, &c1); let (d1, pf1) = sys.share(r, 1, &c1);
+    let (l0, l1) = lagrange_at0(1, 2);
+    // share for member 2 such that c2 / (D1^l0 D2^l1) = g^43
+    let d1_forged = ((c2.into_group() - sys.g_uid(43).into_group() - d0.into_group() * l0) * l1.inverse().unwrap()).into_affine();
+    atk_cause!("A6", "corrupt member forges the second share to frame principal 43 (reuses the honest proof)", judged(sys.judge(&c1, &c2, [(0, d0, pf0), (1, d1_forged, pf1)], REGISTERED)), "invalid share proof from member 2");
+    atk_cause!("A6", "corrupt member forges the second share to frame principal 43 (random proof)", judged(sys.judge(&c1, &c2, [(0, d0, pf0), (1, d1_forged, (Fr::rand(r), Fr::rand(r)))], REGISTERED)), "invalid share proof from member 2");
+    { let d0_bad = (d0.into_group() * Fr::from(3u64)).into_affine();
+      atk_cause!("A6", "malicious member submits a wrong decryption share", judged(sys.judge(&c1, &c2, [(0, d0_bad, pf0), (1, d1, pf1)], REGISTERED)), "invalid share proof from member 1"); }
+    { let (_, pf2) = sys.share(r, 2, &c1);
+      atk_cause!("A6", "share with a proof made for another member", judged(sys.judge(&c1, &c2, [(0, d0, pf0), (1, d1, pf2)], REGISTERED)), "invalid share proof from member 2"); }
+    atk_cause!("A6", "corrupt member submits its own share twice", judged(sys.judge(&c1, &c2, [(0, d0, pf0), (0, d0, pf0)], REGISTERED)), "two distinct committee members");
     { let i = inv("pay2", 1, 10, 16, 1_000_000, &nonce()); let mut p = sys.present(r, &root, &i, 0, true).unwrap(); p.esc = Some((c1, c2));
       atk!("A6", "graft another presentation's escrow ciphertext", Ok(sys.verify(r, &mut pt, &i, &p))); }
 

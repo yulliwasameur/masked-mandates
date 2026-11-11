@@ -102,6 +102,8 @@ fn main() {
                     sys.revoked.extend(add);
                 }
                 root.nm = root.ids().iter().map(|id| sys.nm_witness(*id).unwrap()).collect();
+                // present/verify at exactly `target` revoked ids (before the batch-update phase below)
+                let (p, v, _) = pv(&sys, &mut r, &root, 10, false, target);
                 let mut wit = vec![];
                 for i in 0..10 { let t = Instant::now(); let _ = sys.nm_witness(5_000_000 + i).unwrap(); wit.push(ms(t)); }
                 let (mut batch, mut refresh, mut omega_b) = (vec![], vec![], 0usize);
@@ -111,9 +113,8 @@ fn main() {
                     omega_b = ser_len(&om);
                     let t = Instant::now(); root.refresh(&ad, &om).unwrap(); refresh.push(ms(t));
                 }
-                let (p, v, _) = pv(&sys, &mut r, &root, 10, false, target);
                 eprintln!("rev {} done", target);
-                pts.push(json!({"size": target, "actual_size": sys.revoked.len(), "witness": wit, "batch100": batch, "refresh": refresh, "omega_bytes": omega_b, "present": p, "verify": v}));
+                pts.push(json!({"size": target, "size_after_batches": sys.revoked.len(), "witness": wit, "batch100": batch, "refresh": refresh, "omega_bytes": omega_b, "present": p, "verify": v}));
             }
             let _ = sys.acc.value();
             json!({"points": pts})

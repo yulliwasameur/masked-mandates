@@ -23,13 +23,14 @@ def M(name, val): macros[name] = val
 A = J("attacks.json")
 M("NAttacks", str(A["n_attacks"])); M("NChecks", str(A["n_checks"]))
 assert A["n_rejected"] == A["n_attacks"] and A["n_checks_ok"] == A["n_checks"], "attack suite not clean"
+assert all(a["by"] in ("prover", "issuer", "verifier") for a in A["attacks"]), "attack rejected for an unexpected cause"
 lab = {"A2": "A2", "A3": "A3", "A4": "A4", "A5": "A5", "A6": "A6"}
 rows = []
 for a in A["attacks"]:
-    by = "P" if a["by"].startswith("prover") else "V"
+    by = "P" if a["by"] == "prover" else "V"
     rows.append(f"\\parbox[t]{{0.8\\columnwidth}}{{\\raggedright {lab[a['class']]}: {a['attack']}}} & rejected ({by})\\\\")
 rows.append(f"\\midrule {A['n_checks']} correctness checks & all pass\\\\ \\bottomrule")
-rows.append(r"\multicolumn{2}{@{}l}{\scriptsize P: refused by the prover or the issuer; V: rejected by the verifier.}\\")
+rows.append(r"\multicolumn{2}{@{}l}{\scriptsize P: the cheating prover cannot build the proof; V: rejected by the tool, the issuer or the Judge.}\\")
 open(f"{O}/tab_attacks.tex", "w").write("\n".join(rows) + "\n")
 
 # ---------------- costs

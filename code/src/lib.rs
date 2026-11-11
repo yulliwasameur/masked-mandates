@@ -184,7 +184,7 @@ pub fn nym_base(tool: &str, epoch: u64, j: u64) -> G1Affine {
 }
 pub fn deleg_base(epoch: u64, j: u64) -> G1Affine { h2g(format!("MM-nym|delegate|{}|{}", epoch, j).as_bytes()) }
 
-fn lagrange_at0(i: u64, jj: u64) -> (Fr, Fr) {
+pub fn lagrange_at0(i: u64, jj: u64) -> (Fr, Fr) {
     // coefficients for points i, jj (1-based) at x = 0
     let (xi, xj) = (fr(i), fr(jj));
     (xj / (xj - xi), xi / (xi - xj))
@@ -330,7 +330,21 @@ impl System {
     /// Delegation (three parties). Returns the child mandate and timings (parent_ms, issuer_ms).
     pub fn delegate(&mut self, rng: &mut StdRng, parent: &Mandate, child: &Attrs, epoch: u64, j: u64)
         -> Result<(Mandate, f64, f64), String> {
+        // issuer: fresh session nonce (drawn by the issuer, sent to parent and child)
+        let issuer_nonce = { let mut b = [0u8; 16]; rng.fill_bytes(&mut b); b.to_vec() };
         let t0 = std::time::Instant::now();
+        let (req, sec) = self.deleg_request(rng, parent, child, epoch, j, &issuer_nonce)?;
+        let parent_ms = t0.elapsed().as_secs_f64() * 1e3;
+        let t1 = std::time::Instant::now();
+        let blind = self.deleg_issue(rng, &req, &issuer_nonce)?;
+        let issuer_ms = t1.elapsed().as_secs_f64() * 1e3;
+        let m = self.deleg_finish(parent, child, &sec, blind)?;
+        Ok((m, parent_ms, issuer_ms))
+    }
+
+    /// Parent + child side of a delegation session bound to the issuer's nonce.
+    pub fn deleg_request(&self, rng: &mut StdRng, parent: &Mandate, child: &Attrs, epoch: u64, j: u64, issuer_nonce: &[u8])
+        -> Result<(DelegReq, DelegSecret), String> {
         // child: commit to its link secret
         let s2 = Fr::rand(rng);
         let r1 = Fr::rand(rng);
@@ -339,28 +353,37 @@ impl System {
         let r2 = Fr::rand(rng);
         let cm = child.msgs_1_uid();
         let Cp = self.sp.commit_to_messages(cm.iter().map(|(i, v)| (*i, v)).collect::<Vec<_>>(), &r2).map_err(|e| format!("{e:?}"))?;
-        let issuer_nonce = { let mut b = [0u8; 16]; rng.fill_bytes(&mut b); b.to_vec() };
-        let ctx = { let mut h = Sha256::new(); h.update(&issuer_nonce); for c in [&Cc, &Cp] { let mut b = vec![]; c.serialize_compressed(&mut b).unwrap(); h.update(b); } h.finalize().to_vec() };
+        let ctx = deleg_ctx(issuer_nonce, &Cc, &Cp);
         let nymD = (deleg_base(epoch, j).into_group() * parent.s).into_affine();
         let pf = self.deleg_proof(rng, parent, child, r2, &Cp, &nymD, epoch, j, &ctx)?;
         // child: PoK of opening of Cc, same context
-        let cb = vec![self.sp.h_0, self.sp.h[I_S]];
-        let cpf = ped_pok(rng, &cb, &Cc, vec![r1, s2], &ctx)?;
-        let parent_ms = t0.elapsed().as_secs_f64() * 1e3;
-        // issuer
-        let t1 = std::time::Instant::now();
-        self.deleg_verify(rng, &Cp, &nymD, epoch, j, &pf, &ctx)?;
-        ped_verify(rng, &cb, &Cc, &cpf, &ctx)?;
-        let key = { let mut b = epoch.to_le_bytes().to_vec(); nymD.serialize_compressed(&mut b).unwrap(); b };
+        let cpf = self.child_pok(rng, &Cc, r1, s2, &ctx)?;
+        Ok((DelegReq { Cc, Cp, nymD, epoch, j, pf, cpf }, DelegSecret { s2, r1, r2 }))
+    }
+
+    /// Child's proof of knowledge of the opening of its commitment, under the session context.
+    pub fn child_pok(&self, rng: &mut StdRng, Cc: &G1Affine, r1: Fr, s2: Fr, ctx: &[u8]) -> Result<Proof<E>, String> {
+        ped_pok(rng, &[self.sp.h_0, self.sp.h[I_S]], Cc, vec![r1, s2], ctx)
+    }
+
+    /// Issuer side: checks both proofs under its own nonce, the delegation seen-set, then blind-signs Cc*Cp.
+    pub fn deleg_issue(&mut self, rng: &mut StdRng, q: &DelegReq, issuer_nonce: &[u8]) -> Result<SignatureG1<E>, String> {
+        let ctx = deleg_ctx(issuer_nonce, &q.Cc, &q.Cp);
+        self.deleg_verify(rng, &q.Cp, &q.nymD, q.epoch, q.j, &q.pf, &ctx)?;
+        ped_verify(rng, &[self.sp.h_0, self.sp.h[I_S]], &q.Cc, &q.cpf, &ctx).map_err(|e| format!("child pok: {e}"))?;
+        let key = { let mut b = q.epoch.to_le_bytes().to_vec(); q.nymD.serialize_compressed(&mut b).unwrap(); b };
         if self.seen_deleg.contains(&key) { return Err("delegation pseudonym replay".into()); }
         self.seen_deleg.insert(key);
-        let C = (Cc.into_group() + Cp.into_group()).into_affine();
+        let C = (q.Cc.into_group() + q.Cp.into_group()).into_affine();
         let mut unc = BTreeMap::new();
         let verf = fr(self.ver);
         unc.insert(self.y.ver(), &verf);
-        let blind = SignatureG1::<E>::new_with_committed_messages(rng, &C, unc, &self.ikp.secret_key, &self.sp).map_err(|e| format!("{e:?}"))?;
-        let issuer_ms = t1.elapsed().as_secs_f64() * 1e3;
-        // child unblinds
+        SignatureG1::<E>::new_with_committed_messages(rng, &C, unc, &self.ikp.secret_key, &self.sp).map_err(|e| format!("{e:?}"))
+    }
+
+    /// Child unblinds, checks the signature and assembles its witnesses.
+    pub fn deleg_finish(&self, parent: &Mandate, child: &Attrs, sec: &DelegSecret, blind: SignatureG1<E>) -> Result<Mandate, String> {
+        let (s2, r1, r2) = (sec.s2, sec.r1, sec.r2);
         let sig = blind.unblind(&(r1 + r2));
         let mut m = Mandate { s: s2, a: child.clone(), ver: self.ver, sig, nm: vec![] };
         m.sig.verify(&m.msgs(), self.ikp.public_key.clone(), self.sp.clone()).map_err(|e| format!("child sig: {e:?}"))?;
@@ -368,7 +391,7 @@ impl System {
         let mut nm = vec![self.nm_witness(child.id).ok_or("nm")?];
         nm.push(parent.nm[0].clone()); nm.push(parent.nm[1].clone()); nm.push(parent.nm[2].clone()); nm.push(parent.nm[3].clone());
         m.nm = nm;
-        Ok((m, parent_ms, issuer_ms))
+        Ok(m)
     }
 
     fn deleg_statements(&self, Cp: &G1Affine, nymD: &G1Affine, j: u64, prover: bool) -> Result<(Statements<E>, MetaStatements), String> {
@@ -464,6 +487,7 @@ impl System {
 
     /// Revoke a batch of ids; returns (omega, additions) for holders.
     pub fn revoke(&mut self, ids: &[u64]) -> Result<(Omega<G1Affine>, Vec<Fr>), String> {
+        if ids.contains(&0) { return Err("identifier 0 (no ancestor) can never be revoked".into()); }
         let add: Vec<Fr> = ids.iter().map(|i| fr(*i)).collect();
         let old = *self.acc.value();
         let omega = Omega::new(&add, &[], &old, &self.akp.secret_key);
@@ -495,6 +519,27 @@ impl System {
         (c2.into_group() - k).into_affine()
     }
     pub fn g_uid(&self, uid: u64) -> G1Affine { (self.g.into_group() * fr(uid)).into_affine() }
+
+    /// Judge: accepts an opening only from two shares of distinct members, each with a valid
+    /// Chaum–Pedersen proof, and only if the result is a registered principal; returns its uid.
+    pub fn judge(&self, c1: &G1Affine, c2: &G1Affine, s: [(usize, G1Affine, (Fr, Fr)); 2], registered: &[u64]) -> Result<u64, String> {
+        if s[0].0 == s[1].0 || s[0].0 > 2 || s[1].0 > 2 { return Err("Judge: two distinct committee members required".into()); }
+        for (i, d, pf) in &s { if !self.judge_share(*i, c1, d, pf) { return Err(format!("Judge: invalid share proof from member {}", i + 1)); } }
+        let g = self.open(c2, [(s[0].0, s[0].1), (s[1].0, s[1].1)]);
+        registered.iter().copied().find(|u| self.g_uid(*u) == g).ok_or_else(|| "Judge: opening is no registered principal".into())
+    }
+}
+
+/// Messages of a delegation session (parent + child -> issuer).
+pub struct DelegReq { pub Cc: G1Affine, pub Cp: G1Affine, pub nymD: G1Affine, pub epoch: u64, pub j: u64, pub pf: Proof<E>, pub cpf: Proof<E> }
+/// Secrets kept by parent and child for unblinding.
+pub struct DelegSecret { pub s2: Fr, pub r1: Fr, pub r2: Fr }
+
+/// Session context: issuer nonce and both commitments.
+pub fn deleg_ctx(issuer_nonce: &[u8], Cc: &G1Affine, Cp: &G1Affine) -> Vec<u8> {
+    let mut h = Sha256::new(); h.update(issuer_nonce);
+    for c in [Cc, Cp] { let mut b = vec![]; c.serialize_compressed(&mut b).unwrap(); h.update(b); }
+    h.finalize().to_vec()
 }
 
 fn cp_challenge(g: &G1Affine, c1: &G1Affine, X: &G1Affine, D: &G1Affine, a1: &G1Affine, a2: &G1Affine) -> Fr {
@@ -554,6 +599,22 @@ impl Mandate {
                 .map_err(|e| format!("refresh: {e:?}"))?;
         }
         Ok(())
+    }
+    /// Refreshes every witness whose identifier is not in the published batch and keeps the
+    /// pre-revocation witness for the others: a non-membership witness for a revoked identifier
+    /// does not exist (the library returns a value without error, but it does not verify).
+    /// Returns the positions (0 = own id, 1..4 = ancestors) that could not be refreshed.
+    pub fn refresh_partial(&mut self, additions: &[Fr], omega: &Omega<G1Affine>) -> Vec<usize> {
+        let ids = self.ids();
+        let mut stuck = vec![];
+        for i in 0..5 {
+            if additions.contains(&fr(ids[i])) { stuck.push(i); continue; }
+            match self.nm[i].update_using_public_info_after_batch_updates(additions, &[], omega, &fr(ids[i])) {
+                Ok(w) => self.nm[i] = w,
+                Err(_) => stuck.push(i),
+            }
+        }
+        stuck
     }
 }
 
