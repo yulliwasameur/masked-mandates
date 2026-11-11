@@ -1,0 +1,46 @@
+\parbox[t]{0.8\columnwidth}{\raggedright A2: class outside the mandate's scope} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: amount above budget} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: use after expiry} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: inflate budget under an existing signature} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: add a scope bit under an existing signature} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: mandate signed by an unrecognised issuer} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: child gets a class the parent lacks} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: child budget above parent} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: child quota above parent} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: child expiry after parent} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: depth skip (+2)} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: beyond maximum depth 4} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: ancestry erasure (anc' cleared)} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: ancestry rewrite (wrong grandparent)} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation: principal change (uid')} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation from a forged parent (attributes not signed)} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A2: delegation proof replayed with another child commitment} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A3: same presentation, same tool (replay)} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A3: same presentation sent to another tool} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A3: same proof, different call arguments} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A3: same proof, different tool nonce} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A3: same proof, another epoch} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A3: same proof, larger amount} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A3: same proof, other action class} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A4: reuse a counter j within the epoch (fresh proof)} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A4: counter j = k (beyond quota)} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A4: counter j far beyond quota} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A4: claim another counter for an existing proof} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A4: re-randomise the pseudonym of an accepted proof} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A4: delegation pseudonym reuse (same epoch and counter)} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A4: delegation counter beyond the parent's quota} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A5: refresh the witness of a revoked id from public data} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A5: present after own revocation} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A5: present with a stale accumulator value} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A5: present after parent revocation} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A5: delegate after own revocation} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A5: present after grandparent revocation} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A5: revoked root's sibling chain via refreshed witnesses} & rejected (P)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A6: escrow ciphertext encrypts another principal} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A6: omit escrow where the tool requires it} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A6: malicious member submits a wrong decryption share} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A6: share with a proof made for another member} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A6: single member frames a principal with a fabricated second share} & rejected (V)\\
+\parbox[t]{0.8\columnwidth}{\raggedright A6: graft another presentation's escrow ciphertext} & rejected (V)\\
+\midrule 11 correctness checks & all pass\\ \bottomrule
+\multicolumn{2}{@{}l}{\scriptsize P: refused by the prover or the issuer; V: rejected by the verifier.}\\

@@ -1,0 +1,204 @@
+{
+ "seed": 20261109,
+ "tools": 50,
+ "days": 30,
+ "session_window_s": 600,
+ "calls_per_session": 4,
+ "session_start": "uniform 08:00-22:00",
+ "identifier": {
+  "users": 1000,
+  "calls": 120296,
+  "same_principal_pairs": 7327100,
+  "same_session_pairs": 180444,
+  "formats": {
+   "clear": {
+    "linked": 7327100,
+    "linked_sess": 180444,
+    "recall": 1.0,
+    "session_recall": 1.0
+   },
+   "pertool": {
+    "linked": 1472156,
+    "linked_sess": 36219,
+    "recall": 0.2009193268823955,
+    "session_recall": 0.2007215535013633
+   },
+   "epoch": {
+    "linked": 68389,
+    "linked_sess": 36219,
+    "recall": 0.009333706377693768,
+    "session_recall": 0.2007215535013633
+   },
+   "mm": {
+    "linked": 0,
+    "linked_sess": 0,
+    "recall": 0.0,
+    "session_recall": 0.0
+   }
+  }
+ },
+ "timing": [
+  {
+   "users": 100,
+   "jitter_s": 0,
+   "delta_s": 10,
+   "linked": 1520,
+   "tp": 560,
+   "precision": 0.3684210526315789,
+   "session_recall": 0.030897009966777408
+  },
+  {
+   "users": 100,
+   "jitter_s": 0,
+   "delta_s": 60,
+   "linked": 8976,
+   "tp": 3442,
+   "precision": 0.38346702317290554,
+   "session_recall": 0.18975636766334442
+  },
+  {
+   "users": 100,
+   "jitter_s": 0,
+   "delta_s": 600,
+   "linked": 74726,
+   "tp": 18366,
+   "precision": 0.24577790862618099,
+   "session_recall": 1.0
+  },
+  {
+   "users": 100,
+   "jitter_s": 600,
+   "delta_s": 10,
+   "linked": 1324,
+   "tp": 398,
+   "precision": 0.30060422960725075,
+   "session_recall": 0.021816168327796235
+  },
+  {
+   "users": 100,
+   "jitter_s": 600,
+   "delta_s": 60,
+   "linked": 7954,
+   "tp": 2327,
+   "precision": 0.2925572039225547,
+   "session_recall": 0.12746400885935769
+  },
+  {
+   "users": 100,
+   "jitter_s": 600,
+   "delta_s": 600,
+   "linked": 73244,
+   "tp": 16830,
+   "precision": 0.22977991371306863,
+   "session_recall": 0.91578073089701
+  },
+  {
+   "users": 1000,
+   "jitter_s": 0,
+   "delta_s": 10,
+   "linked": 102131,
+   "tp": 5987,
+   "precision": 0.05862079094496284,
+   "session_recall": 0.03284334966612224
+  },
+  {
+   "users": 1000,
+   "jitter_s": 0,
+   "delta_s": 60,
+   "linked": 608384,
+   "tp": 34328,
+   "precision": 0.056424889543446245,
+   "session_recall": 0.1886714887281535
+  },
+  {
+   "users": 1000,
+   "jitter_s": 0,
+   "delta_s": 600,
+   "linked": 5922436,
+   "tp": 183765,
+   "precision": 0.0310286172784307,
+   "session_recall": 1.0
+  },
+  {
+   "users": 1000,
+   "jitter_s": 600,
+   "delta_s": 10,
+   "linked": 100018,
+   "tp": 4027,
+   "precision": 0.04026275270451319,
+   "session_recall": 0.02202148817261647
+  },
+  {
+   "users": 1000,
+   "jitter_s": 600,
+   "delta_s": 60,
+   "linked": 599318,
+   "tp": 24239,
+   "precision": 0.0404443050267137,
+   "session_recall": 0.13252336033243337
+  },
+  {
+   "users": 1000,
+   "jitter_s": 600,
+   "delta_s": 600,
+   "linked": 5898823,
+   "tp": 168910,
+   "precision": 0.028634525904574524,
+   "session_recall": 0.9178971812050709
+  },
+  {
+   "users": 10000,
+   "jitter_s": 0,
+   "delta_s": 10,
+   "linked": 9628833,
+   "tp": 59884,
+   "precision": 0.0062192375753115665,
+   "session_recall": 0.03295608192698683
+  },
+  {
+   "users": 10000,
+   "jitter_s": 0,
+   "delta_s": 60,
+   "linked": 57739262,
+   "tp": 345395,
+   "precision": 0.005981978086245716,
+   "session_recall": 0.19003455355801493
+  },
+  {
+   "users": 10000,
+   "jitter_s": 0,
+   "delta_s": 600,
+   "linked": 574153896,
+   "tp": 1835815,
+   "precision": 0.0031974267052609184,
+   "session_recall": 1.0
+  },
+  {
+   "users": 10000,
+   "jitter_s": 600,
+   "delta_s": 10,
+   "linked": 9592834,
+   "tp": 40432,
+   "precision": 0.004214812848841124,
+   "session_recall": 0.022125405489620022
+  },
+  {
+   "users": 10000,
+   "jitter_s": 600,
+   "delta_s": 60,
+   "linked": 57571415,
+   "tp": 242767,
+   "precision": 0.004216797520088745,
+   "session_recall": 0.13292325326478263
+  },
+  {
+   "users": 10000,
+   "jitter_s": 600,
+   "delta_s": 600,
+   "linked": 573495549,
+   "tp": 1686235,
+   "precision": 0.0029402756532989236,
+   "session_recall": 0.9168199598266201
+  }
+ ]
+}

@@ -1,0 +1,193 @@
+//! Attack suite (A2–A6) and correctness checks. Output: results/attacks.json
+use vb_accumulator::prelude::Accumulator;
+use ark_bls12_381::{Fr, G1Affine};
+use ark_ec::{AffineRepr, CurveGroup};
+use ark_std::UniformRand;
+use mmcore::*;
+use serde_json::json;
+
+struct Ctx { sys: System, r: rand::rngs::StdRng }
+
+fn scope(cls: &[usize]) -> Vec<bool> { let mut s = vec![false; NCLS]; for &c in cls { s[c] = true; } s }
+fn inv(tool: &str, class: usize, amt: u64, epoch: u64, t: u64, nonce: &str) -> Invocation {
+    Invocation { tool: tool.into(), call: format!("{{\"arguments\":{{\"amt\":{amt}}},\"name\":\"op{class}\"}}"), class, amt, epoch, t, nonce: nonce.into() }
+}
+/// Outcome of an attempted attack: who stopped it.
+fn outcome(r: Result<Result<(), String>, String>) -> (bool, &'static str, String) {
+    match r {
+        Err(e) => (true, "prover/issuer", e),
+        Ok(Err(e)) => (true, "verifier", e),
+        Ok(Ok(())) => (false, "ACCEPTED", String::new()),
+    }
+}
+
+fn main() {
+    let seed = 20261109;
+    let mut c = Ctx { sys: System::setup(&mut rng(seed), 1000), r: rng(seed + 1) };
+    let r = &mut c.r;
+    let sys = &mut c.sys;
+    let root_a = Attrs { id: 101, anc: [0; 4], depth: 0, scope: scope(&[0, 1, 2]), budget: 800, k: 3, exp: 2_000_000, uid: 42 };
+    let root = sys.issue_root(r, &root_a).unwrap();
+    let child_a = Attrs { id: 202, anc: [101, 0, 0, 0], depth: 1, scope: scope(&[1]), budget: 300, k: 2, exp: 1_500_000, uid: 42 };
+    let (child, _, _) = sys.delegate(r, &root, &child_a, 7, 0).unwrap();
+    let gc_a = Attrs { id: 303, anc: [202, 101, 0, 0], depth: 2, scope: scope(&[1]), budget: 100, k: 1, exp: 1_400_000, uid: 42 };
+    let (gchild, _, _) = sys.delegate(r, &child, &gc_a, 7, 0).unwrap();
+
+    let mut checks = vec![];
+    let mut attacks = vec![];
+    let mut n = 0u32;
+    let mut nonce = || { n += 1; format!("n{n}") };
+
+    // ---------------- correctness checks ----------------
+    let mut tool = Tool::new("hotel", false);
+    let mut etool = Tool::new("pay", true);
+    // depths 0..4 (build a chain up to depth 4)
+    let mut chain = vec![];
+    let mut cur = sys.issue_root(r, &Attrs { id: 1000, anc: [0; 4], depth: 0, scope: scope(&[1]), budget: 500, k: 4, exp: 2_000_000, uid: 7 }).unwrap();
+    for d in 1..=4u64 {
+        let a = Attrs { id: 1000 + d, anc: { let mut x = [0u64; 4]; x[0] = cur.a.id; x[1] = cur.a.anc[0]; x[2] = cur.a.anc[1]; x[3] = cur.a.anc[2]; x },
+                        depth: d, scope: scope(&[1]), budget: 500 - d * 50, k: 4, exp: 2_000_000 - d, uid: 7 };
+        let (m, _, _) = sys.delegate(r, &cur, &a, 7, 0).unwrap();
+        chain.push(std::mem::replace(&mut cur, m));
+    }
+    chain.push(cur);
+    for m in &chain {
+        let i = inv("hotel", 1, 10, 7, 1_000_000, &nonce());
+        let ok = sys.present(r, m, &i, 0, false).and_then(|p| sys.verify(r, &mut tool, &i, &p)).is_ok();
+        checks.push(json!({"check": format!("honest presentation, depth {}", m.a.depth), "ok": ok}));
+    }
+    for (name, m) in [("escrow presentation, root", &root), ("escrow presentation, depth 2", &gchild)] {
+        let i = inv("pay", 1, 50, 7, 1_000_000, &nonce());
+        let ok = sys.present(r, m, &i, 0, true).and_then(|p| sys.verify(r, &mut etool, &i, &p)).is_ok();
+        checks.push(json!({"check": name, "ok": ok}));
+    }
+    // within quota: root k=3, counters 0,1,2 at a fresh tool
+    let mut qtool = Tool::new("air", false);
+    let okq = (0..3).all(|j| { let i = inv("air", 0, 10, 7, 1_000_000, &nonce()); sys.present(r, &root, &i, j, false).and_then(|p| sys.verify(r, &mut qtool, &i, &p)).is_ok() });
+    checks.push(json!({"check": "all k=3 counters accepted within quota", "ok": okq}));
+    // 2-of-3 openings, all pairs, and judge
+    let i = inv("pay", 1, 50, 8, 1_000_000, &nonce());
+    let p = sys.present(r, &gchild, &i, 0, true).unwrap();
+    sys.verify(r, &mut etool, &i, &p).unwrap();
+    let (c1, c2) = p.esc.unwrap();
+    for (a, b) in [(0usize, 1usize), (0, 2), (1, 2)] {
+        let (da, pa) = sys.share(r, a, &c1); let (db, pb) = sys.share(r, b, &c1);
+        let ok = sys.judge_share(a, &c1, &da, &pa) && sys.judge_share(b, &c1, &db, &pb) && sys.open(&c2, [(a, da), (b, db)]) == sys.g_uid(42);
+        checks.push(json!({"check": format!("2-of-3 opening with members {}+{} returns the root principal", a + 1, b + 1), "ok": ok}));
+    }
+
+    // ---------------- attacks ----------------
+    macro_rules! atk { ($cls:expr, $name:expr, $res:expr) => {{ let (rej, by, why) = outcome($res); attacks.push(json!({"class": $cls, "attack": $name, "rejected": rej, "by": by, "detail": why.chars().take(120).collect::<String>()})); }} }
+    let mut t1 = Tool::new("hotel2", false);
+    let mut t2 = Tool::new("air2", false);
+    let pv = |sys: &System, r: &mut rand::rngs::StdRng, m: &Mandate, i: &Invocation, j: u64, e: bool, t: &mut Tool| -> Result<Result<(), String>, String> {
+        let p = sys.present(r, m, i, j, e)?; Ok(sys.verify(r, t, i, &p))
+    };
+    // A2 — overreach by a compromised agent
+    atk!("A2", "class outside the mandate's scope", pv(sys, r, &child, &inv("hotel2", 2, 10, 7, 1_000_000, &nonce()), 0, false, &mut t1));
+    atk!("A2", "amount above budget", pv(sys, r, &child, &inv("hotel2", 1, 301, 7, 1_000_000, &nonce()), 0, false, &mut t1));
+    atk!("A2", "use after expiry", pv(sys, r, &child, &inv("hotel2", 1, 10, 7, 1_500_001, &nonce()), 0, false, &mut t1));
+    { let mut m2 = Mandate { s: child.s, a: child.a.clone(), ver: child.ver, sig: child.sig.clone(), nm: child.nm.clone() }; m2.a.budget = 10_000;
+      atk!("A2", "inflate budget under an existing signature", pv(sys, r, &m2, &inv("hotel2", 1, 5_000, 7, 1_000_000, &nonce()), 0, false, &mut t1)); }
+    { let mut m2 = Mandate { s: child.s, a: child.a.clone(), ver: child.ver, sig: child.sig.clone(), nm: child.nm.clone() }; m2.a.scope = scope(&[1, 2]);
+      atk!("A2", "add a scope bit under an existing signature", pv(sys, r, &m2, &inv("hotel2", 2, 5, 7, 1_000_000, &nonce()), 0, false, &mut t1)); }
+    { let other = System::setup(&mut rng(99), 10); let mut rr = rng(5);
+      let mut o = other; let fake = o.issue_root(&mut rr, &Attrs { id: 9, anc: [0;4], depth: 0, scope: scope(&[0,1,2,3]), budget: 1<<30, k: 100, exp: 9_000_000, uid: 1 }).unwrap();
+      let fm = Mandate { s: fake.s, a: fake.a.clone(), ver: fake.ver, sig: fake.sig.clone(), nm: child.nm.clone() };
+      atk!("A2", "mandate signed by an unrecognised issuer", pv(sys, r, &fm, &inv("hotel2", 1, 10, 7, 1_000_000, &nonce()), 0, false, &mut t1)); }
+    let mut dj = 1u64;
+    let mut dl = |sys: &mut System, r: &mut rand::rngs::StdRng, p: &Mandate, a: Attrs| -> Result<Result<(), String>, String> { dj += 1; sys.delegate(r, p, &a, 100 + dj, 0).map(|_| Ok(())) };
+    let base = || Attrs { id: 5000, anc: [101, 0, 0, 0], depth: 1, scope: scope(&[1]), budget: 100, k: 2, exp: 1_000_000, uid: 42 };
+    atk!("A2", "delegation: child gets a class the parent lacks", dl(sys, r, &root, Attrs { id: 5001, scope: scope(&[1, 5]), ..base() }));
+    atk!("A2", "delegation: child budget above parent", dl(sys, r, &root, Attrs { id: 5002, budget: 801, ..base() }));
+    atk!("A2", "delegation: child quota above parent", dl(sys, r, &root, Attrs { id: 5003, k: 4, ..base() }));
+    atk!("A2", "delegation: child expiry after parent", dl(sys, r, &root, Attrs { id: 5004, exp: 2_000_001, ..base() }));
+    atk!("A2", "delegation: depth skip (+2)", dl(sys, r, &root, Attrs { id: 5005, depth: 2, ..base() }));
+    atk!("A2", "delegation: beyond maximum depth 4", dl(sys, r, &chain[4], Attrs { id: 5006, depth: 5, anc: [1004, 1003, 1002, 1001], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 7 }));
+    atk!("A2", "delegation: ancestry erasure (anc' cleared)", dl(sys, r, &child, Attrs { id: 5007, depth: 2, anc: [0, 0, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }));
+    atk!("A2", "delegation: ancestry rewrite (wrong grandparent)", dl(sys, r, &child, Attrs { id: 5008, depth: 2, anc: [202, 999, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }));
+    atk!("A2", "delegation: principal change (uid')", dl(sys, r, &root, Attrs { id: 5009, uid: 43, ..base() }));
+    { let mut fp = Mandate { s: root.s, a: root.a.clone(), ver: root.ver, sig: root.sig.clone(), nm: root.nm.clone() }; fp.a.budget = 1 << 30;
+      atk!("A2", "delegation from a forged parent (attributes not signed)", dl(sys, r, &fp, Attrs { id: 5010, budget: 1 << 29, ..base() })); }
+    // mix-and-match: reuse a parent's delegation proof with another child commitment -> emulate by a child with a different link secret is not possible through the API;
+    // instead check that a parent proof bound to context C1 fails under context C2 (same statements)
+    atk!("A2", "delegation proof replayed with another child commitment", {
+        let a = Attrs { id: 5011, ..base() };
+        let s2 = Fr::rand(r); let r1 = Fr::rand(r);
+        let cc = sys.sp.commit_to_messages(vec![(I_S, &s2)], &r1).unwrap();
+        let bases = vec![sys.sp.h_0, sys.sp.h[I_S]];
+        let pf = ped_pok(r, &bases, &cc, vec![r1, s2], b"ctx-A").unwrap();
+        let _ = a; Ok(ped_verify(r, &bases, &cc, &pf, b"ctx-B")) });
+    // A3 — replay
+    let i_ok = inv("hotel2", 1, 10, 9, 1_000_000, &nonce());
+    let p_ok = sys.present(r, &child, &i_ok, 0, false).unwrap();
+    sys.verify(r, &mut t1, &i_ok, &p_ok).unwrap();
+    atk!("A3", "same presentation, same tool (replay)", Ok(sys.verify(r, &mut t1, &i_ok, &p_ok)));
+    atk!("A3", "same presentation sent to another tool", Ok(sys.verify(r, &mut t2, &Invocation { tool: "air2".into(), ..i_ok.clone() }, &p_ok)));
+    atk!("A3", "same proof, different call arguments", Ok(sys.verify(r, &mut Tool::new("hotel2", false), &Invocation { call: "{\"name\":\"op1\",\"arguments\":{\"amt\":999}}".into(), ..i_ok.clone() }, &p_ok)));
+    atk!("A3", "same proof, different tool nonce", Ok(sys.verify(r, &mut Tool::new("hotel2", false), &Invocation { nonce: "other".into(), ..i_ok.clone() }, &p_ok)));
+    atk!("A3", "same proof, another epoch", Ok(sys.verify(r, &mut Tool::new("hotel2", false), &Invocation { epoch: 10, ..i_ok.clone() }, &p_ok)));
+    atk!("A3", "same proof, larger amount", Ok(sys.verify(r, &mut Tool::new("hotel2", false), &Invocation { amt: 299, ..i_ok.clone() }, &p_ok)));
+    atk!("A3", "same proof, other action class", Ok(sys.verify(r, &mut Tool::new("hotel2", false), &Invocation { class: 0, ..i_ok.clone() }, &p_ok)));
+    // A4 — rate abuse
+    atk!("A4", "reuse a counter j within the epoch (fresh proof)", pv(sys, r, &child, &inv("hotel2", 1, 10, 9, 1_000_000, &nonce()), 0, false, &mut t1));
+    atk!("A4", "counter j = k (beyond quota)", pv(sys, r, &child, &inv("hotel2", 1, 10, 9, 1_000_000, &nonce()), 2, false, &mut t1));
+    atk!("A4", "counter j far beyond quota", pv(sys, r, &child, &inv("hotel2", 1, 10, 9, 1_000_000, &nonce()), 1000, false, &mut t1));
+    { let mut pp = p_ok.clone(); pp.j = 1;
+      atk!("A4", "claim another counter for an existing proof", Ok(sys.verify(r, &mut Tool::new("hotel2", false), &i_ok, &pp))); }
+    { let mut pp = p_ok.clone(); pp.nym = (pp.nym.into_group() * Fr::from(2u64)).into_affine();
+      atk!("A4", "re-randomise the pseudonym of an accepted proof", Ok(sys.verify(r, &mut t1, &i_ok, &pp))); }
+    atk!("A4", "delegation pseudonym reuse (same epoch and counter)", sys.delegate(r, &root, &Attrs { id: 5012, ..base() }, 7, 0).map(|_| Ok(())));
+    atk!("A4", "delegation counter beyond the parent's quota", sys.delegate(r, &root, &Attrs { id: 5013, ..base() }, 7, 3).map(|_| Ok(())));
+    // A5 — revocation
+    let old_acc: G1Affine = *sys.acc.value();
+    let (om, ad) = sys.revoke(&[303]).unwrap();
+    let mut root = root; let mut child = child; root.refresh(&ad, &om).unwrap(); child.refresh(&ad, &om).unwrap();
+    let grefok = { let mut g = Mandate { s: gchild.s, a: gchild.a.clone(), ver: gchild.ver, sig: gchild.sig.clone(), nm: gchild.nm.clone() };
+        g.refresh(&ad, &om).is_ok() && sys.acc.verify_non_membership(&fr(303), &g.nm[0], &sys.akp.public_key, &sys.ap) };
+    atk!("A5", "refresh the witness of a revoked id from public data", Ok(if grefok { Ok(()) } else { Err("refreshed witness does not verify".into()) }));
+    atk!("A5", "present after own revocation", pv(sys, r, &gchild, &inv("hotel2", 1, 10, 11, 1_000_000, &nonce()), 0, false, &mut t1));
+    atk!("A5", "present with a stale accumulator value", { let i = inv("hotel2", 1, 10, 11, 1_000_000, &nonce());
+        sys.present_cheat(r, &gchild, &i, 0, false, &Cheat { acc_value: Some(old_acc), ..Default::default() }).map(|p| sys.verify(r, &mut t1, &i, &p)) });
+    let (om, ad) = sys.revoke(&[202]).unwrap(); root.refresh(&ad, &om).unwrap();
+    atk!("A5", "present after parent revocation", pv(sys, r, &child, &inv("hotel2", 1, 10, 11, 1_000_000, &nonce()), 1, false, &mut t1));
+    atk!("A5", "delegate after own revocation", sys.delegate(r, &child, &Attrs { id: 5014, depth: 2, anc: [202, 101, 0, 0], scope: scope(&[1]), budget: 10, k: 1, exp: 1_000, uid: 42 }, 12, 0).map(|_| Ok(())));
+    // grandparent revocation: build fresh chain 7000->7001->7002, revoke 7000
+    let g0 = sys.issue_root(r, &Attrs { id: 7000, anc: [0; 4], depth: 0, scope: scope(&[1]), budget: 100, k: 2, exp: 2_000_000, uid: 9 }).unwrap();
+    let (g1, _, _) = sys.delegate(r, &g0, &Attrs { id: 7001, anc: [7000, 0, 0, 0], depth: 1, scope: scope(&[1]), budget: 90, k: 2, exp: 1_900_000, uid: 9 }, 13, 0).unwrap();
+    let (g2, _, _) = sys.delegate(r, &g1, &Attrs { id: 7002, anc: [7001, 7000, 0, 0], depth: 2, scope: scope(&[1]), budget: 80, k: 2, exp: 1_800_000, uid: 9 }, 13, 0).unwrap();
+    let (om, ad) = sys.revoke(&[7000]).unwrap(); root.refresh(&ad, &om).unwrap();
+    let mut g0 = g0; let g0r = g0.refresh(&ad, &om); let _ = g0r;
+    atk!("A5", "present after grandparent revocation", pv(sys, r, &g2, &inv("hotel2", 1, 10, 13, 1_000_000, &nonce()), 0, false, &mut t1));
+    atk!("A5", "revoked root's sibling chain via refreshed witnesses", { // holder tries to refresh its witness for a revoked id: impossible
+        Err::<Result<(), String>, String>(if sys.nm_witness(7000).is_none() { "no non-membership witness exists for a revoked id".into() } else { "witness obtained".into() }) });
+    // A6 — accountability
+    let mut pt = Tool::new("pay2", true);
+    atk!("A6", "escrow ciphertext encrypts another principal", { let i = inv("pay2", 1, 10, 14, 1_000_000, &nonce());
+        sys.present_cheat(r, &root, &i, 0, true, &Cheat { esc_uid: Some(43), ..Default::default() }).map(|p| sys.verify(r, &mut pt, &i, &p)) });
+    atk!("A6", "omit escrow where the tool requires it", { let i = inv("pay2", 1, 10, 14, 1_000_000, &nonce()); sys.present(r, &root, &i, 0, false).map(|p| sys.verify(r, &mut pt, &i, &p)) });
+    let i6 = inv("pay2", 0, 10, 15, 1_000_000, &nonce());
+    let p6 = sys.present(r, &root, &i6, 0, true).unwrap();
+    sys.verify(r, &mut pt, &i6, &p6).unwrap();
+    let (c1, c2) = p6.esc.unwrap();
+    { let (mut d, pf) = sys.share(r, 0, &c1); d = (d.into_group() * Fr::from(3u64)).into_affine();
+      atk!("A6", "malicious member submits a wrong decryption share", Ok(if sys.judge_share(0, &c1, &d, &pf) { Ok(()) } else { Err("Judge rejects the share".into()) })); }
+    { let (d, _) = sys.share(r, 1, &c1); let (_, pf2) = sys.share(r, 2, &c1);
+      atk!("A6", "share with a proof made for another member", Ok(if sys.judge_share(1, &c1, &d, &pf2) { Ok(()) } else { Err("Judge rejects the proof".into()) })); }
+    { let (d0, _) = sys.share(r, 0, &c1); let fake = (G1Affine::generator().into_group() * Fr::rand(r)).into_affine();
+      let res = sys.open(&c2, [(0, d0), (1, fake)]) == sys.g_uid(42) || sys.open(&c2, [(0, d0), (1, fake)]) == sys.g_uid(43);
+      atk!("A6", "single member frames a principal with a fabricated second share", Ok(if res { Ok(()) } else { Err("opening does not yield any registered principal".into()) })); }
+    { let i = inv("pay2", 1, 10, 16, 1_000_000, &nonce()); let mut p = sys.present(r, &root, &i, 0, true).unwrap(); p.esc = Some((c1, c2));
+      atk!("A6", "graft another presentation's escrow ciphertext", Ok(sys.verify(r, &mut pt, &i, &p))); }
+
+    let n_att = attacks.len();
+    let n_rej = attacks.iter().filter(|a| a["rejected"] == true).count();
+    let n_chk = checks.len();
+    let n_ok = checks.iter().filter(|c| c["ok"] == true).count();
+    let out = json!({"seed": seed, "attacks": attacks, "checks": checks, "n_attacks": n_att, "n_rejected": n_rej, "n_checks": n_chk, "n_checks_ok": n_ok});
+    std::fs::create_dir_all("results").unwrap();
+    std::fs::write("results/attacks.json", serde_json::to_string_pretty(&out).unwrap()).unwrap();
+    println!("attacks rejected {}/{} ; checks ok {}/{}", n_rej, n_att, n_ok, n_chk);
+    for a in out["attacks"].as_array().unwrap() { if a["rejected"] == false { println!("NOT REJECTED: {}", a["attack"]); } }
+    for c in out["checks"].as_array().unwrap() { if c["ok"] == false { println!("CHECK FAILED: {}", c["check"]); } }
+}

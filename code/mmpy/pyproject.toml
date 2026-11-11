@@ -1,0 +1,6 @@
+[build-system]
+requires = ["maturin>=1.5"]
+build-backend = "maturin"
+[project]
+name = "mmpy"
+version = "0.1.0"
