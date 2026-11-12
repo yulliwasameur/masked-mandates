@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Campagne E1 + E2 sur ce Mac (chantier 95). Usage : ./run_campaign.sh  (depuis corrige/)
+# Runs E1 and E2 and records env.json, campaign.log and hashes. Usage: ./run_campaign.sh (from the repository root)
 set -e
 ROOT="${0:A:h}"
 cd "$ROOT/code"
@@ -21,5 +21,6 @@ env={"cpu": sh("sysctl -n machdep.cpu.brand_string"), "machine": "MacBook (Apple
      "threads": 1, "note": "laptop on mains power, single thread, release build"}
 json.dump(env, open("results/env.json","w"), indent=1); print(env)
 PY
-shasum -a 256 target/release/bench target/release/attacks results/*.json > results/SHA256SUMS
+shasum -a 256 results/*.json > results/SHA256SUMS            # check with: (cd code && shasum -a 256 -c results/SHA256SUMS)
+shasum -a 256 target/release/bench target/release/attacks > results/binaries-SHA256.txt   # not shipped
 log "done"

@@ -25,7 +25,7 @@ uses a VB universal accumulator. Range checks use Bulletproofs++, and an optiona
 | `code/e2/e2.py` | E2: end-to-end calls over the official MCP Python SDK, with JWT, Biscuit and macaroon baselines |
 | `code/sim/e3.py` | E3/E3b: collusion of 50 tools (identifier linkage and timing attacker) |
 | `code/gen_tex.py` | Generates every number, table and figure of the paper from `results/*.json` |
-| `code/results/` | Result files of the campaign reported in the paper, with `env.json`, `campaign.log` and `SHA256SUMS` |
+| `code/results/` | Result files of the campaign reported in the paper, with `env.json`, `campaign.log`, `SHA256SUMS` (result files) and `binaries-SHA256.txt` (binaries of the campaign, not shipped) |
 | `run_campaign.sh` | Runs E1 and E2 and records the environment and hashes |
 | `manuscrit/` | Generated `numbers.tex`, `tab_*.tex`, `fig_*.pdf` |
 
@@ -51,6 +51,8 @@ python gen_tex.py ../manuscrit                 # numbers.tex, tab_*.tex, fig_*.p
 Instead of the bench and E2 steps, `./run_campaign.sh` runs E1 and E2 in sequence. It
 also records `env.json`, `campaign.log` and `SHA256SUMS`. On macOS with a broken
 Command Line Tools SDK, set `SDKROOT` to an installed SDK (the script does this).
+
+To check the result files: `cd code && shasum -a 256 -c results/SHA256SUMS`.
 
 The seed is 20261109. The attack suite and E3 are deterministic and reproduce byte
 for byte. Timings depend on the machine. The paper reports one thread on an Apple
@@ -95,7 +97,7 @@ reviewed the code on 12 November 2026.
 
 ## Citation
 
-See `CITATION.cff`. Archived version: DOI [10.5281/zenodo.24148363](https://doi.org/10.5281/zenodo.24148363).
+See `CITATION.cff`. The paper cites version 1.0.0: DOI [10.5281/zenodo.24148363](https://doi.org/10.5281/zenodo.24148363). All versions: DOI [10.5281/zenodo.24148362](https://doi.org/10.5281/zenodo.24148362). Changes between versions are listed in `CHANGELOG.md`.
 
 ## Contact
 

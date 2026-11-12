@@ -1,0 +1,4 @@
+# SHA-256 of the binaries built for the campaign reported in the paper (Apple M5 Pro, macOS, rustc 1.99.1).
+# The binaries are not shipped: rebuilding them on another machine gives other hashes.
+de4517818f2c4946b9c8722d3f27e83dcf98b032280b1fdd2d18f65318d8b0cf  target/release/bench
+a4b6b98e709dd703d812eed844c6efb6cecac58310141c9c1e3036e5ebf7be75  target/release/attacks
