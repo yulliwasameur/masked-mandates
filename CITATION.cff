@@ -13,7 +13,7 @@ authors:
     email: yulliwas.ameur@efrei.fr
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.XXXXXXX"  # to be filled after the Zenodo deposit
+    value: "10.5281/zenodo.24148363"
 keywords:
   - anonymous credentials
   - delegation

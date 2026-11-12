@@ -95,7 +95,7 @@ reviewed the code on 12 November 2026.
 
 ## Citation
 
-See `CITATION.cff`. Archived version: DOI `10.5281/zenodo.XXXXXXX` <!-- to be filled after the Zenodo deposit -->.
+See `CITATION.cff`. Archived version: DOI [10.5281/zenodo.24148363](https://doi.org/10.5281/zenodo.24148363).
 
 ## Contact
 
