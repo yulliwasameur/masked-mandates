@@ -2,8 +2,8 @@
 
 Code, scripts and result files for the paper
 
-> Y. Ameur, *Masked Mandates: Unlinkable, Attenuable and Accountable Delegation for LLM Agents*,
-> submitted to IEEE Transactions on Information Forensics and Security, 2026.
+> Y. Ameur, S. Bouzefrane and S. Banerjee, *Masked Mandates: Unlinkable, Attenuable and Accountable Delegation for LLM Agents*,
+> submitted to IEEE Open Journal of the Computer Society, 2026.
 
 Masked Mandates lets an AI agent prove, for one tool call, that it holds a valid,
 unrevoked and sufficiently scoped mandate, without revealing who mandated it and

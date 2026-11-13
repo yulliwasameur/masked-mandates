@@ -1,13 +1,23 @@
 {
   "upload_type": "software",
   "title": "Masked Mandates: artifact (code, scripts and results)",
-  "version": "1.0.2",
-  "description": "Rust prototype, Python bindings, MCP harness, simulators, result files (with environment record and SHA-256 hashes) and the script that generates every number, table and figure of the paper <i>Masked Mandates: Unlinkable, Attenuable and Accountable Delegation for LLM Agents</i> (submitted to IEEE Transactions on Information Forensics and Security). Research prototype; not for production use. Code under MIT; result files and generated tables and figures under CC BY 4.0.",
+  "version": "1.0.3",
+  "description": "Rust prototype, Python bindings, MCP harness, simulators, result files (with environment record and SHA-256 hashes) and the script that generates every number, table and figure of the paper <i>Masked Mandates: Unlinkable, Attenuable and Accountable Delegation for LLM Agents</i> (submitted to IEEE Open Journal of the Computer Society). Research prototype; not for production use. Code under MIT; result files and generated tables and figures under CC BY 4.0.",
   "creators": [
     {
       "name": "Ameur, Yulliwas",
       "affiliation": "Efrei Research Lab, Université Paris-Panthéon-Assas; Cédric, Cnam",
       "orcid": "0000-0003-1435-2982"
+    },
+    {
+      "name": "Bouzefrane, Samia",
+      "affiliation": "Cédric, Cnam",
+      "orcid": "0000-0002-0979-1289"
+    },
+    {
+      "name": "Banerjee, Soumya",
+      "affiliation": "Cédric, Cnam",
+      "orcid": "0000-0001-8766-8473"
     }
   ],
   "license": "mit",

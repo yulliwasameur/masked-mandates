@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3 (2026-11-13)
+
+- Metadata only: the paper now has three authors (Y. Ameur, S. Bouzefrane, S. Banerjee) and is submitted to
+  IEEE Open Journal of the Computer Society; `CITATION.cff`, `.zenodo.json` and `README.md` are updated.
+  The paper cites version 1.0.2 (DOI 10.5281/zenodo.24182546).
+- No change to code, results or generated files.
+
 ## 1.0.2 (2026-11-13)
 
 - New experiment E4: a real LLM agent in the loop (`code/e4/e4.py`, Slurm job `code/e4/hedy_e4.sbatch`).
