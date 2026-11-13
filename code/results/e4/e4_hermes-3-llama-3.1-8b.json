@@ -1,0 +1,4790 @@
+{
+ "seed": 20261109,
+ "model": "hermes-3-llama-3.1-8b",
+ "base_url_kind": "vllm-0.33.0 on H100",
+ "server_models": {
+  "object": "list",
+  "data": [
+   {
+    "id": "hermes-3-llama-3.1-8b",
+    "object": "model",
+    "created": 1794530801,
+    "owned_by": "vllm",
+    "root": "/home/yulameur1/masked-mandates-95/hf/Hermes-3-Llama-3.1-8B",
+    "parent": null,
+    "max_model_len": 16384,
+    "permission": [
+     {
+      "id": "modelperm-95ada66e45afdbe4",
+      "object": "model_permission",
+      "created": 1794530801,
+      "allow_create_engine": false,
+      "allow_sampling": true,
+      "allow_logprobs": true,
+      "allow_search_indices": false,
+      "allow_view": true,
+      "allow_fine_tuning": false,
+      "organization": "*",
+      "group": null,
+      "is_blocking": false
+     }
+    ]
+   }
+  ]
+ },
+ "tasks": 24,
+ "reps": 2,
+ "mcp_sdk": "1.30.0",
+ "python": "3.12.4",
+ "machine": "Linux-5.14.0-687.13.1.el9_8.x86_64-x86_64-with-glibc2.34",
+ "max_turns": 12,
+ "started": "2026-11-13T01:46:41+0100",
+ "modes": [
+  "none",
+  "jwt",
+  "mm"
+ ],
+ "rows": [
+  {
+   "task": 0,
+   "llm_ms": [
+    243.47312201280147,
+    169.84035895438865
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.027260975912213326,
+     "rtt_ms": 3.8354609860107303,
+     "verify_ms": 0.02668995875865221,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 417.278602020815,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    190.3227079892531,
+    112.78688599122688
+   ],
+   "tokens_in": 1434,
+   "tokens_out": 46,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.017807993572205305,
+     "rtt_ms": 2.07404897082597,
+     "verify_ms": 0.0171540305018425,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is ROM101 by SkyLine for 124 EUR.",
+   "wall_ms": 305.2775430260226,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    190.0194810004905,
+    176.17656401125714
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015099998563528061,
+     "rtt_ms": 1.8674840102903545,
+     "verify_ms": 0.013827986549586058,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I book it?",
+   "wall_ms": 368.15377802122384,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    190.11656095972285,
+    107.10891505004838
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 45,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015054014511406422,
+     "rtt_ms": 1.9089079578407109,
+     "verify_ms": 0.012614007573574781,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR.",
+   "wall_ms": 299.2217620485462,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    196.29329699091613,
+    150.93075495678931
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015372002962976694,
+     "rtt_ms": 1.8320669769309461,
+     "verify_ms": 0.012595963198691607,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 349.1432130103931,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    196.19975198293105,
+    269.69504897715524
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015079043805599213,
+     "rtt_ms": 1.800592988729477,
+     "verify_ms": 0.012484961189329624,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 4 nights at most 200 EUR per night.",
+   "wall_ms": 467.78650098713115,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    196.2822190253064,
+    213.10405404074118
+   ],
+   "tokens_in": 1413,
+   "tokens_out": 63,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014447025023400784,
+     "rtt_ms": 1.8372450140304863,
+     "verify_ms": 0.012248987331986427,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is offered by EuroJet for the flight ATH102 at a price of 140 EUR. \nDo you want to book this flight?",
+   "wall_ms": 411.30738001083955,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    196.22587197227404,
+    119.47474000044167
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0151429558172822,
+     "rtt_ms": 1.8105690251104534,
+     "verify_ms": 0.012445030733942986,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 317.5986090209335,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    189.87863400252536,
+    119.30211901199073
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015140976756811142,
+     "rtt_ms": 1.8238559714518487,
+     "verify_ms": 0.012414006050676107,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 311.08997896080837,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    196.2229369673878,
+    132.13265896774828
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 50,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014800985809415579,
+     "rtt_ms": 1.8228659755550325,
+     "verify_ms": 0.011886004358530045,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is **WAR100** by AirNova for **109 EUR**.",
+   "wall_ms": 330.26459300890565,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    196.34937803493813,
+    169.22499297652394
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01540803350508213,
+     "rtt_ms": 1.787588989827782,
+     "verify_ms": 0.012473028618842363,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is offered by AirNova for 275 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 367.44942702353,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    189.96448500547558,
+    345.35782400052994,
+    308.6189960013144
+   ],
+   "tokens_in": 2365,
+   "tokens_out": 131,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01525896368548274,
+     "rtt_ms": 1.9733370281755924,
+     "verify_ms": 0.012339965905994177,
+     "meta_bytes": 0
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Porto",
+      "nights": 4,
+      "max_price_per_night": 120.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015652040019631386,
+     "rtt_ms": 3.370104997884482,
+     "verify_ms": 0.027462025173008442,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight is from SkyLine for 239 EUR and the cheapest hotel is Riverside Inn Porto for 4 nights at 68 EUR per night, totaling 272 EUR. \n\nShould I proceed with booking the flight and the hotel?",
+   "wall_ms": 849.4469670113176,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    195.8318820106797,
+    168.8497350551188
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016550009604543447,
+     "rtt_ms": 1.8111279932782054,
+     "verify_ms": 0.012753007467836142,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.58208101289347,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    196.1789570050314,
+    113.25377796310931
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015212979633361101,
+     "rtt_ms": 1.8531300011090934,
+     "verify_ms": 0.012832984793931246,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is ROM101 by SkyLine for 124 EUR.",
+   "wall_ms": 311.3730979966931,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    190.03018498187885,
+    175.4047729773447
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01491903094574809,
+     "rtt_ms": 2.3488749866373837,
+     "verify_ms": 0.022029969841241837,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I book it?",
+   "wall_ms": 367.870407004375,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    196.21895003365353,
+    181.6130760125816
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015109020750969648,
+     "rtt_ms": 1.8538619624450803,
+     "verify_ms": 0.013302022125571966,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR. \nNow, let's search for a hotel in Madrid.",
+   "wall_ms": 379.76896995678544,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    196.23644702369347,
+    150.84058698266745
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014864024706184864,
+     "rtt_ms": 1.8466169713065028,
+     "verify_ms": 0.012611038982868195,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 349.0086810197681,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    196.12116902135313,
+    269.55095800803974
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014999008271843195,
+     "rtt_ms": 1.868422026745975,
+     "verify_ms": 0.012971984688192606,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 3 nights at most 200 EUR per night.",
+   "wall_ms": 467.6260380074382,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    196.18183496640995,
+    144.55709501635283
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 52,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015231955330818892,
+     "rtt_ms": 1.8432170036248863,
+     "verify_ms": 0.012911972589790821,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is **ATH102** by **EuroJet** for **140 EUR**.",
+   "wall_ms": 342.66706998459995,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    196.13431300967932,
+    119.42348896991462
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01526903361082077,
+     "rtt_ms": 1.8803119892254472,
+     "verify_ms": 0.013001961633563042,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 317.52565305214375,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    189.80439798906446,
+    119.62697398848832
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015359022654592991,
+     "rtt_ms": 1.8514660187065601,
+     "verify_ms": 0.013020006008446217,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 311.37130700517446,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    196.01684802910313,
+    332.7273500035517,
+    314.764823007863
+   ],
+   "tokens_in": 2353,
+   "tokens_out": 131,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015065015759319067,
+     "rtt_ms": 1.8364290008321404,
+     "verify_ms": 0.01245300518348813,
+     "meta_bytes": 0
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Warsaw",
+      "nights": 1,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016001984477043152,
+     "rtt_ms": 2.0048239966854453,
+     "verify_ms": 0.017983955331146717,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is WAR100 by AirNova for 109 EUR. The cheapest hotel in Warsaw for 1 night is Hotel Central Warsaw for 108 EUR per night. \n\nShould I proceed with booking the flight and the hotel?",
+   "wall_ms": 847.5077800103463,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    196.1297260131687,
+    119.48184197535738
+   ],
+   "tokens_in": 1460,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015279976651072502,
+     "rtt_ms": 1.862411038018763,
+     "verify_ms": 0.012614007573574781,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is BUD100 by AirNova for 275 EUR.",
+   "wall_ms": 317.5671949866228,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    196.27573096659034,
+    100.6167969899252
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 45,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015269964933395386,
+     "rtt_ms": 1.8406480085104704,
+     "verify_ms": 0.012560980394482613,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR.",
+   "wall_ms": 298.82009798893705,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    195.7969760405831,
+    168.82514394819736
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014501041732728481,
+     "rtt_ms": 1.8480049911886454,
+     "verify_ms": 0.012675998732447624,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.55322002479807,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    433.87594900559634,
+    288.9919599983841
+   ],
+   "tokens_in": 1549,
+   "tokens_out": 113,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015393015928566456,
+     "rtt_ms": 1.841782999690622,
+     "verify_ms": 0.01284899190068245,
+     "meta_bytes": 0
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.012834032531827688,
+     "rtt_ms": 1.8200710183009505,
+     "verify_ms": 0.014486955478787422,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is offered by SkyLine for 124 EUR. The cheapest hotel in Rome for 4 nights is Hotel Central Rome at a total cost of 256 EUR. Shall I proceed with the bookings?",
+   "wall_ms": 726.6594280372374,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    189.4752269727178,
+    175.4436669871211
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015263038221746683,
+     "rtt_ms": 1.8276809714734554,
+     "verify_ms": 0.013030949048697948,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I book it?",
+   "wall_ms": 366.8345339829102,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    195.75663999421522,
+    106.31104797357693
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 46,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01498096389696002,
+     "rtt_ms": 1.8283030367456377,
+     "verify_ms": 0.012471049558371305,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR.",
+   "wall_ms": 303.9827600005083,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    195.74501900933683,
+    150.19588399445638
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014646968338638544,
+     "rtt_ms": 1.8193710129708052,
+     "verify_ms": 0.012643984518945217,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 347.8444429929368,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    195.84583200048655,
+    269.23292700666934
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015116995200514793,
+     "rtt_ms": 1.8163619679398835,
+     "verify_ms": 0.0128250103443861,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 4 nights at most 200 EUR per night.",
+   "wall_ms": 466.9781940174289,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    195.7129249931313,
+    212.65055000549182
+   ],
+   "tokens_in": 1413,
+   "tokens_out": 63,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0153309665620327,
+     "rtt_ms": 1.836429990362376,
+     "verify_ms": 0.012267031706869602,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is offered by EuroJet for the flight ATH102 at a price of 140 EUR. \nDo you want to book this flight?",
+   "wall_ms": 410.2858190308325,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    195.85167901823297,
+    118.62922203727067
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016840000171214342,
+     "rtt_ms": 1.8651129794307053,
+     "verify_ms": 0.012887991033494473,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 316.43638998502865,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    189.58057899726555,
+    118.80997096886858
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01557101495563984,
+     "rtt_ms": 1.8545520142652094,
+     "verify_ms": 0.012620992492884398,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 310.3321669623256,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    195.78452198766172,
+    130.9175009955652
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 50,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016091973520815372,
+     "rtt_ms": 1.8457180121913552,
+     "verify_ms": 0.012268021237105131,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is **WAR100** by AirNova for **109 EUR**.",
+   "wall_ms": 328.6366129759699,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    195.74292801553383,
+    168.81320800166577
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014991965144872665,
+     "rtt_ms": 1.8356870277784765,
+     "verify_ms": 0.012791017070412636,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is offered by AirNova for 275 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.4749210001901,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    189.48088103206828,
+    156.04205999989063
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015068042557686567,
+     "rtt_ms": 1.8256509792990983,
+     "verify_ms": 0.013048003893345594,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR. Would you like to proceed with this flight?",
+   "wall_ms": 347.43539098417386,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    195.72233100188896,
+    168.78824902232736
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015513971447944641,
+     "rtt_ms": 1.838293974287808,
+     "verify_ms": 0.012604985386133194,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.43283802550286,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    195.77720999950543,
+    112.08764900220558
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014706980437040329,
+     "rtt_ms": 1.8560609896667302,
+     "verify_ms": 0.012403994332998991,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is ROM101 by SkyLine for 124 EUR.",
+   "wall_ms": 309.8057630122639,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    189.48670598911121,
+    187.91941198287532
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014964025467634201,
+     "rtt_ms": 1.826900988817215,
+     "verify_ms": 0.013212033081799746,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I proceed with this flight?",
+   "wall_ms": 379.3186650145799,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    195.79627102939412,
+    181.22718197992072
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016255013179033995,
+     "rtt_ms": 1.831047993618995,
+     "verify_ms": 0.012587988749146461,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR. \nNow, let's search for a hotel in Madrid.",
+   "wall_ms": 378.94488498568535,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    195.79569896450266,
+    150.13354399707168
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01544697443023324,
+     "rtt_ms": 1.8344349809922278,
+     "verify_ms": 0.012672971934080124,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 347.8502850048244,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    195.73070801561698,
+    268.92666198546067
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015238008927553892,
+     "rtt_ms": 2.012077020481229,
+     "verify_ms": 0.012347998563200235,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 3 nights at most 200 EUR per night.",
+   "wall_ms": 466.75495395902544,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    195.7317779888399,
+    143.52526696166024
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 52,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014550983905792236,
+     "rtt_ms": 1.824291015509516,
+     "verify_ms": 0.012324017006903887,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is **ATH102** by **EuroJet** for **140 EUR**.",
+   "wall_ms": 341.16706403438,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    195.73000399395823,
+    118.76748100621626
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014797027688473463,
+     "rtt_ms": 1.8223249935545027,
+     "verify_ms": 0.013067037798464298,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 316.40614598290995,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    189.48892899788916,
+    118.78644599346444
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01477397745475173,
+     "rtt_ms": 1.8401769921183586,
+     "verify_ms": 0.01763401087373495,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 310.20027201157063,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    195.78015303704888,
+    169.02311699232087
+   ],
+   "tokens_in": 1434,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014938006643205881,
+     "rtt_ms": 1.8154529971070588,
+     "verify_ms": 0.012499978765845299,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is offered by AirNova for 109 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.72100296709687,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    195.6626299652271,
+    118.85143304243684
+   ],
+   "tokens_in": 1460,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014888995792716742,
+     "rtt_ms": 1.8403659923933446,
+     "verify_ms": 0.012767966836690903,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is BUD100 by AirNova for 275 EUR.",
+   "wall_ms": 316.4410759927705,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    189.50820801546797,
+    99.57862598821521
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 44,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.015147030353546143,
+     "rtt_ms": 1.800105965230614,
+     "verify_ms": 0.012726988643407822,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR.",
+   "wall_ms": 290.9737029694952,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    196.62236102158204,
+    168.8561929622665
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.14648004435002804,
+     "rtt_ms": 4.405930987559259,
+     "verify_ms": 0.5767849506810308,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 370.12650998076424,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    433.9494780288078,
+    288.3192320005037
+   ],
+   "tokens_in": 1549,
+   "tokens_out": 113,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.09843002771958709,
+     "rtt_ms": 2.3609650088474154,
+     "verify_ms": 0.37909403908997774,
+     "meta_bytes": 764
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.07628800813108683,
+     "rtt_ms": 3.868217987474054,
+     "verify_ms": 0.5746869719587266,
+     "meta_bytes": 761
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is offered by SkyLine for 124 EUR. The cheapest hotel in Rome for 4 nights is Hotel Central Rome at a total cost of 256 EUR. Shall I proceed with the bookings?",
+   "wall_ms": 728.8021270069294,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    189.3669000128284,
+    174.9672350124456
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08861598325893283,
+     "rtt_ms": 2.2304659942165017,
+     "verify_ms": 0.33794197952374816,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I book it?",
+   "wall_ms": 366.7479310533963,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    195.78980299411342,
+    105.85881001316011
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 46,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08734001312404871,
+     "rtt_ms": 2.2006590152159333,
+     "verify_ms": 0.33112202072516084,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR.",
+   "wall_ms": 304.0183180128224,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    195.82523999270052,
+    149.63608497055247
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.09611895075067878,
+     "rtt_ms": 2.2051710402593017,
+     "verify_ms": 0.32806798117235303,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 347.8443410131149,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    195.84857299923897,
+    268.66623503156006
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08875899948179722,
+     "rtt_ms": 2.1943349856883287,
+     "verify_ms": 0.33418304519727826,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 4 nights at most 200 EUR per night.",
+   "wall_ms": 466.8811640003696,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    195.85186202311888,
+    212.1470479760319
+   ],
+   "tokens_in": 1413,
+   "tokens_out": 63,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08901901310309768,
+     "rtt_ms": 2.1954270196147263,
+     "verify_ms": 0.3331929910928011,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is offered by EuroJet for the flight ATH102 at a price of 140 EUR. \nDo you want to book this flight?",
+   "wall_ms": 410.36407300271094,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    195.78199100214988,
+    118.18974395282567
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0876459525898099,
+     "rtt_ms": 2.3279190063476562,
+     "verify_ms": 0.3299129894003272,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 316.46897399332374,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    189.57037501968443,
+    118.50164295174181
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0867149792611599,
+     "rtt_ms": 2.171178988646716,
+     "verify_ms": 0.3379909903742373,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 310.40946597931907,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    195.7154650008306,
+    130.46262098941952
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 50,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.09519804734736681,
+     "rtt_ms": 2.214429958257824,
+     "verify_ms": 0.33046299358829856,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is **WAR100** by AirNova for **109 EUR**.",
+   "wall_ms": 328.56888900278136,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    195.7724480307661,
+    168.3662969735451
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08720398182049394,
+     "rtt_ms": 2.1867550094611943,
+     "verify_ms": 0.3308209707029164,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is offered by AirNova for 275 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.4926210185513,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    189.5961919799447,
+    155.5863399989903
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.09379000402987003,
+     "rtt_ms": 2.2077239700593054,
+     "verify_ms": 0.3246339620091021,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR. Would you like to proceed with this flight?",
+   "wall_ms": 347.5657220114954,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    195.7985300105065,
+    168.39282697765157
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08743803482502699,
+     "rtt_ms": 2.194163971580565,
+     "verify_ms": 0.3319759853184223,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.55279103433713,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    195.78941399231553,
+    111.42861202824861
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0874160323292017,
+     "rtt_ms": 2.2166609996929765,
+     "verify_ms": 0.3394099767319858,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is ROM101 by SkyLine for 124 EUR.",
+   "wall_ms": 309.60381601471454,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    189.4673330243677,
+    187.56474199471995
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08614599937573075,
+     "rtt_ms": 2.1954860421828926,
+     "verify_ms": 0.3323769778944552,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I proceed with this flight?",
+   "wall_ms": 379.3941249605268,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    195.84941602079198,
+    180.87091197958216
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08800998330116272,
+     "rtt_ms": 2.193766995333135,
+     "verify_ms": 0.33329002326354384,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR. \nNow, let's search for a hotel in Madrid.",
+   "wall_ms": 379.0816210093908,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    195.7560500013642,
+    149.71146901370957
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08696800796315074,
+     "rtt_ms": 2.19427898991853,
+     "verify_ms": 0.33487501787021756,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 347.837059001904,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    195.79412398161367,
+    268.73072201851755
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08864299161359668,
+     "rtt_ms": 2.1652550203725696,
+     "verify_ms": 0.33926195465028286,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 3 nights at most 200 EUR per night.",
+   "wall_ms": 466.85832005459815,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    195.80779102398083,
+    143.048522004392
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 52,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08682097541168332,
+     "rtt_ms": 2.1755140041932464,
+     "verify_ms": 0.33797003561630845,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is **ATH102** by **EuroJet** for **140 EUR**.",
+   "wall_ms": 341.1996489739977,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    195.83866599714383,
+    118.2800279930234
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08694297866895795,
+     "rtt_ms": 2.1986099891364574,
+     "verify_ms": 0.33026497112587094,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 316.4865600410849,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    189.5122440182604,
+    118.44910099171102
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08657202124595642,
+     "rtt_ms": 2.196458983235061,
+     "verify_ms": 0.3311939653940499,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 310.3241469943896,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    195.701202028431,
+    168.6109759612009
+   ],
+   "tokens_in": 1434,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0865460024215281,
+     "rtt_ms": 2.1887560142204165,
+     "verify_ms": 0.33477303804829717,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is offered by AirNova for 109 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.6660900344141,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    195.7677869941108,
+    118.27838700264692
+   ],
+   "tokens_in": 1460,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.09427702752873302,
+     "rtt_ms": 2.286061004269868,
+     "verify_ms": 0.34332001814618707,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is BUD100 by AirNova for 275 EUR.",
+   "wall_ms": 316.5074430289678,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    189.60074899950996,
+    99.08317303052172
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 44,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08721998892724514,
+     "rtt_ms": 2.2091360297054052,
+     "verify_ms": 0.34267595037817955,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR.",
+   "wall_ms": 291.0608520032838,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    195.807941025123,
+    168.34461700636894
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08750800043344498,
+     "rtt_ms": 2.202008035965264,
+     "verify_ms": 0.3295870264992118,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.520619019866,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    433.9368270011619,
+    288.1907760165632
+   ],
+   "tokens_in": 1549,
+   "tokens_out": 113,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08677697042003274,
+     "rtt_ms": 2.194604021497071,
+     "verify_ms": 0.3339909599162638,
+     "meta_bytes": 765
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.07562997052446008,
+     "rtt_ms": 2.604199049528688,
+     "verify_ms": 0.39721198845654726,
+     "meta_bytes": 762
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is offered by SkyLine for 124 EUR. The cheapest hotel in Rome for 4 nights is Hotel Central Rome at a total cost of 256 EUR. Shall I proceed with the bookings?",
+   "wall_ms": 727.2085660370067,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    189.5114539656788,
+    175.01236696261913
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08590903598815203,
+     "rtt_ms": 2.1835360093973577,
+     "verify_ms": 0.3297849907539785,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I book it?",
+   "wall_ms": 366.8766519986093,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    195.59826800832525,
+    105.78199499286711
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 46,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08786102989688516,
+     "rtt_ms": 2.201212977524847,
+     "verify_ms": 0.33407798036932945,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR.",
+   "wall_ms": 303.75350901158527,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    195.8044699858874,
+    149.66426702449098
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08726300438866019,
+     "rtt_ms": 2.2019599564373493,
+     "verify_ms": 0.329377013258636,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 347.83849702216685,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    195.82892302423716,
+    268.7222969834693
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08780899224802852,
+     "rtt_ms": 2.190352010075003,
+     "verify_ms": 0.3265659906901419,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 4 nights at most 200 EUR per night.",
+   "wall_ms": 466.9140669866465,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    195.77466399641708,
+    212.34009898034856
+   ],
+   "tokens_in": 1413,
+   "tokens_out": 63,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08699099998921156,
+     "rtt_ms": 2.2233000490814447,
+     "verify_ms": 0.3291800385341048,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is offered by EuroJet for the flight ATH102 at a price of 140 EUR. \nDo you want to book this flight?",
+   "wall_ms": 410.5050300131552,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    195.88057097280398,
+    118.19433298660442
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08742499630898237,
+     "rtt_ms": 2.196859975811094,
+     "verify_ms": 0.3295279457233846,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 316.4412359474227,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    189.46930102538317,
+    118.38547803927213
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08699099998921156,
+     "rtt_ms": 2.1962079918012023,
+     "verify_ms": 0.3295370261184871,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 310.2179699926637,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    195.6596410018392,
+    130.5990150431171
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 50,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08678098674863577,
+     "rtt_ms": 2.1943410392850637,
+     "verify_ms": 0.32957002986222506,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is **WAR100** by AirNova for **109 EUR**.",
+   "wall_ms": 328.6325710359961,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    195.64746401738375,
+    168.4303610236384
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08714001160115004,
+     "rtt_ms": 2.185204008128494,
+     "verify_ms": 0.3372899955138564,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is offered by AirNova for 275 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.4296990027651,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    189.55243396339938,
+    155.61151603469625
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08621002780273557,
+     "rtt_ms": 2.1808099700137973,
+     "verify_ms": 0.32885599648579955,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR. Would you like to proceed with this flight?",
+   "wall_ms": 347.51809400040656,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    195.75107999844477,
+    168.3740759617649
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.085487961769104,
+     "rtt_ms": 2.174327033571899,
+     "verify_ms": 0.32924197148531675,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.46369501249865,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    195.83758601220325,
+    111.69255600543693
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.087135995272547,
+     "rtt_ms": 2.1802489645779133,
+     "verify_ms": 0.33673399593681097,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is ROM101 by SkyLine for 124 EUR.",
+   "wall_ms": 309.8780349828303,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    189.48962300783023,
+    187.40603397600353
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08671998511999846,
+     "rtt_ms": 2.367279026657343,
+     "verify_ms": 0.32797001767903566,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I proceed with this flight?",
+   "wall_ms": 379.4299730216153,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    195.73569303611293,
+    180.9021779918112
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08601800072938204,
+     "rtt_ms": 2.1589440293610096,
+     "verify_ms": 0.33040199195966125,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR. \nNow, let's search for a hotel in Madrid.",
+   "wall_ms": 378.9611749816686,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    195.78526698751375,
+    149.68898298684508
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08717103628441691,
+     "rtt_ms": 2.194712986238301,
+     "verify_ms": 0.32980000833049417,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 347.83654299099,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    195.79461799003184,
+    268.73104501282796
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08706998778507113,
+     "rtt_ms": 2.174635010305792,
+     "verify_ms": 0.3302540280856192,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 3 nights at most 200 EUR per night.",
+   "wall_ms": 466.86667000176385,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    195.761647017207,
+    143.08151399018243
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 52,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08596398402005434,
+     "rtt_ms": 2.1911890362389386,
+     "verify_ms": 0.33531198278069496,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is **ATH102** by **EuroJet** for **140 EUR**.",
+   "wall_ms": 341.20230801636353,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    195.75258303666487,
+    118.19393001496792
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0871039810590446,
+     "rtt_ms": 2.1758709917776287,
+     "verify_ms": 0.325793051160872,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 316.2913899868727,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    189.56277199322358,
+    118.4336289879866
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08580501889809966,
+     "rtt_ms": 2.196947985794395,
+     "verify_ms": 0.3314719651825726,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 310.35973998950794,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    195.8172110025771,
+    168.6755460104905
+   ],
+   "tokens_in": 1434,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08628499926999211,
+     "rtt_ms": 2.174075983930379,
+     "verify_ms": 0.3348099999129772,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is offered by AirNova for 109 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 366.83377402368933,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    195.86648797849193,
+    118.39373200200498
+   ],
+   "tokens_in": 1460,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08690095273777843,
+     "rtt_ms": 2.1882550208829343,
+     "verify_ms": 0.33257901668548584,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is BUD100 by AirNova for 275 EUR.",
+   "wall_ms": 316.62448903080076,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    189.43731603212655,
+    99.10467604640871
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 44,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0867850030772388,
+     "rtt_ms": 2.201446972321719,
+     "verify_ms": 0.3333949716761708,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR.",
+   "wall_ms": 290.9118310199119,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    196.22169801732525,
+    169.39334600465372
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.31350697297603,
+     "rtt_ms": 59.1685880208388,
+     "verify_ms": 55.09558197809383,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 524.226654029917,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    433.9779080473818,
+    288.9687030110508
+   ],
+   "tokens_in": 1549,
+   "tokens_out": 113,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.29285803809762,
+     "rtt_ms": 57.7243099687621,
+     "verify_ms": 55.23159896256402,
+     "meta_bytes": 15840
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 98.51160703692585,
+     "rtt_ms": 59.433107962831855,
+     "verify_ms": 55.52700499538332,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is offered by SkyLine for 124 EUR. The cheapest hotel in Rome for 4 nights is Hotel Central Rome at a total cost of 256 EUR. Shall I proceed with the bookings?",
+   "wall_ms": 1038.0963620264083,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    189.54502698034048,
+    175.34852598328143
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.2201830376871,
+     "rtt_ms": 57.72969196550548,
+     "verify_ms": 55.31104496913031,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I book it?",
+   "wall_ms": 521.9613640219904,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    195.8014449919574,
+    106.0168879921548
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 46,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.29033002117649,
+     "rtt_ms": 57.64130497118458,
+     "verify_ms": 55.370861024130136,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR.",
+   "wall_ms": 458.8638700079173,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    195.77776500955224,
+    149.88721604458988
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 98.91376103041694,
+     "rtt_ms": 57.62880196562037,
+     "verify_ms": 55.36852200748399,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 502.320758998394,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    195.7747769774869,
+    268.89559300616384
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.22653902322054,
+     "rtt_ms": 57.530229969415814,
+     "verify_ms": 55.29186298372224,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 4 nights at most 200 EUR per night.",
+   "wall_ms": 621.5371569851413,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    195.7798299845308,
+    212.4668229953386
+   ],
+   "tokens_in": 1413,
+   "tokens_out": 63,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 98.99092698469758,
+     "rtt_ms": 57.34585801837966,
+     "verify_ms": 55.08738703792915,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is offered by EuroJet for the flight ATH102 at a price of 140 EUR. \nDo you want to book this flight?",
+   "wall_ms": 564.692745974753,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    195.72173099732026,
+    118.4247269993648
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.25481700338423,
+     "rtt_ms": 57.18921695370227,
+     "verify_ms": 54.97754504904151,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 470.70158104179427,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    189.46430197684094,
+    118.57992300065234
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.07725703669712,
+     "rtt_ms": 57.76793695986271,
+     "verify_ms": 55.555858998559415,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 465.00166301848367,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    195.7600830355659,
+    130.88148401584476
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 50,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.56170100485906,
+     "rtt_ms": 57.4660649872385,
+     "verify_ms": 55.19453203305602,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is **WAR100** by AirNova for **109 EUR**.",
+   "wall_ms": 483.7813119520433,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    195.76722499914467,
+    168.53937896667048
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.52679497655481,
+     "rtt_ms": 57.587001007050276,
+     "verify_ms": 55.310486000962555,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is offered by AirNova for 275 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 521.5313140070066,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    189.55892598023638,
+    155.63794295303524
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.50048796599731,
+     "rtt_ms": 57.28527304017916,
+     "verify_ms": 55.0835530157201,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR. Would you like to proceed with this flight?",
+   "wall_ms": 502.09867994999513,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    195.75399096356705,
+    168.57523698126897
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.22438900684938,
+     "rtt_ms": 57.47298599453643,
+     "verify_ms": 55.243216978851706,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 521.1343260016292,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    195.59743301942945,
+    111.88168701482937
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.20451900688931,
+     "rtt_ms": 57.294524973258376,
+     "verify_ms": 55.06357504054904,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is ROM101 by SkyLine for 124 EUR.",
+   "wall_ms": 464.09125003265217,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    189.53558703651652,
+    187.84780200803652
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.00276397820562,
+     "rtt_ms": 56.85910797910765,
+     "verify_ms": 54.702204011846334,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I proceed with this flight?",
+   "wall_ms": 533.3548130001873,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    195.7908479962498,
+    180.9577330132015
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.06483301892877,
+     "rtt_ms": 57.428326981607825,
+     "verify_ms": 55.251437006518245,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR. \nNow, let's search for a hotel in Madrid.",
+   "wall_ms": 533.3487080060877,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    195.78755996190012,
+    149.8893850366585
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.36122398357838,
+     "rtt_ms": 56.929790996946394,
+     "verify_ms": 54.694301972631365,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 502.081359969452,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    195.74390799971297,
+    268.89758597826585
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.26948300562799,
+     "rtt_ms": 57.50733596505597,
+     "verify_ms": 55.274951038882136,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 3 nights at most 200 EUR per night.",
+   "wall_ms": 621.5269289677963,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    195.77037199633196,
+    143.47613498102874
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 52,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.55803700722754,
+     "rtt_ms": 57.22752201836556,
+     "verify_ms": 55.02382095437497,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is **ATH102** by **EuroJet** for **140 EUR**.",
+   "wall_ms": 496.1467770044692,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    195.74994902359322,
+    118.51066694362089
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.61982100503519,
+     "rtt_ms": 57.675215997733176,
+     "verify_ms": 55.4458080441691,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 471.6657939716242,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    189.5505340071395,
+    118.55723598273471
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.2779359803535,
+     "rtt_ms": 57.45581502560526,
+     "verify_ms": 55.2665590075776,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 464.9508229922503,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    195.8241339889355,
+    168.83101098937914
+   ],
+   "tokens_in": 1434,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.09771400270984,
+     "rtt_ms": 57.42171499878168,
+     "verify_ms": 55.13032199814916,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is offered by AirNova for 109 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 521.2866080109961,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    195.7733110175468,
+    118.61256702104583
+   ],
+   "tokens_in": 1460,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.33013399131596,
+     "rtt_ms": 57.577341969590634,
+     "verify_ms": 55.34545500995591,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is BUD100 by AirNova for 275 EUR.",
+   "wall_ms": 471.40340303303674,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    189.6015090169385,
+    99.2846279987134
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 44,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 98.9656180026941,
+     "rtt_ms": 57.26131098344922,
+     "verify_ms": 55.0129659823142,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR.",
+   "wall_ms": 445.22465800400823,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    195.79918001545593,
+    168.54623501421884
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 98.9736370393075,
+     "rtt_ms": 57.627664995379746,
+     "verify_ms": 55.45145197538659,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 521.0536110098474,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    433.8596910238266,
+    288.90536195831373
+   ],
+   "tokens_in": 1549,
+   "tokens_out": 113,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.44282902870327,
+     "rtt_ms": 57.469605992082506,
+     "verify_ms": 55.234214989468455,
+     "meta_bytes": 15841
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.05373898800462,
+     "rtt_ms": 58.00125701352954,
+     "verify_ms": 55.121932993642986,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is offered by SkyLine for 124 EUR. The cheapest hotel in Rome for 4 nights is Hotel Central Rome at a total cost of 256 EUR. Shall I proceed with the bookings?",
+   "wall_ms": 1036.920695041772,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    189.48472803458571,
+    175.24647200480103
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.10928795579821,
+     "rtt_ms": 57.484957040287554,
+     "verify_ms": 55.24946597870439,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I book it?",
+   "wall_ms": 521.4351749746129,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    195.76377200428396,
+    106.19920596946031
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 46,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.16552802314982,
+     "rtt_ms": 57.10118496790528,
+     "verify_ms": 54.90913096582517,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR.",
+   "wall_ms": 458.3385860314593,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    195.79176098341122,
+    150.04736400442198
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.30988197447732,
+     "rtt_ms": 57.01612401753664,
+     "verify_ms": 54.8071630182676,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 502.2756030084565,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    195.83667197730392,
+    269.0535690053366
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.28867901908234,
+     "rtt_ms": 57.158491981681436,
+     "verify_ms": 54.92988397600129,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 4 nights at most 200 EUR per night.",
+   "wall_ms": 621.4468030375428,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    195.74589899275452,
+    212.39687397610396
+   ],
+   "tokens_in": 1413,
+   "tokens_out": 63,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.29742600070313,
+     "rtt_ms": 57.485095981974155,
+     "verify_ms": 55.26458501117304,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is offered by EuroJet for the flight ATH102 at a price of 140 EUR. \nDo you want to book this flight?",
+   "wall_ms": 565.0343839661218,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    195.70880196988583,
+    118.48169105360284
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.30400096345693,
+     "rtt_ms": 57.344428030774,
+     "verify_ms": 55.146690050605685,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 470.94898304203525,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    189.62698901304975,
+    118.5763850226067
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.2173959966749,
+     "rtt_ms": 57.1323600015603,
+     "verify_ms": 54.90180995548144,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 464.66223301831633,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    196.53137598652393,
+    130.7354280143045
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 50,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.35427602613345,
+     "rtt_ms": 57.65465699369088,
+     "verify_ms": 55.33387197647244,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is **WAR100** by AirNova for **109 EUR**.",
+   "wall_ms": 484.394034021534,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    195.73089596815407,
+    168.59923501033336
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.5130529627204,
+     "rtt_ms": 57.68833600450307,
+     "verify_ms": 55.44227600330487,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is offered by AirNova for 275 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 521.6475490015,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    189.38337900908664,
+    155.969568004366
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.4097400107421,
+     "rtt_ms": 57.620853011030704,
+     "verify_ms": 55.379039025865495,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR. Would you like to proceed with this flight?",
+   "wall_ms": 502.49468500260264,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    195.72439696639776,
+    169.08179898746312
+   ],
+   "tokens_in": 1416,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Lisbon",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.04115402605385,
+     "rtt_ms": 57.04281997168437,
+     "verify_ms": 54.82747498899698,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Lisbon is offered by AirNova for 104 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 521.0019130026922,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    195.7078170380555,
+    111.77618004148826
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.4369100080803,
+     "rtt_ms": 57.275798986665905,
+     "verify_ms": 55.07322400808334,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Rome is ROM101 by SkyLine for 124 EUR.",
+   "wall_ms": 464.30566697381437,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    189.5714860293083,
+    187.68816901138052
+   ],
+   "tokens_in": 1453,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.16108701145276,
+     "rtt_ms": 57.33664199942723,
+     "verify_ms": 55.11238903272897,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "I found some flights to Berlin. The cheapest one is BER100 by AirNova for 126 EUR. Shall I proceed with this flight?",
+   "wall_ms": 533.8749479851685,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    195.7514930400066,
+    180.98492099670693
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 58,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.12339504808187,
+     "rtt_ms": 57.4249429628253,
+     "verify_ms": 55.155199021101,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Madrid is offered by EuroJet for 213 EUR. \nNow, let's search for a hotel in Madrid.",
+   "wall_ms": 533.3935070084408,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    195.7441300037317,
+    149.8653269954957
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 53,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Vienna",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.24601600505412,
+     "rtt_ms": 57.55456001497805,
+     "verify_ms": 55.3377770120278,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Vienna is with SkyLine for 177 EUR. Now let's search for a hotel.",
+   "wall_ms": 502.51923996256664,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    195.8043160266243,
+    268.95096304360777
+   ],
+   "tokens_in": 1414,
+   "tokens_out": 72,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Prague",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.15533103048801,
+     "rtt_ms": 57.22696497105062,
+     "verify_ms": 54.95162698207423,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Prague is PRA101 by SkyLine, costing 204 EUR. \nNow, let's search for a hotel in Prague for 3 nights at most 200 EUR per night.",
+   "wall_ms": 621.2460739770904,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    195.76326303649694,
+    143.24271795339882
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 52,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.19802099466324,
+     "rtt_ms": 57.27890500565991,
+     "verify_ms": 55.03322294680402,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Athens is **ATH102** by **EuroJet** for **140 EUR**.",
+   "wall_ms": 495.599694957491,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    195.765188022051,
+    118.42565599363297
+   ],
+   "tokens_in": 1458,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Dublin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.55067600822076,
+     "rtt_ms": 57.58998595410958,
+     "verify_ms": 55.291971017140895,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Dublin is DUB102 by EuroJet for 128 EUR.",
+   "wall_ms": 471.44230699632317,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    189.54035098431632,
+    118.47085098270327
+   ],
+   "tokens_in": 1436,
+   "tokens_out": 47,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.2582690087147,
+     "rtt_ms": 57.18048301059753,
+     "verify_ms": 54.91768300998956,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Oslo is OSL100 by AirNova for 165 EUR.",
+   "wall_ms": 464.5613139728084,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    195.78572898171842,
+    168.99085202021524
+   ],
+   "tokens_in": 1434,
+   "tokens_out": 56,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Warsaw",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.50476296944544,
+     "rtt_ms": 57.35814099898562,
+     "verify_ms": 55.08214503061026,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Warsaw is offered by AirNova for 109 EUR. \nDo you want me to book this flight?",
+   "wall_ms": 521.7497129924595,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    195.72164898272604,
+    118.47430100897327
+   ],
+   "tokens_in": 1460,
+   "tokens_out": 48,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Budapest",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.0481479675509,
+     "rtt_ms": 57.444231992121786,
+     "verify_ms": 55.20448100287467,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Budapest is BUD100 by AirNova for 275 EUR.",
+   "wall_ms": 470.8004139829427,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    189.55820600967854,
+    99.27108499687165
+   ],
+   "tokens_in": 1455,
+   "tokens_out": 44,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 98.86501601431519,
+     "rtt_ms": 57.15816596057266,
+     "verify_ms": 54.89971296628937,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "final_text": "The cheapest flight to Porto is with EuroJet for 123 EUR.",
+   "wall_ms": 444.9639899539761,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  }
+ ],
+ "summary": {
+  "none": {
+   "tasks": 48,
+   "success_rate": 0.0,
+   "median_llm_ms": 346.50896850507706,
+   "median_auth_ms": 0.02796947956085205,
+   "median_wall_ms": 348.42948301229626,
+   "auth_share_of_wall": 8.082204996459024e-05,
+   "tool_calls": 51,
+   "rejected_honest_calls": 0
+  },
+  "jwt": {
+   "tasks": 48,
+   "success_rate": 0.0,
+   "median_llm_ms": 345.4681280127261,
+   "median_auth_ms": 0.4194469947833568,
+   "median_wall_ms": 347.8377780120354,
+   "auth_share_of_wall": 0.001216116937000342,
+   "tool_calls": 50,
+   "rejected_honest_calls": 0
+  },
+  "mm": {
+   "tasks": 48,
+   "success_rate": 0.0,
+   "median_llm_ms": 345.67096302635036,
+   "median_auth_ms": 154.43789001437835,
+   "median_wall_ms": 502.4077220004983,
+   "auth_share_of_wall": 0.3069882919049419,
+   "tool_calls": 50,
+   "rejected_honest_calls": 0
+  }
+ },
+ "finished": "2026-11-13T01:47:48+0100"
+}

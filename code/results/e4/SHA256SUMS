@@ -1,0 +1,13 @@
+085385b89dd206041589bdbb728c5f139fc01b5f269f8d5cd54e1834c15dcf26  e4_gpt-oss-20b.json
+4028a93f12c9599e0d8ae0b5486211dfca086ada991ebbe3b7259c13e47dc7a1  e4_granite-3.3-8b-instruct.json
+d80e433ae9f63799a112a11156f7b08692376f9f6ba891692793835960c3e930  e4_hermes-3-llama-3.1-8b.json
+6d7749bc97db28938c10022af8cc6347ec3af58aaf726c58418db85553eb8dd5  e4_mistral-small-3.2-24b-instruct.json
+dc48e43ae5657f5013169661f009b35be95c42e7b3ef1d891a5912905d03d03c  e4_qwen2.5-72b-instruct-awq.json
+7e999439646b7f99a4c5fd65c1f8e2e7a580d090c01d5f1e09083e4d0803e1c6  e4_qwen2.5-7b-instruct.json
+c58bea98c0cdae3db73ceda1b61e7e4ad23c7592ed77b51f8764c6e4fc1b0e49  gpu-gpt-oss-20b-45194.csv
+327b2449d47f300fc7f97432dcf31d816d8b5dee48d0d94c541f4824f9f752be  gpu-granite-3.3-8b-instruct-45193.csv
+d96ff2e7896fd52d31e3bf40cb9add274b0b241f1a77f2cebc09dad209c00ec4  gpu-hermes-3-llama-3.1-8b-45211.csv
+d96ff2e7896fd52d31e3bf40cb9add274b0b241f1a77f2cebc09dad209c00ec4  gpu-mistral-small-3.2-24b-instruct-45195.csv
+d96ff2e7896fd52d31e3bf40cb9add274b0b241f1a77f2cebc09dad209c00ec4  gpu-qwen2.5-72b-instruct-awq-45196.csv
+212f6556de9a9fa3f3c970bac6f4d608862be3dbca9b5da4adf4fa65847e3c87  gpu-qwen2.5-7b-instruct-45165.csv
+212f6556de9a9fa3f3c970bac6f4d608862be3dbca9b5da4adf4fa65847e3c87  gpu-qwen2.5-7b-instruct-45192.csv

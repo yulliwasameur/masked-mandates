@@ -117,6 +117,35 @@ M("TimSessRec", f"{tget(1000,0,600)['session_recall']:.2f}")
 M("TimPrecHSixty", f"{tget(100,0,60)['precision']:.2f}"); M("TimPrecKSixty", f"{tget(1000,0,60)['precision']:.2f}"); M("TimPrecTTSixty", f"{tget(10000,0,60)['precision']:.3f}")
 M("TimSessRecSixty", f"{tget(1000,0,60)['session_recall']:.2f}"); M("TimSessRecJit", f"{tget(1000,600,60)['session_recall']:.2f}")
 
+# ---------------- E4: LLM agents in the loop (results/e4/e4_*.json, one file per model)
+import glob
+E4 = [json.load(open(p)) for p in sorted(glob.glob(os.path.join(R, "e4", "e4_*.json")))]
+E4NAME = {"qwen2.5-7b-instruct": "Qwen2.5-7B", "hermes-3-llama-3.1-8b": "Hermes-3-Llama-8B",
+          "granite-3.3-8b-instruct": "Granite-3.3-8B", "gpt-oss-20b": "gpt-oss-20b",
+          "mistral-small-3.2-24b-instruct": "Mistral-Small-24B", "qwen2.5-72b-instruct-awq": "Qwen2.5-72B (AWQ)"}
+E4ORD = list(E4NAME)
+E4.sort(key=lambda d: E4ORD.index(d["model"]))
+def e4calls(d, mode): return [c for r in d["rows"] if r["mode"] == mode for c in r["calls"] if c["args"] is not None]
+er4, shares, percall = [], [], []
+for d in E4:
+    rs = {m: [r for r in d["rows"] if r["mode"] == m] for m in ("none", "jwt", "mm")}
+    succ = " / ".join(f"{100*sum(r['success'] for r in rs[m])/len(rs[m]):.0f}" for m in ("none", "jwt", "mm"))
+    assert all(r["rejected_honest_calls"] == 0 for m in rs for r in rs[m]), "E4: honest call rejected"
+    ncalls = len(e4calls(d, "mm"))
+    if ncalls == 0:
+        why = "vLLM tool-parser error" if any(r.get("error") for r in rs["mm"]) else "no tool call"
+        er4.append(f"{E4NAME[d['model']]} & {succ} & \\multicolumn{{4}}{{c}}{{{why}}}\\\\"); continue
+    llm = med([sum(r["llm_ms"]) for r in rs["mm"]]) / 1000
+    auth = med([sum(c["prep_ms"] + c["verify_ms"] for c in r["calls"] if c["args"] is not None) for r in rs["mm"]])
+    pc = [c["prep_ms"] + c["verify_ms"] for c in e4calls(d, "mm")]; percall += pc
+    tpc = ncalls / len(rs["mm"])
+    sh = med([sum(c["prep_ms"] + c["verify_ms"] for c in r["calls"] if c["args"] is not None) / r["wall_ms"] for r in rs["mm"] if r["wall_ms"] > 0])
+    if all(r["success"] for r in rs["mm"]) or sum(r["success"] for r in rs["mm"]) > 0: shares.append(sh)
+    er4.append(f"{E4NAME[d['model']]} & {succ} & {tpc:.1f} & {llm:.2f} & {f0(auth)} & {100*sh:.0f}\\,\\%\\\\")
+open(f"{O}/tab_e4.tex", "w").write("\n".join(er4) + "\n\\bottomrule\n")
+M("EFourModels", str(len(E4))); M("EFourTasks", str(E4[0]["tasks"])); M("EFourReps", str(E4[0]["reps"]))
+M("EFourCallMs", f0(med(percall))); M("EFourShareMin", f"{100*min(shares):.0f}\\,\\%"); M("EFourShareMax", f"{100*max(shares):.0f}\\,\\%")
+
 # ---------------- environment
 env = J("env.json")
 M("Cpu", env["cpu"]); M("Rustc", env["rustc"])

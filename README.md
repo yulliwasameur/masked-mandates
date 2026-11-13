@@ -24,6 +24,7 @@ uses a VB universal accumulator. Range checks use Bulletproofs++, and an optiona
 | `code/mmpy/` | PyO3 bindings (agent-side wallet, tool-side verifier) |
 | `code/e2/e2.py` | E2: end-to-end calls over the official MCP Python SDK, with JWT, Biscuit and macaroon baselines |
 | `code/sim/e3.py` | E3/E3b: collusion of 50 tools (identifier linkage and timing attacker) |
+| `code/e4/e4.py` | E4: an LLM agent (any OpenAI-compatible endpoint, e.g. vLLM) solves 24 booking tasks through three MCP tools, with no authorisation, JWT or Masked Mandates; `hedy_e4.sbatch` is the Slurm job used for the paper |
 | `code/gen_tex.py` | Generates every number, table and figure of the paper from `results/*.json` |
 | `code/results/` | Result files of the campaign reported in the paper, with `env.json`, `campaign.log`, `SHA256SUMS` (result files) and `binaries-SHA256.txt` (binaries of the campaign, not shipped) |
 | `run_campaign.sh` | Runs E1 and E2 and records the environment and hashes |
@@ -45,6 +46,7 @@ RAYON_NUM_THREADS=1 ./target/release/bench costs   # then: depth, msgs, rev
 (cd mmpy && maturin develop --release)         # inside a Python virtual environment
 python e2/e2.py client results/e2.json         # E2 (spawns three MCP stdio servers)
 python sim/e3.py                               # E3 / E3b
+python e4/e4.py run --base-url http://HOST:PORT/v1 --model NAME --out results/e4/e4_NAME.json --reps 2   # E4
 python gen_tex.py ../manuscrit                 # numbers.tex, tab_*.tex, fig_*.pdf
 ```
 
@@ -52,7 +54,7 @@ Instead of the bench and E2 steps, `./run_campaign.sh` runs E1 and E2 in sequenc
 also records `env.json`, `campaign.log` and `SHA256SUMS`. On macOS with a broken
 Command Line Tools SDK, set `SDKROOT` to an installed SDK (the script does this).
 
-To check the result files: `cd code && shasum -a 256 -c results/SHA256SUMS`.
+To check the result files: `cd code && shasum -a 256 -c results/SHA256SUMS` (E4: `cd code/results/e4 && shasum -a 256 -c SHA256SUMS`).
 
 The seed is 20261109. The attack suite and E3 are deterministic and reproduce byte
 for byte. Timings depend on the machine. The paper reports one thread on an Apple
@@ -72,7 +74,7 @@ child's values were added (47/48).
 - The escrow uses a trusted dealer and a lookup table of registered principals. A deployment would use a DKG.
 - The PyO3 `Verifier` rebuilds the whole system from the seed, secret keys included. It is a test harness, not a deployment component.
 - E3 is a synthetic simulation. The Masked Mandates row of the identifier-linkage table is analytic (one pseudonym per call).
-- No language model runs in the loop.
+- E4 uses six open models on one GPU node (MesoNET Hedy, 1 H100, vLLM 0.33.0) and synthetic booking tasks; its authorisation costs were measured on that node's Xeon cores, not on the laptop of E1–E3. Three of the six models do not complete the tasks in any mode (see the paper); `results/e4/debug/` keeps the diagnostic runs.
 
 ## Provenance
 

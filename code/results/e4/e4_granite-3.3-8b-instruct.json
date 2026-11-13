@@ -1,0 +1,3550 @@
+{
+ "seed": 20261109,
+ "model": "granite-3.3-8b-instruct",
+ "base_url_kind": "vllm-0.33.0 on H100",
+ "server_models": {
+  "object": "list",
+  "data": [
+   {
+    "id": "granite-3.3-8b-instruct",
+    "object": "model",
+    "created": 1794528503,
+    "owned_by": "vllm",
+    "root": "/home/yulameur1/masked-mandates-95/hf/granite-3.3-8b-instruct",
+    "parent": null,
+    "max_model_len": 16384,
+    "permission": [
+     {
+      "id": "modelperm-be357495833b1a8d",
+      "object": "model_permission",
+      "created": 1794528503,
+      "allow_create_engine": false,
+      "allow_sampling": true,
+      "allow_logprobs": true,
+      "allow_search_indices": false,
+      "allow_view": true,
+      "allow_fine_tuning": false,
+      "organization": "*",
+      "group": null,
+      "is_blocking": false
+     }
+    ]
+   }
+  ]
+ },
+ "tasks": 24,
+ "reps": 2,
+ "mcp_sdk": "1.30.0",
+ "python": "3.12.4",
+ "machine": "Linux-5.14.0-687.13.1.el9_8.x86_64-x86_64-with-glibc2.34",
+ "max_turns": 12,
+ "started": "2026-11-13T01:08:23+0100",
+ "modes": [
+  "none",
+  "jwt",
+  "mm"
+ ],
+ "rows": [
+  {
+   "task": 0,
+   "llm_ms": [
+    2820.2059980249032
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2820.2451519900933,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    509.434777952265,
+    986.7959170369431
+   ],
+   "tokens_in": 1226,
+   "tokens_out": 210,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.02144899917766452,
+     "rtt_ms": 3.9833379560150206,
+     "verify_ms": 0.025108049158006907,
+     "meta_bytes": 0
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.014978984836488962,
+     "rtt_ms": 3.2350890105590224,
+     "verify_ms": 0.026115973014384508,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 1503.6159960436635,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    1683.3757879794575,
+    625.721487973351
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 326,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016727950423955917,
+     "rtt_ms": 2.189835999161005,
+     "verify_ms": 0.018268998246639967,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 2311.386849032715,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    1578.005027025938,
+    1555.383188999258
+   ],
+   "tokens_in": 1166,
+   "tokens_out": 443,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.017520971596240997,
+     "rtt_ms": 2.079530037008226,
+     "verify_ms": 0.01675501698628068,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3135.567807999905,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    2873.4528580098413
+   ],
+   "tokens_in": 535,
+   "tokens_out": 407,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2873.477899993304,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    2408.5398839670233
+   ],
+   "tokens_in": 535,
+   "tokens_out": 341,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2408.5711099905893,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    1634.259774000384,
+    1808.233110990841
+   ],
+   "tokens_in": 1118,
+   "tokens_out": 487,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01828401582315564,
+     "rtt_ms": 2.339881961233914,
+     "verify_ms": 0.017442042008042336,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3444.9393159593455,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    3085.591079958249
+   ],
+   "tokens_in": 535,
+   "tokens_out": 437,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3085.621809994336,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    1577.7533460059203,
+    618.3885060017928
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 310,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01818698365241289,
+     "rtt_ms": 2.6961159892380238,
+     "verify_ms": 0.020459003280848265,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 2198.9344710018486,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    3042.988366971258
+   ],
+   "tokens_in": 535,
+   "tokens_out": 431,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3043.016666022595,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    2458.723448042292
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2458.7527539697476,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    1752.8117089532316,
+    1393.0981979938224
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 445,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0176610192283988,
+     "rtt_ms": 2.433039015159011,
+     "verify_ms": 0.018148974049836397,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3148.441521974746,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    2795.4653869965114
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.494072022848,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    1570.689170039259,
+    1329.6374070341699
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 410,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.017385988030582666,
+     "rtt_ms": 2.3525659926235676,
+     "verify_ms": 0.019340019207447767,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 2902.777909010183,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    1577.656200970523,
+    1442.5302599556744
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 427,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01570803578943014,
+     "rtt_ms": 2.181808988098055,
+     "verify_ms": 0.014883000403642654,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3022.4676019861363,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    227.54824196454138,
+    1666.9767840066925
+   ],
+   "tokens_in": 1114,
+   "tokens_out": 267,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.017740007024258375,
+     "rtt_ms": 2.098047989420593,
+     "verify_ms": 0.015313038602471352,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 1896.7192969867028,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    3304.0549200377427
+   ],
+   "tokens_in": 535,
+   "tokens_out": 468,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3304.084076953586,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    3155.389280989766
+   ],
+   "tokens_in": 535,
+   "tokens_out": 447,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3155.419308983255,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    1817.4059899756685,
+    1632.268532004673
+   ],
+   "tokens_in": 1168,
+   "tokens_out": 488,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016573001630604267,
+     "rtt_ms": 2.4167720112018287,
+     "verify_ms": 0.01873000292107463,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3452.187335002236,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    3043.2413600501604
+   ],
+   "tokens_in": 535,
+   "tokens_out": 431,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3043.272857030388,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    1584.6450899844058,
+    1716.4899909985252
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 467,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.019225990399718285,
+     "rtt_ms": 2.377952972892672,
+     "verify_ms": 0.017813988961279392,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3303.611852985341,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    2965.5282699968666
+   ],
+   "tokens_in": 535,
+   "tokens_out": 420,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2965.5563139822334,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    2507.2250650264323
+   ],
+   "tokens_in": 537,
+   "tokens_out": 355,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2507.2515290230513,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    1661.501299997326,
+    1392.3155769589357
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 432,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01779600279405713,
+     "rtt_ms": 2.3771930136717856,
+     "verify_ms": 0.020243984181433916,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3056.2950469902717,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    2795.248033013195
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.2734410064295,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    508.0456169671379,
+    983.6119450046681
+   ],
+   "tokens_in": 1226,
+   "tokens_out": 210,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.024589011445641518,
+     "rtt_ms": 2.2175319609232247,
+     "verify_ms": 0.016184989362955093,
+     "meta_bytes": 0
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.013469019904732704,
+     "rtt_ms": 2.8549509588629007,
+     "verify_ms": 0.023877015337347984,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 1496.8791270512156,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    1731.852567056194,
+    624.9299070332199
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 333,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.018311955500394106,
+     "rtt_ms": 2.1149320527911186,
+     "verify_ms": 0.015960016753524542,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 2358.9965860010125,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    1577.0556940115057,
+    1631.553487968631
+   ],
+   "tokens_in": 1166,
+   "tokens_out": 454,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01761200837790966,
+     "rtt_ms": 2.2179930238053203,
+     "verify_ms": 0.014084973372519016,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3210.9257300035097,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    2873.1429510517046
+   ],
+   "tokens_in": 535,
+   "tokens_out": 407,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2873.168390011415,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    2407.2548859985545
+   ],
+   "tokens_in": 535,
+   "tokens_out": 341,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2407.2792069637217,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    1633.3301109843887,
+    1806.8357900483534
+   ],
+   "tokens_in": 1118,
+   "tokens_out": 487,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016783014871180058,
+     "rtt_ms": 2.111729991156608,
+     "verify_ms": 0.014649995137006044,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3442.3707659589127,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    3247.192188980989
+   ],
+   "tokens_in": 535,
+   "tokens_out": 460,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3247.2236800240353,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    1576.5261389897205,
+    617.7877389709465
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 310,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0179769704118371,
+     "rtt_ms": 2.254988008644432,
+     "verify_ms": 0.01584802521392703,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 2196.665171009954,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    2915.2219319948927
+   ],
+   "tokens_in": 535,
+   "tokens_out": 413,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2915.252826001961,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    2456.9466109969653
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2456.9749829825014,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    1753.0239530024119,
+    1406.6110349958763
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 447,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.02368004061281681,
+     "rtt_ms": 2.3184629972092807,
+     "verify_ms": 0.01682603033259511,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3162.0613249833696,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    2794.9109110049903
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2794.94260501815,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    1590.8284849720076,
+    1328.8418629672378
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 413,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.0179069465957582,
+     "rtt_ms": 2.6576350210234523,
+     "verify_ms": 0.02143305027857423,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 2922.430209990125,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    1576.943970983848,
+    1391.9234109926037
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 420,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.019353989046067,
+     "rtt_ms": 2.3137970129027963,
+     "verify_ms": 0.016573001630604267,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 2971.2852469529025,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    1598.3027319889516,
+    1546.243604971096
+   ],
+   "tokens_in": 1114,
+   "tokens_out": 445,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.016597972717136145,
+     "rtt_ms": 2.2623470285907388,
+     "verify_ms": 0.01715304097160697,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3146.899581013713,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    3303.545714006759
+   ],
+   "tokens_in": 535,
+   "tokens_out": 468,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3303.576876001898,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    2992.39409097936
+   ],
+   "tokens_in": 535,
+   "tokens_out": 424,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2992.4251749762334,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    1422.5798530387692,
+    1582.6230740058236
+   ],
+   "tokens_in": 1168,
+   "tokens_out": 425,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.01972098834812641,
+     "rtt_ms": 2.5433690170757473,
+     "verify_ms": 0.021450978238135576,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3007.8538899542764,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    3310.1544979726896
+   ],
+   "tokens_in": 535,
+   "tokens_out": 469,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3310.183572000824,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    1584.6823999891058,
+    1681.3167500076815
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.023648026399314404,
+     "rtt_ms": 2.542028028983623,
+     "verify_ms": 0.0214899773709476,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3268.6563309980556,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    2957.329567987472
+   ],
+   "tokens_in": 535,
+   "tokens_out": 419,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2957.3590510408394,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    2457.2227890021168
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2457.2502829832956,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    1661.631723982282,
+    1603.6539730266668
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.018858991097658873,
+     "rtt_ms": 2.539200009778142,
+     "verify_ms": 0.019350030925124884,
+     "meta_bytes": 0
+    }
+   ],
+   "error": null,
+   "wall_ms": 3267.9285050253384,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "none"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    2795.6670509884134
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.700590009801,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    508.3118139882572,
+    983.8057580054738
+   ],
+   "tokens_in": 1226,
+   "tokens_out": 210,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.1520169898867607,
+     "rtt_ms": 4.613380006048828,
+     "verify_ms": 0.6020110449753702,
+     "meta_bytes": 764
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08844700641930103,
+     "rtt_ms": 4.055949975736439,
+     "verify_ms": 0.5591859808191657,
+     "meta_bytes": 761
+    }
+   ],
+   "error": null,
+   "wall_ms": 1501.164912013337,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    1731.600531958975,
+    624.7326509910636
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 333,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08794799214228988,
+     "rtt_ms": 2.3927990114316344,
+     "verify_ms": 0.3728790325112641,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "wall_ms": 2358.902667008806,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    1577.0701270084828,
+    1631.963394000195
+   ],
+   "tokens_in": 1166,
+   "tokens_out": 454,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.1429180265404284,
+     "rtt_ms": 2.7984249754808843,
+     "verify_ms": 0.41760801104828715,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "wall_ms": 3212.0773430215195,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    2873.0793749564327
+   ],
+   "tokens_in": 535,
+   "tokens_out": 407,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2873.1048770132475,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    2407.5657579815015
+   ],
+   "tokens_in": 535,
+   "tokens_out": 341,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2407.5949630350806,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    1633.4720980376005,
+    1807.1226649917662
+   ],
+   "tokens_in": 1118,
+   "tokens_out": 487,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.14157203258946538,
+     "rtt_ms": 2.870886994060129,
+     "verify_ms": 0.4197140224277973,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "wall_ms": 3443.698583985679,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    3246.1676640086807
+   ],
+   "tokens_in": 535,
+   "tokens_out": 460,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3246.1967960116453,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    1576.8496679957025,
+    617.0088910148479
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 310,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.14052900951355696,
+     "rtt_ms": 2.936710021458566,
+     "verify_ms": 0.4202010459266603,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "wall_ms": 2197.0249540172517,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    2915.4808019520715
+   ],
+   "tokens_in": 535,
+   "tokens_out": 413,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2915.5085220118053,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    2457.085766014643
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2457.116589997895,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    1752.514524036087,
+    1405.6777009973302
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 447,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.14245399506762624,
+     "rtt_ms": 2.8658389928750694,
+     "verify_ms": 0.4056610050611198,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "wall_ms": 3161.2925580120645,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    2795.1068060356192
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.1389540103264,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    1591.217766981572,
+    1328.3264999627136
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 413,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.13753201346844435,
+     "rtt_ms": 2.75872100610286,
+     "verify_ms": 0.39431103505194187,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "wall_ms": 2922.5325119914487,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    1577.163782028947,
+    1391.9197880313732
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 420,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.12501399032771587,
+     "rtt_ms": 2.632133022416383,
+     "verify_ms": 0.3730289754457772,
+     "meta_bytes": 764
+    }
+   ],
+   "error": null,
+   "wall_ms": 2971.935073961504,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    1597.836768021807,
+    1546.124504006002
+   ],
+   "tokens_in": 1114,
+   "tokens_out": 445,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.12719101505354047,
+     "rtt_ms": 2.754080982413143,
+     "verify_ms": 0.39321405347436666,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3146.9360000337474,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    3303.4185970318504
+   ],
+   "tokens_in": 535,
+   "tokens_out": 468,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3303.456957975868,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    2993.049418029841
+   ],
+   "tokens_in": 535,
+   "tokens_out": 424,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2993.084406014532,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    1422.32640896691,
+    1582.4694249895401
+   ],
+   "tokens_in": 1168,
+   "tokens_out": 425,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.1449140254408121,
+     "rtt_ms": 3.094429965130985,
+     "verify_ms": 0.42632402619346976,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3008.130436006468,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    3310.245399014093
+   ],
+   "tokens_in": 535,
+   "tokens_out": 469,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3310.2752849808894,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    1584.117702965159,
+    1680.0721479812637
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.13544398825615644,
+     "rtt_ms": 2.7228069957345724,
+     "verify_ms": 0.3882839810103178,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3267.137654009275,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    2956.9031950086355
+   ],
+   "tokens_in": 535,
+   "tokens_out": 419,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2956.933773995843,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    2457.1979790343903
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2457.2227890021168,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    1661.7209720425308,
+    1603.639863024
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.1437499886378646,
+     "rtt_ms": 3.0245360103435814,
+     "verify_ms": 0.44484197860583663,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3268.626659992151,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    2795.4880130128004
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.5165110179223,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    507.85500096390024,
+    983.9188079931773
+   ],
+   "tokens_in": 1226,
+   "tokens_out": 210,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.13806798961013556,
+     "rtt_ms": 2.874655998311937,
+     "verify_ms": 0.39996299892663956,
+     "meta_bytes": 765
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.08126400643959641,
+     "rtt_ms": 2.902100037317723,
+     "verify_ms": 0.4257999826222658,
+     "meta_bytes": 762
+    }
+   ],
+   "error": null,
+   "wall_ms": 1497.896507033147,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    1732.0167570142075,
+    624.4142429786734
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 333,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.12110499665141106,
+     "rtt_ms": 2.6443980168551207,
+     "verify_ms": 0.38683199090883136,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 2359.2855110182427,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    1577.4835540214553,
+    1631.8133900058456
+   ],
+   "tokens_in": 1166,
+   "tokens_out": 454,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.13063597725704312,
+     "rtt_ms": 2.7079610154032707,
+     "verify_ms": 0.38524699630215764,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3212.230934004765,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    2873.576532001607
+   ],
+   "tokens_in": 535,
+   "tokens_out": 407,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2873.6122899572365,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    2406.966715992894
+   ],
+   "tokens_in": 535,
+   "tokens_out": 341,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2406.9942830246873,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    1632.97168497229,
+    1807.077030010987
+   ],
+   "tokens_in": 1118,
+   "tokens_out": 487,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.14017103239893913,
+     "rtt_ms": 2.8590779984369874,
+     "verify_ms": 0.4013130092062056,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3443.1428809766658,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    3246.6761479736306
+   ],
+   "tokens_in": 535,
+   "tokens_out": 460,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3246.708879014477,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    1576.845442992635,
+    617.1992549789138
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 310,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.1420159824192524,
+     "rtt_ms": 2.9265930061228573,
+     "verify_ms": 0.4167709848843515,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 2197.203532967251,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    2915.4581709881313
+   ],
+   "tokens_in": 535,
+   "tokens_out": 413,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2915.4853830114007,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    2456.8365199957043
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2456.864151987247,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    1753.2651310320944,
+    1406.5507460036315
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 447,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.14023500261828303,
+     "rtt_ms": 2.8200660017319024,
+     "verify_ms": 0.4036870086565614,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3162.8765240311623,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    2795.222925953567
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.2536429511383,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    1591.1880310159177,
+    1328.2903409563005
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 413,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.14144601300358772,
+     "rtt_ms": 3.063248994294554,
+     "verify_ms": 0.42249797843396664,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 2922.778178995941,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    1577.2735240170732,
+    1391.4799349731766
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 420,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.13587099965661764,
+     "rtt_ms": 2.93312402209267,
+     "verify_ms": 0.4171319887973368,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 2971.9140250235796,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    1598.4292160137556,
+    1545.9007239551283
+   ],
+   "tokens_in": 1114,
+   "tokens_out": 445,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.12378697283565998,
+     "rtt_ms": 2.5877929874695837,
+     "verify_ms": 0.37578801857307553,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3147.151114011649,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    3303.2265240326524
+   ],
+   "tokens_in": 535,
+   "tokens_out": 468,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3303.257017978467,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    2992.4721379647963
+   ],
+   "tokens_in": 535,
+   "tokens_out": 424,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2992.5008399877697,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    1422.8109840187244,
+    1582.0778000052087
+   ],
+   "tokens_in": 1168,
+   "tokens_out": 425,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.1399600296281278,
+     "rtt_ms": 2.7572279796004295,
+     "verify_ms": 0.3893200191669166,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3007.880078977905,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    3309.5626639551483
+   ],
+   "tokens_in": 535,
+   "tokens_out": 469,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3309.5888100215234,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    1584.7114970092662,
+    1680.9181440039538
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.147598038893193,
+     "rtt_ms": 2.8877739678137004,
+     "verify_ms": 0.4084920510649681,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3268.762594962027,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    2957.981697982177
+   ],
+   "tokens_in": 535,
+   "tokens_out": 419,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2958.0085100024007,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    2457.6717180316336
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2457.7000730205327,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    1661.0045779962093,
+    1603.2916440162808
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 0.15030597569420934,
+     "rtt_ms": 2.9179720440879464,
+     "verify_ms": 0.4153299960307777,
+     "meta_bytes": 765
+    }
+   ],
+   "error": null,
+   "wall_ms": 3267.456895962823,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "jwt"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    2795.490949996747
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.526292989962,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    508.4048109711148,
+    984.7753689973615
+   ],
+   "tokens_in": 1226,
+   "tokens_out": 210,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.78421300183982,
+     "rtt_ms": 59.578811982646585,
+     "verify_ms": 55.5336510296911,
+     "meta_bytes": 15840
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.26737798377872,
+     "rtt_ms": 59.31092199170962,
+     "verify_ms": 55.31077500199899,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "wall_ms": 1811.3198329810984,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    1732.0218450040556,
+    624.9874799977988
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 333,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.51164002995938,
+     "rtt_ms": 58.47446096595377,
+     "verify_ms": 55.56840600911528,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "wall_ms": 2515.1177640073,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    1577.1100210258737,
+    1631.7063060123473
+   ],
+   "tokens_in": 1166,
+   "tokens_out": 454,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.16000801604241,
+     "rtt_ms": 57.77943000430241,
+     "verify_ms": 55.29180396115407,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "wall_ms": 3365.8987369854003,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    2873.48856596509
+   ],
+   "tokens_in": 535,
+   "tokens_out": 407,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2873.5215450287797,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    2406.961588014383
+   ],
+   "tokens_in": 535,
+   "tokens_out": 341,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2406.98898100527,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    1633.3540509804152,
+    1807.145663013216
+   ],
+   "tokens_in": 1118,
+   "tokens_out": 487,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.49486097320914,
+     "rtt_ms": 57.97006702050567,
+     "verify_ms": 55.26111798826605,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "wall_ms": 3598.0918960412964,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    3248.462241026573
+   ],
+   "tokens_in": 535,
+   "tokens_out": 460,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3248.495029984042,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    1576.1958850198425,
+    617.9169779643416
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 310,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.68048299197108,
+     "rtt_ms": 58.2312680198811,
+     "verify_ms": 55.29525800375268,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "wall_ms": 2352.1441929624416,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    2915.3622580342926
+   ],
+   "tokens_in": 535,
+   "tokens_out": 413,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2915.393300005235,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    2456.6634109942243
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2456.6895390162244,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    1753.3562480239198,
+    1406.805197999347
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 447,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.48329697363079,
+     "rtt_ms": 58.225636021234095,
+     "verify_ms": 55.37096899934113,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "wall_ms": 3317.9991919896565,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    2795.445962983649
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.472428028006,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    1590.8821240300313,
+    1328.7701700464822
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 413,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.71247002249584,
+     "rtt_ms": 57.60535900481045,
+     "verify_ms": 55.00153097091243,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "wall_ms": 3077.0944940159097,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    1577.0600649993867,
+    1392.3912859754637
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 420,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.62734300643206,
+     "rtt_ms": 58.17686300724745,
+     "verify_ms": 55.457270005717874,
+     "meta_bytes": 15840
+    }
+   ],
+   "error": null,
+   "wall_ms": 3127.3815389722586,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    1597.8060660418123,
+    1546.3295700028539
+   ],
+   "tokens_in": 1114,
+   "tokens_out": 445,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.13235204294324,
+     "rtt_ms": 57.39750497741625,
+     "verify_ms": 54.854530026204884,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3300.7879159995355,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    3302.8558760415763
+   ],
+   "tokens_in": 535,
+   "tokens_out": 468,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3302.8851650306024,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    2993.472017988097
+   ],
+   "tokens_in": 535,
+   "tokens_out": 424,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2993.505167949479,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    1422.1758139901794,
+    1582.7442409936339
+   ],
+   "tokens_in": 1168,
+   "tokens_out": 425,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.77509098825976,
+     "rtt_ms": 58.190462994389236,
+     "verify_ms": 55.414683010894805,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3163.015805010218,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    3310.1444719941355
+   ],
+   "tokens_in": 535,
+   "tokens_out": 469,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3310.1763350423425,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    1584.6022400073707,
+    1680.6466789566912
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.39381701406091,
+     "rtt_ms": 58.12732601771131,
+     "verify_ms": 55.37025997182354,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3422.891719965264,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    2957.77595002437
+   ],
+   "tokens_in": 535,
+   "tokens_out": 419,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2957.806173013523,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    2457.5092049781233
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2457.535858033225,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    1661.49986902019,
+    1603.5657259635627
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.17762398254126,
+     "rtt_ms": 58.11022000852972,
+     "verify_ms": 55.42184197111055,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3422.4737980403006,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 0,
+   "llm_ms": [
+    2796.0210900055245
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2796.051674988121,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 1,
+   "llm_ms": [
+    508.298170985654,
+    984.0278170304373
+   ],
+   "tokens_in": 1226,
+   "tokens_out": 210,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.52815901488066,
+     "rtt_ms": 57.961056008934975,
+     "verify_ms": 55.08368695154786,
+     "meta_bytes": 15841
+    },
+    {
+     "name": "search_hotels",
+     "args": {
+      "city": "Rome",
+      "nights": 4,
+      "max_price_per_night": 200.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.40372401615605,
+     "rtt_ms": 57.955880009103566,
+     "verify_ms": 54.785932996310294,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 1807.3685209965333,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 2,
+   "llm_ms": [
+    1732.2916670236737,
+    624.7406040201895
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 333,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.24891201080754,
+     "rtt_ms": 57.697271986398846,
+     "verify_ms": 55.304650973994285,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 2514.1008110367693,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 3,
+   "llm_ms": [
+    1577.4654350243509,
+    1631.7939400323667
+   ],
+   "tokens_in": 1166,
+   "tokens_out": 454,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.22112501226366,
+     "rtt_ms": 57.66589398263022,
+     "verify_ms": 55.09638600051403,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3366.2702930159867,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 4,
+   "llm_ms": [
+    2874.3369660223834
+   ],
+   "tokens_in": 535,
+   "tokens_out": 407,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2874.3730160058476,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 5,
+   "llm_ms": [
+    2407.034550968092
+   ],
+   "tokens_in": 535,
+   "tokens_out": 341,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2407.062938029412,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 6,
+   "llm_ms": [
+    1633.4391239797696,
+    1806.5928210271522
+   ],
+   "tokens_in": 1118,
+   "tokens_out": 487,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.42359098931774,
+     "rtt_ms": 58.240069018211216,
+     "verify_ms": 55.467983009293675,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3597.8120520012453,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 7,
+   "llm_ms": [
+    3246.8478900264017
+   ],
+   "tokens_in": 535,
+   "tokens_out": 460,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3246.8782670330256,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 8,
+   "llm_ms": [
+    1577.1904019638896,
+    617.6793460035697
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 310,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.57646403927356,
+     "rtt_ms": 57.97427095239982,
+     "verify_ms": 55.25682203005999,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 2352.5393509771675,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 9,
+   "llm_ms": [
+    2915.239076013677
+   ],
+   "tokens_in": 535,
+   "tokens_out": 413,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2915.266892989166,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 10,
+   "llm_ms": [
+    2457.4669600115158
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2457.4920989689417,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 11,
+   "llm_ms": [
+    1753.0719159985892,
+    1406.2953180400655
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 447,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 350.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.2554789991118,
+     "rtt_ms": 58.024892990943044,
+     "verify_ms": 55.14097498962656,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3316.7821780079976,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 12,
+   "llm_ms": [
+    2795.5691109527834
+   ],
+   "tokens_in": 535,
+   "tokens_out": 396,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2795.5954810022376,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 13,
+   "llm_ms": [
+    1591.2915819790214,
+    1328.919775027316
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 413,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Rome",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.50207802467048,
+     "rtt_ms": 58.171320997644216,
+     "verify_ms": 55.32377399504185,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3078.028684016317,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 14,
+   "llm_ms": [
+    1577.7023559785448,
+    1392.551833007019
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 420,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Berlin",
+      "max_price": 420.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.22101098345593,
+     "rtt_ms": 58.25200997060165,
+     "verify_ms": 55.434793001040816,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3127.861411019694,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 15,
+   "llm_ms": [
+    1598.205736023374,
+    1546.6011749813333
+   ],
+   "tokens_in": 1114,
+   "tokens_out": 445,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Madrid",
+      "max_price": 250.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.22867600107566,
+     "rtt_ms": 57.94638697989285,
+     "verify_ms": 55.070845992304385,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3302.1024219924584,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 16,
+   "llm_ms": [
+    3303.029813047033
+   ],
+   "tokens_in": 535,
+   "tokens_out": 468,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3303.0605349922553,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 17,
+   "llm_ms": [
+    2993.3972830185667
+   ],
+   "tokens_in": 535,
+   "tokens_out": 424,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2993.423828971572,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 18,
+   "llm_ms": [
+    1422.1617809962481,
+    1583.1061879871413
+   ],
+   "tokens_in": 1168,
+   "tokens_out": 425,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Athens",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.58444099174812,
+     "rtt_ms": 57.843716989737004,
+     "verify_ms": 55.02720101503655,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3162.8242949955165,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 19,
+   "llm_ms": [
+    3310.2138260146603
+   ],
+   "tokens_in": 535,
+   "tokens_out": 469,
+   "calls": [],
+   "error": null,
+   "wall_ms": 3310.241429018788,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 20,
+   "llm_ms": [
+    1584.5105029875413,
+    1681.3892149948515
+   ],
+   "tokens_in": 1139,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Oslo",
+      "max_price": 400.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.0541409701109,
+     "rtt_ms": 57.89465201087296,
+     "verify_ms": 55.11764797847718,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3422.9729220387526,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 21,
+   "llm_ms": [
+    2957.6027269940823
+   ],
+   "tokens_in": 535,
+   "tokens_out": 419,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2957.6298290048726,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 22,
+   "llm_ms": [
+    2457.2360399761237
+   ],
+   "tokens_in": 537,
+   "tokens_out": 348,
+   "calls": [],
+   "error": null,
+   "wall_ms": 2457.2637950186618,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  },
+  {
+   "task": 23,
+   "llm_ms": [
+    1661.2822079914622,
+    1603.6000670283101
+   ],
+   "tokens_in": 1163,
+   "tokens_out": 462,
+   "calls": [
+    {
+     "name": "search_flights",
+     "args": {
+      "destination": "Porto",
+      "max_price": 300.0
+     },
+     "ok": true,
+     "why": "",
+     "prep_ms": 99.7984170098789,
+     "rtt_ms": 58.24479600414634,
+     "verify_ms": 55.35566300386563,
+     "meta_bytes": 15841
+    }
+   ],
+   "error": null,
+   "wall_ms": 3423.0452539632097,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 1,
+   "mode": "mm"
+  }
+ ],
+ "summary": {
+  "none": {
+   "tasks": 48,
+   "success_rate": 0.0,
+   "median_llm_ms": 2967.197825986659,
+   "median_auth_ms": 0.015295518096536398,
+   "median_wall_ms": 2968.420780467568,
+   "auth_share_of_wall": 4.565604948633427e-06,
+   "tool_calls": 26,
+   "rejected_honest_calls": 0
+  },
+  "jwt": {
+   "tasks": 48,
+   "success_rate": 0.0,
+   "median_llm_ms": 2963.3675784862135,
+   "median_auth_ms": 0.23041351232677698,
+   "median_wall_ms": 2964.96126751299,
+   "auth_share_of_wall": 7.86322351879208e-05,
+   "tool_calls": 26,
+   "rejected_honest_calls": 0
+  },
+  "mm": {
+   "tasks": 48,
+   "success_rate": 0.0,
+   "median_llm_ms": 2963.6136504996102,
+   "median_auth_ms": 76.99344103457406,
+   "median_wall_ms": 3035.2998309826944,
+   "auth_share_of_wall": 0.0215052843886146,
+   "tool_calls": 26,
+   "rejected_honest_calls": 0
+  }
+ },
+ "finished": "2026-11-13T01:15:25+0100"
+}

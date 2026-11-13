@@ -1,0 +1,166 @@
+{
+ "seed": 20261109,
+ "model": "mistral-dbg2",
+ "base_url_kind": "vllm-0.33.0 on H100",
+ "server_models": {
+  "object": "list",
+  "data": [
+   {
+    "id": "mistral-dbg2",
+    "object": "model",
+    "created": 1794529439,
+    "owned_by": "vllm",
+    "root": "/home/yulameur1/masked-mandates-95/hf/Mistral-Small-3.2-24B-Instruct-2506",
+    "parent": null,
+    "max_model_len": 16384,
+    "permission": [
+     {
+      "id": "modelperm-9b5228c5ae0a6349",
+      "object": "model_permission",
+      "created": 1794529439,
+      "allow_create_engine": false,
+      "allow_sampling": true,
+      "allow_logprobs": true,
+      "allow_search_indices": false,
+      "allow_view": true,
+      "allow_fine_tuning": false,
+      "organization": "*",
+      "group": null,
+      "is_blocking": false
+     }
+    ]
+   }
+  ]
+ },
+ "tasks": 2,
+ "reps": 1,
+ "mcp_sdk": "1.30.0",
+ "python": "3.12.4",
+ "machine": "Linux-5.14.0-687.13.1.el9_8.x86_64-x86_64-with-glibc2.34",
+ "max_turns": 12,
+ "started": "2026-11-13T01:23:59+0100",
+ "modes": [
+  "none",
+  "jwt",
+  "mm"
+ ],
+ "rows": [
+  {
+   "task": 0,
+   "llm_ms": [],
+   "tokens_in": 0,
+   "tokens_out": 0,
+   "calls": [],
+   "error": "llm: RuntimeError: HTTP 400: {\"error\":{\"message\":\"GrammarFactory.get_lark_from_jinja() missing 1 required positional argument: 'force_tool_names'\",\"type\":\"BadRequestError\",\"param\":null,\"code\":400}}",
+   "wall_ms": 617.3771469620988,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 1,
+   "llm_ms": [],
+   "tokens_in": 0,
+   "tokens_out": 0,
+   "calls": [],
+   "error": "llm: RuntimeError: HTTP 400: {\"error\":{\"message\":\"GrammarFactory.get_lark_from_jinja() missing 1 required positional argument: 'force_tool_names'\",\"type\":\"BadRequestError\",\"param\":null,\"code\":400}}",
+   "wall_ms": 118.64168901229277,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "none"
+  },
+  {
+   "task": 0,
+   "llm_ms": [],
+   "tokens_in": 0,
+   "tokens_out": 0,
+   "calls": [],
+   "error": "llm: RuntimeError: HTTP 400: {\"error\":{\"message\":\"GrammarFactory.get_lark_from_jinja() missing 1 required positional argument: 'force_tool_names'\",\"type\":\"BadRequestError\",\"param\":null,\"code\":400}}",
+   "wall_ms": 119.08633797429502,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 1,
+   "llm_ms": [],
+   "tokens_in": 0,
+   "tokens_out": 0,
+   "calls": [],
+   "error": "llm: RuntimeError: HTTP 400: {\"error\":{\"message\":\"GrammarFactory.get_lark_from_jinja() missing 1 required positional argument: 'force_tool_names'\",\"type\":\"BadRequestError\",\"param\":null,\"code\":400}}",
+   "wall_ms": 117.12817201623693,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "jwt"
+  },
+  {
+   "task": 0,
+   "llm_ms": [],
+   "tokens_in": 0,
+   "tokens_out": 0,
+   "calls": [],
+   "error": "llm: RuntimeError: HTTP 400: {\"error\":{\"message\":\"GrammarFactory.get_lark_from_jinja() missing 1 required positional argument: 'force_tool_names'\",\"type\":\"BadRequestError\",\"param\":null,\"code\":400}}",
+   "wall_ms": 119.12537197349593,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  },
+  {
+   "task": 1,
+   "llm_ms": [],
+   "tokens_in": 0,
+   "tokens_out": 0,
+   "calls": [],
+   "error": "llm: RuntimeError: HTTP 400: {\"error\":{\"message\":\"GrammarFactory.get_lark_from_jinja() missing 1 required positional argument: 'force_tool_names'\",\"type\":\"BadRequestError\",\"param\":null,\"code\":400}}",
+   "wall_ms": 116.95326794870198,
+   "paid": [],
+   "success": false,
+   "rejected_honest_calls": 0,
+   "rep": 0,
+   "mode": "mm"
+  }
+ ],
+ "summary": {
+  "none": {
+   "tasks": 2,
+   "success_rate": 0.0,
+   "median_llm_ms": 0.0,
+   "median_auth_ms": 0.0,
+   "median_wall_ms": 368.0094179871958,
+   "auth_share_of_wall": 0.0,
+   "tool_calls": 0,
+   "rejected_honest_calls": 0
+  },
+  "jwt": {
+   "tasks": 2,
+   "success_rate": 0.0,
+   "median_llm_ms": 0.0,
+   "median_auth_ms": 0.0,
+   "median_wall_ms": 118.10725499526598,
+   "auth_share_of_wall": 0.0,
+   "tool_calls": 0,
+   "rejected_honest_calls": 0
+  },
+  "mm": {
+   "tasks": 2,
+   "success_rate": 0.0,
+   "median_llm_ms": 0.0,
+   "median_auth_ms": 0.0,
+   "median_wall_ms": 118.03931996109895,
+   "auth_share_of_wall": 0.0,
+   "tool_calls": 0,
+   "rejected_honest_calls": 0
+  }
+ },
+ "finished": "2026-11-13T01:24:06+0100"
+}

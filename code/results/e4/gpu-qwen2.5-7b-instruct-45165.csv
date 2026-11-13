@@ -1,0 +1,5 @@
+name, memory.total [MiB], driver_version
+NVIDIA H100 80GB HBM3, 81559 MiB, 590.48.01
+CPU(s):                                  64
+Model name:                              Intel(R) Xeon(R) Platinum 8462Y+
+cpus vllm=32,34,36,38,40,42,44,46 agent=48,50,52,54,56,58,60,62
