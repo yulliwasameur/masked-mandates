@@ -1,0 +1,103 @@
+% Supplement, part 2 (input by supplement.tex).
+\section{Security games}\label{s:defs}
+In all games $H$ and the Fiat--Shamir hash are random oracles, and epochs and times are those of the issuer's and the tools' clocks, which the adversary does not control. $\Rset$ is the revoked set in $\Log$.
+
+\begin{definition}[UNF]\label{def:unf}
+$\Iss$ and the registry are honest; $\mathcal{A}$ controls every principal (registering keys of its choice), agent, tool and escrow member. It has oracles for root issuance (as holder), the issuer side of Delegate, revocation and verification. Let $\Lset$ be the smallest set of attribute vectors such that (a) every vector signed in a root session, with $(s,t)$ extracted from $\Pi_{\mathrm{root}}$, is in $\Lset$, and (b) for every accepted delegation whose extracted parent $a$ is in $\Lset$ and live at that time, the child vector $a'$ (extracted opening of $C_p$ and the issuer's $\mathit{id}'$) is in $\Lset$. $\mathcal{A}$ wins if:
+\begin{itemize}[leftmargin=*]
+\item an accepted delegation extracts a parent outside $\Lset$, or not live, or a child with $a'\not\preceq a$; or
+\item an accepted presentation extracts a vector $a$ with $a\notin\Lset$, $\neg\Allow(a,\iota)$ or $\neg\Live(a,\Rset_V)$, where $\Rset_V$ is the revoked set at the accumulator value used.
+\end{itemize}
+Here $a'\preceq a$ means: $b'_c=1\Rightarrow b_c=1$; $\beta'\le\beta$; $\ell\le\ell'$; $k'\le k$; $\tau'\le\tau$; $\delta'=\delta+1\le4$; $\mathit{anc}'=(\mathit{id},\mathit{anc}_{1..3})$; $s'=s$; $t'=t$. All comparisons are over the integers.
+\end{definition}
+With a grace window $W>0$, a presentation against one of the $W$ previous accumulator values is live with respect to that value. Revocation therefore takes effect after at most $W$ further accumulator updates; $W=0$ makes it immediate.
+
+\begin{definition}[RL]\label{def:rl}
+In the UNF game, let $a_0\in\Lset$ be a root with interval $[\ell_0,k_0)$ and link secret $s_0$ (extracted at its issuance), and let $N(a_0,\theta,e)=\{B_{\theta,e}^{1/(s_0+j+1)}:\ell_0\le j<k_0\}$, a set of $k_0-\ell_0$ pseudonyms. $\mathcal{A}$ wins if an honest tool $\theta$ (verification oracle) accepts in its epoch $e$ a presentation that extracts to a descendant of $a_0$ but whose pseudonym is not in $N(a_0,\theta,e)$. Since tools reject repeated pseudonyms within an epoch, RL implies that $\theta$ accepts at most $k_0-\ell_0$ presentations in $e$ that extract to descendants of $a_0$. Likewise, the issuer accepts at most $k_0-\ell_0$ delegations in its epoch $e$ whose parent descends from $a_0$.
+\end{definition}
+
+\begin{definition}[INV]\label{def:inv}
+
+$\mathcal{A}$ controls the issuer, the accumulator, every tool and every other principal. It may ask honest wallets to issue roots, delegate and present for invocations of its choice. It wins if a tool accepts $(\iota',\pi)$ whose extracted witness contains the link secret of an honest tree, while no wallet of that tree presented for $\iota'$. Honest wallets request and accept only roots with $k_0-\ell_0\le Q$.
+\end{definition}
+
+\begin{definition}[UNL]\label{def:unl}
+$\mathcal{A}$ controls the issuer (its BBS+ key, the registry, the accumulator secret key, which values it appends to $\Log$), every tool and one escrow member; it may append a revocation of an honest identifier only with a valid authorization (a proof with the credential of that mandate, held only by its holder and its parent, which it never obtains for uncorrupted trees, or two committee signatures, of which it holds at most one), and identifier $0$ is never revoked; hash-derived parameters are honest. The challenger keeps honest wallets, which accept keys and accumulator values only from $\Log$, verify every blind signature they receive (a handle is created only if the signature is valid), and verify every non-membership witness on receipt and after every refresh, and request and accept only roots with $k_0-\ell_0\le Q$ for the public bound $Q$; a wallet whose witness fails although none of its identifiers is in the revoked set stops presenting and reports issuer misbehaviour. Oracles:
+\begin{itemize}[leftmargin=*]
+\item registration of honest principals;
+\item root issuance and delegation between an honest wallet and $\mathcal{A}$ as issuer, creating honest handles;
+\item presentation by a handle;
+\item corruption of a handle, which reveals the secrets of its whole \emph{tree};
+\item (UNL-CCA only) opening of any $(\iota,\pi)$ whose $E$ shares no component with a challenge output, by the two honest members, after checking $\pi$;
+\item challenge $(h_0,h_1,\iota,\mathit{esc})$, any number of times: the challenger runs \emph{both} wallets on $\iota$, so that each handle consumes one counter of its own part at $(\theta,e)$, and returns the presentation of $h_b$.
+\end{itemize}
+For every challenge, both handles belong to trees that are never corrupted, and $\Lambda(h_0,\iota)=\Lambda(h_1,\iota)$ for
+\begin{multline*}
+\Lambda(h,\iota)=\big(\Allow(a_h,\iota),\ \Live(a_h,\Rset),\ \text{the $\Log$ value held by }h,\ \text{whether $h$ holds a valid witness for it},\\ \text{the number of free counters in the own part of $h$'s interval at }(\theta,e)\big).
+\end{multline*}
+$\mathcal{A}$ wins if it outputs $b$.
+\end{definition}
+Running both wallets keeps the two handles' states equal after every challenge, whatever $b$ is: their remaining quotas at every $(\theta,e)$ change identically, so later presentations, challenges or refusals cannot reveal $b$. Comparing the number of free counters, not only whether one is free, makes the condition stable under repeated challenges. Without these two rules the game would be unwinnable for the scheme: an adversary could exhaust the quota of $h_b$ alone through challenges and then test which handle still answers.
+$\Lambda$ states what a presentation may reveal and what a malicious issuer may learn by probing:
+\begin{itemize}[leftmargin=*]
+\item whether the mandate allows a call the tool proposed (wallet policy decides whether to answer);
+\item whether it is revoked: in the game, an honest mandate is revoked only by its own tree or by two committee members, so this component reflects revocations its tree requested or that the committee decided, never an issuer-initiated probe;
+\item which accumulator value it uses: with $W>0$, the anonymity set splits by value;
+\item whether its witness is valid. Update data that refresh correctly only for chosen identifiers are caught publicly: every update carries non-membership witnesses for a point $y^*=H(V_{\text{old}},V_{\text{new}},\text{additions},\Omega)$ under both values, and anyone checks both and that the public update rule maps one to the other. A tampered $\Omega$ passes only if the tampering polynomial vanishes at $y^*$, which the issuer cannot predict when it fixes $\Omega$; this has probability at most $q_H\,m/q$ for a batch of $m$ and $q_H$ hash queries, which is negligible. An issuer can still hand one wallet an invalid initial witness; that wallet detects it on receipt and reports misbehaviour, but tools and other principals do not see it, so this component stays in $\Lambda$;
+\item how many of its own counters are left at $(\theta,e)$, which the tool could learn anyway by asking the agent to call until refused.
+\end{itemize}
+Because wallets accept only values from $\Log$, the issuer cannot tag wallets with private accumulator values or keys.
+
+\begin{definition}[TRACE]\label{def:trace}
+$\Iss$ is honest and $\Log$ is consistent; at most one escrow member is corrupted. $\mathcal{A}$ may ask the honest members for their shares on any accepted $(\iota,\pi)$ of its choice (opening oracle). $\mathcal{A}$ wins if a tool requiring escrow accepts $(\iota,\pi)$ and either $\mathsf{Judge}$, given two honest shares, outputs $\bot$, or it outputs (label, $\mathit{id}$) such that the extracted mandate's root was not issued to label, or $\mathit{id}(a)\neq\mathit{id}$.
+\end{definition}
+
+\begin{definition}[NF]\label{def:nf}
+$\mathcal{A}$ controls the issuer, the other principals, every tool and one escrow member, and may append any entry to $\Log$; $\Log$ is consistent and append-only, and the registration of a label is its first entry. The challenger registers $P$ in $\Log$ before $\mathcal{A}$ acts on $P$'s label, and runs $P$'s wallet. $\mathcal{A}$ may ask the two honest members for their shares on any accepted $(\iota,\pi)$ of its choice (opening oracle). All of $P$'s trees stay inside $P$'s wallet; trees whose secrets $P$ hands to an external delegate wallet are excluded, since actions under them are attributable to $P$ by design. $\mathcal{A}$ wins if it outputs an accepted $(\iota,\pi)$ such that $P$'s wallet never output a presentation for $\iota$ with the same statement $(\iota,V,\nym,E)$, together with two shares of distinct members that $\mathsf{Judge}$ accepts with label $P$.
+\end{definition}
+
+\section{Arithmetic lemmas}\label{s:lemmas}
+\begin{lemma}[Bound checks]\label{lem:range}
+Let $\ell,h<2^{41}$ and $m\in\Zq$. If $m-\ell\equiv a$ and $h-m\equiv a'$ with $a,a'\in[0,2^{64})$, then $m$ is an integer and $\ell\le m\le h$.
+\end{lemma}
+\begin{proof}
+$a+a'\equiv h-\ell$ and $0\le a+a'<2^{65}<q$. If $h\ge\ell$ then $0\le h-\ell<2^{41}$, so $a+a'=h-\ell$ over the integers and $m\equiv\ell+a\in[\ell,h]$. If $h<\ell$ then $h-\ell+q>2^{65}$ and no such $a,a'$ exist.
+\end{proof}
+The library's bound check for $[\ell,h)$ proves $m-\ell$ and $h-1-m$ in $[0,2^{64})$; Lemma~\ref{lem:range} applies with $h-1$.
+
+\begin{lemma}[Integer attenuation]\label{lem:att}
+If $x<2^{40}$ is an integer, $d+x'-x\equiv1$, $d\in[1,2^{40})$ and $x'\in[0,2^{40})$, then $x'=x+1-d\le x$ over the integers. Symmetrically, $d+\ell-\ell'\equiv1$ with the same ranges gives $\ell'\ge\ell$.
+\end{lemma}
+\begin{proof}
+$d+x'-x-1$ is an integer in $(-2^{42},2^{42})$ that is $\equiv0\pmod q$, hence $0$.
+\end{proof}
+The ranges on the child values are what make $a'\preceq a$ hold over the integers. Without them a parent could obtain a signature on a value that wraps around $q$. Such a mandate would be unusable, because every presentation proves two-sided bounds, but it would break the invariant of Lemma~\ref{lem:bounds} on which the proofs rely.
+
+\begin{lemma}[Bounds]\label{lem:bounds}
+In the UNF game, every vector in $\Lset$ has $\beta,\ell,k,\tau\in[0,2^{40})$, $\ell\le k$ for the root, and $\delta\in[0,4]$. A child may have $\ell'\ge k'$; such a mandate has no counter and is simply unusable.
+\end{lemma}
+\begin{proof}
+For roots, the issuer checks these values. Children follow by Lemma~\ref{lem:att} and the depth statement.
+\end{proof}
+
+\begin{lemma}[Counter]\label{lem:ctr}
+An accepted (DY) statement with $\ell,k<2^{40}$ gives an integer $j$ with $\ell\le j<k$, and $\nym=B^{1/(s+j+1)}$ whenever $B\neq1$.
+\end{lemma}
+\begin{proof}
+$d_0\in[1,2^{40})$ and $d_0+\ell-j\equiv1$ give the integer $j=\ell+d_0-1\in[\ell,2^{41})$. Then $d=k-j-1\in[0,2^{40})$, all values having absolute value below $2^{42}$, so $j<k$. Finally $\nym^{w}=B\neq1$ forces $w\neq0$.
+\end{proof}
+
+\begin{lemma}[Scope bits]\label{lem:scope}
+For every vector in $\Lset$ of depth $\delta$, $b_c\in\{1,0,-1,\dots,-\delta\}$, and a child has $b'_c=1$ only if its parent has $b_c=1$.
+\end{lemma}
+\begin{proof}
+By induction. For roots, the issuer signs bits in clear. For a child, $d_c\in\{1,2\}$ gives $b'_c\in\{b_c,b_c-1\}$. If $b_c=1$ then $b'_c\in\{1,0\}$. If $b_c\in\{0,\dots,-\delta\}$ then $b'_c\in\{0,\dots,-\delta-1\}$, and $b'_c=1$ would need $b_c\in\{1,2\}$, which are distinct residues since $\delta\le4\ll q$.
+\end{proof}
+
+\begin{lemma}[Ancestry and identifiers]\label{lem:anc}
+In the UNF game, every vector in $\Lset$ has a non-zero identifier chosen by $\Iss$, unique among issued identifiers, and lists its true ancestors in $\mathit{anc}$.
+\end{lemma}
+\begin{proof}
+$\Iss$ draws identifiers and signs them in clear; roots have $\mathit{anc}=0^4$; the equalities force $\mathit{anc}'$ from the extracted parent; depth at most 3 for a parent means its $\mathit{anc}_4=0$; binding of $C_p$ (DL) ties the extracted opening to the signed vector.
+\end{proof}
+

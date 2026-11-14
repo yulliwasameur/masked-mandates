@@ -1,0 +1,73 @@
+% Sections 1--6 of the revised OJ-CS manuscript (input by main-ojcs.tex). Hand-written; numbers come from numbers.tex.
+\section{Introduction}
+\IEEEPARstart{A}{gents} act on behalf of people. To book a trip, an agent built on a large language model (LLM) may query an airline, a hotel and a payment service, and may hand the hotel search to a sub-agent. Each call needs authorization: the tool must know that the caller may perform \emph{this} action. Current designs answer with a token that carries identifiers and the delegation chain:
+signed intent tokens with per-agent keys~\cite{goswami2025ajwt}; JSON Web Tokens (JWT) or Biscuit tokens for multi-hop delegation over the Model Context Protocol (MCP) and Agent2Agent (A2A)~\cite{prakash2026aip}; OAuth token exchange and transaction tokens~\cite{rfc8693,tulshibagwale2026txntokens}; persistent decentralized identities~\cite{zou2026intersage,garzon2026didvc}.
+These tokens prove authority, but disclose the principal and give every tool a stable identifier to log. One mandate may drive dozens of tools in a day; each tool sees a slice, and pooled together the slices form a profile.
+
+\paragraph*{Problem} Can an agent prove that it may make one specific tool call, without revealing who mandated it and without being linkable across tools by the tokens it shows? The tool should still be able to rate-limit the whole delegation tree, the principal to revoke a subtree, and a committee to lift anonymity after abuse.
+
+\paragraph*{What exists} Each property exists somewhere:
+delegatable anonymous credentials give anonymous, attenuable delegation, some with chained revocation~\cite{belenkiy2009dac,camenisch2017cdd,griffy2024dac,mir2024tdac,xie2025fdaac}; updatable credentials re-issue hidden attributes through an online issuer~\cite{blomer2019uacs,hartung2017bbaplus}; $k$-times anonymous authentication, Clone Wars, anonymous counting tokens, Privacy Pass and anonymous rate-limited credentials (ARC) rate-limit anonymously~\cite{teranishi2004ktaa,au2006bbsplus,camenisch2006clonewars,benhamouda2023act,rfc9576,yun2026arccrypto}; group signatures give traceability with non-frameability~\cite{bellare2005dynamic}.
+None of these targets a delegation tree of agents whose every call must be bound to one tool invocation and counted against the root's quota. The agent-specific schemes either carry identities~\cite{goswami2025ajwt,prakash2026aip,zou2026intersage} or do not address delegation~\cite{liu2026bcm,llambi2026cva,zhou2026capbinding}.
+
+\paragraph*{Contributions} Our contribution is a careful composition for agents, not a new primitive.
+\begin{enumerate}
+\item A deployment and threat model for agent delegation through a shared domain issuer, and six game-based properties (Sec.~\ref{sec:model}): unforgeability with attenuation and chained revocation, a rate limit shared by a whole delegation tree, invocation binding, unlinkability with an explicit leakage function, traceability, and non-frameability against a corrupted issuer that publishes a consistent log.
+\item \sys{} (Sec.~\ref{sec:construction}), which combines BBS+ mandates~\cite{au2006bbsplus,tessaro2023bbs} delegated by blind re-issuance; one Dodis--Yampolskiy pseudonym per call, with a hidden counter taken from a signed interval, so that sub-agents get disjoint shares of the root's quota~\cite{dodis2005vrf,camenisch2006clonewars}; a per-root tag bound by the principal's signature; a VB accumulator with hash-derived parameters for chained revocation~\cite{vitto2022vb}; and a 2-of-3 escrow that opens to the principal and the mandate. We prove the properties under stated assumptions in the supplementary material.
+\item An open Rust implementation, Python bindings and an MCP binding with tool-issued nonces (Sec.~\ref{sec:impl}).
+\item An evaluation (Sec.~\ref{sec:eval}): an attack taxonomy with malicious provers and fuzzing; costs on two platforms, an ablation and multi-core throughput; an MCP comparison with five token baselines; a collusion study with identifier, content, timing and identified-tool attackers; and agent runs with five open LLMs, including delegation, revocation, binding quotas and a shared issuer.
+\end{enumerate}
+
+\section{Background and Related Work}\label{sec:related}
+\subsection{Agent identity and delegation}
+Agentic JWT ties each agent action to the user's intent and carries a chain of downstream agents with per-agent proof-of-possession keys~\cite{goswami2025ajwt}. AIP uses a signed JWT for single-hop delegation and a Biscuit token~\cite{biscuit} for multi-hop delegation across MCP and A2A, verified locally~\cite{prakash2026aip}. OAuth token exchange, rich authorization requests and transaction tokens propagate identity and scope along call chains~\cite{rfc8693,rfc9396,tulshibagwale2026txntokens}; the MCP authorization specification builds on OAuth~\cite{mcpauth}. Other agent-specific proposals:
+InterSAGE, a positioning paper, proposes attenuated agent credentials with subtree revocation~\cite{zou2026intersage}; Rodriguez Garzon et al.\ give agents decentralized identifiers (DIDs) and verifiable credentials~\cite{garzon2026didvc}; KITA requires threshold, action-bound signatures~\cite{zheng2026kita}; South et al.\ argue for authenticated delegation to agents~\cite{south2025icml}.
+Google's Agent Payments Protocol (AP2) carries signed ``mandates'' as verifiable credentials over A2A and MCP and shows them to merchants as evidence~\cite{ap2-2025}. The OpenID Foundation~\cite{south2025idmgmt} and the IETF WIMSE working group~\cite{kasselman2026aims} survey identity and delegation for agents; the WIMSE draft recommends minimizing personal data in tokens. These systems target authority and accountability; none aims at unlinkability. B-CM authenticates agents unlinkably~\cite{liu2026bcm}, and Zhou binds capabilities with BBS+ certificates~\cite{zhou2026capbinding}; neither addresses delegation between agents or per-call binding. A zero-knowledge authorization proof for agents uses a public agent identifier~\cite{llambi2026cva}.
+
+\subsection{Anonymous credentials and delegation}
+\paragraph*{BBS-type signatures and related credentials} BBS-type signatures~\cite{bbs2004,au2006bbsplus,camenisch2016bbsplus} allow efficient proofs with selective disclosure. Their security was revisited recently~\cite{tessaro2023bbs,chairattana2025bbs}, issuance can be distributed among several signers~\cite{doerner2023threshold}, per-verifier pseudonyms are specified in an IRTF CFRG draft~\cite{kalos2026pseudonyms}, and a W3C cryptosuite brings BBS to verifiable credentials~\cite{w3c2026bbs}. Related credential systems:
+Coconut thresholdizes issuance~\cite{sonnino2019coconut}; issuer-hiding credentials hide which issuer signed~\cite{bobolz2021ihabc,connolly2022spseq}; zk-creds builds credentials from general-purpose zero-knowledge proofs~\cite{rosenberg2023zkcreds}; keyed-verification credentials serve Signal groups~\cite{chase2020signal}.
+
+\paragraph*{Delegation} Delegatable credentials~\cite{belenkiy2009dac,camenisch2017cdd} became practical with mercurial signatures~\cite{griffy2024dac}, gained threshold and fine-grained delegation with chained revocation~\cite{mir2024tdac,xie2025fdaac}, and are built in recent preprints from JWTs with recursive SNARKs~\cite{rometsch2026dac} and in the keyed-verification setting~\cite{mirzamohammadi2026dkvac}. Updatable anonymous credentials let an online issuer update hidden attributes under a proven relation~\cite{blomer2019uacs}, as BBA+ does for balances~\cite{hartung2017bbaplus}. Our delegation is such an update: the parent proves a relation between its signed attributes and the child's committed ones, and the issuer blind-signs. Unlike delegatable credentials, it needs the online issuer, which in exchange enforces a per-root delegation limit and chooses identifiers.
+
+\subsection{Anonymous rate limiting, tokens and blocklisting}
+$k$-TAA~\cite{teranishi2004ktaa,au2006bbsplus} and periodic $n$-times anonymous authentication~\cite{camenisch2006clonewars} limit each credential to $k$ uses per period, with pseudonyms derived from a secret and a counter. We reuse this design; what is new is splitting the counter interval across a delegation tree. Anonymous counting tokens~\cite{benhamouda2023act}, Privacy Pass~\cite{rfc9576,rfc9577,rfc9578,hanff2025privacypass} and ARC~\cite{yun2026arccrypto} give unlinkable, rate-limited tokens bound to an origin challenge, but carry no attributes and no delegation. SD-JWT with batch issuance~\cite{rfc9901,openid4vci} gives one-time credentials that tools cannot link, but the issuer can. Anonymous blocklisting~\cite{tsang2011nymble,tsang2007blac,rosenberg2022snarkblock} blocks misbehaving users without identifying them, an alternative to escrow.
+
+\subsection{Positioning}
+Table~\ref{tab:position} summarizes the properties as stated in each work; the supplementary material and the artifact give the evidence for the partial and inferred cells. ``Not addressed'' does not mean ``impossible'': any Fiat--Shamir credential can bind a call by hashing it, and a delegatable credential could add $k$-TAA-style per-verifier limits. What is new here is one hidden counter space split across a delegation tree, chained revocation through ancestor identifiers in a BBS+ setting, and their integration with escrow. \sys{} has all the listed properties, but it is also one of the few schemes that need an online issuer to delegate (last column), and it costs far more per call than token schemes (Sec.~\ref{sec:eval}). Sec.~\ref{sec:discussion} says when each choice fits.
+
+\begin{table}[t]\centering
+\caption{Properties as described in each work: \ok{} provided, \pa{} partially, \no{} stated as not provided, \na{} not addressed, ? not verifiable from the open text, n/a not applicable. Unl.: unlinkable. Del.: delegation with attenuation. Bnd.: proof bound to one call or a verifier challenge (Privacy Pass, ARC, ACT: challenge, not the call). RL: anonymous per-verifier rate limit. Sub.: revoking a credential revokes its descendants. Tr.: escrow or tracing. Off.: delegation without an online issuer. $^*$: our inference, not a claim of the work.}\label{tab:position}
+\scriptsize\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{@{}lccccccc@{}}\toprule
+System & Unl. & Del. & Bnd. & RL & Sub. & Tr. & Off.\\\midrule
+Agentic JWT~\cite{goswami2025ajwt} & \no & \pa & \pa & \na & \na & \ok$^5$ & \no\\
+AIP~\cite{prakash2026aip} & \no & \ok & \no$^4$ & \na & \no & \ok$^5$ & \ok\\
+InterSAGE$^1$~\cite{zou2026intersage} & \no & \ok & \na & \na & \ok & \ok$^5$ & \no\\
+DID/VC agents~\cite{garzon2026didvc} & \no & \na & \na & \na & \na & \ok$^5$ & \na\\
+KITA~\cite{zheng2026kita} & \na & \na & \ok & \na & \na & n/a & \na\\
+AP2~\cite{ap2-2025} & \no & \pa$^*$ & \ok & \na & \na & \ok$^5$ & \na\\
+Verif.\ authorization~\cite{llambi2026cva} & \no & \no & \ok & \na & \na & \ok$^5$ & \na\\
+B-CM$^2$~\cite{liu2026bcm} & \ok & \na & \na & \na & \na & ? & \na\\
+CDD17~\cite{camenisch2017cdd} & \ok & \ok & \na & \na & \na & \na & \ok\\
+DAC (mercurial)$^3$~\cite{griffy2024dac} & \ok & \pa & \na & \na & \ok & \pa & \ok\\
+TDAC$^2$~\cite{mir2024tdac} & \ok & \ok & \na & \na & \na & \na & ?\\
+FDAAC-CR~\cite{xie2025fdaac} & \ok & \ok & \na & \na & \ok & \na & \ok\\
+UACS~\cite{blomer2019uacs} & \ok & \pa$^*$ & \na & \na & \na & \pa & \no\\
+BBA+~\cite{hartung2017bbaplus} & \ok & \na & \na & \na & \na & \pa & n/a\\
+DAC from JWTs~\cite{rometsch2026dac} & \ok & \pa$^*$ & \na & \na & \na & \na & \ok$^*$\\
+Delegatable KVAC~\cite{mirzamohammadi2026dkvac} & \ok & \ok & \na & \na & \na & \na & ?\\
+BBS per-verifier pseud.~\cite{kalos2026pseudonyms} & \pa & \na & \pa$^*$ & \na & \na & \na & n/a\\
+Clone Wars~\cite{camenisch2006clonewars} & \ok & \na & \na & \ok & \na & \pa & n/a\\
+Dynamic $k$-TAA~\cite{au2006bbsplus} & \ok & \na & \na & \ok & \na & \pa & n/a\\
+BLAC/SNARKBlock~\cite{tsang2007blac,rosenberg2022snarkblock} & \ok & \na & \na & \na & \na & \pa & n/a\\
+ACT (counting tokens)~\cite{benhamouda2023act} & \ok & \na & \pa & \ok & \na & \na & n/a\\
+Privacy Pass~\cite{rfc9577,hanff2025privacypass} & \ok & \na & \pa & \pa & \na & \na & n/a\\
+ARC~\cite{yun2026arccrypto} & \ok & \na & \pa & \ok & \na & \na & n/a\\
+SD-JWT, batch~\cite{rfc9901} & \pa & \na & \pa & \na & \na & n/a & n/a\\
+Coconut~\cite{sonnino2019coconut} & \ok & \na & \na & \pa & \na & \na & n/a\\
+\sys{} & \ok & \ok & \ok & \ok & \ok & \ok & \no\\\bottomrule
+\multicolumn{8}{@{}p{0.97\columnwidth}@{}}{\scriptsize $^1$Positioning paper, no construction. $^2$Closed access; title and abstract only. $^3$Assumes an honest revocation authority that can link chains. $^4$Its invocation-bound tokens do not prevent replay within their lifetime. $^5$Trivially traceable: the identity is in clear.}
+\end{tabular}
+\end{table}
+

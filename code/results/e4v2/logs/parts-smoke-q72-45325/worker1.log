@@ -1,0 +1,4 @@
+[w1] task24b t0 none: ok=True calls=4 turns=6 llm=4918 auth=0 lat=430 wall=5367 err=None
+[w1] task24b t0 jwt: ok=True calls=4 turns=6 llm=4289 auth=14 lat=431 wall=4746 err=None
+[w1] task24b t0 mm: ok=True calls=4 turns=6 llm=4098 auth=4154 lat=430 wall=8695 err=None
+[w1] task24b t0 mm_esc: ok=True calls=4 turns=6 llm=4049 auth=4171 lat=430 wall=8663 err=None

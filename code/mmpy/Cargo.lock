@@ -1410,6 +1410,7 @@ dependencies = [
  "mmcore",
  "pyo3",
  "rand",
+ "sha2",
 ]
 
 [[package]]

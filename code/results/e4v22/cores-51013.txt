@@ -1,0 +1,1 @@
+job 51013 node m-gpu01 cpus vllm=1,3,5,7,9 orchestrator=11 agents=13,15,17,19,21 servers=23,25,27,29,31 RAYON_NUM_THREADS=1 runs=Qwen2.5-72B-Instruct-AWQ|qwen2.5-72b-instruct-awq|hermes|-|retry0 d1000 sparse_w2 sparse_d1000 dw;Qwen2.5-7B-Instruct|qwen2.5-7b-instruct|hermes|-|dw

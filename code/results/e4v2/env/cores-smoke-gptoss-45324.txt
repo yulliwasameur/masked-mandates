@@ -1,0 +1,1 @@
+job 45324 node m-gpu05 cpus vllm=0,2,4,6,8,10,12 orchestrator=14 agents=16,18,20,22 servers=24,26,28,30 RAYON_NUM_THREADS=1

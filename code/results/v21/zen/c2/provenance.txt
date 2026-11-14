@@ -1,0 +1,8 @@
+git_commit=21a8dace1f54
+94d5c2c47c0fcdacc7152ab7cf7fe05d7cf10958272d8295ca82269d28095c34  target/release/bench
+b4aa993fbbf7607a8730025ecc7b8f3d6853ed7055e3fb206f82432c18072a0e  target/release/attacks
+53993b8e18935794d9ba9e0b5bf7b58af25b4cf81195ffc58e06dcbbf8bb071c  target/release/smoke
+pin=taskset -c 8
+rayon=1
+node=node059
+job=1679771

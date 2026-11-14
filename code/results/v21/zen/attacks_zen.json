@@ -1,0 +1,677 @@
+{
+  "attacks": [
+    {
+      "attack": "class outside the mandate's scope",
+      "by": "verifier",
+      "class": "A2",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "mechanism": "BBS+ revealed scope bit",
+      "rejected": true
+    },
+    {
+      "attack": "amount above budget",
+      "by": "prover",
+      "class": "A2",
+      "detail": "prove: BulletproofsPlusPlus(IncorrectBounds(\"value=300 should be >= min=301\"))",
+      "mechanism": "range proof",
+      "rejected": true
+    },
+    {
+      "attack": "use after expiry",
+      "by": "prover",
+      "class": "A2",
+      "detail": "prove: BulletproofsPlusPlus(IncorrectBounds(\"value=1500000 should be >= min=1500001\"))",
+      "mechanism": "range proof",
+      "rejected": true
+    },
+    {
+      "attack": "inflate budget under an existing signature",
+      "by": "verifier",
+      "class": "A2",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "mechanism": "BBS+ signature",
+      "rejected": true
+    },
+    {
+      "attack": "add a scope bit under an existing signature",
+      "by": "verifier",
+      "class": "A2",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "mechanism": "BBS+ signature",
+      "rejected": true
+    },
+    {
+      "attack": "mandate signed by an unrecognised issuer",
+      "by": "verifier",
+      "class": "A2",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "mechanism": "BBS+ signature",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child gets a class the parent lacks",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=0 should be >= min=1\"))",
+      "mechanism": "range proof (scope)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child budget above parent",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=0 should be >= min=1\"))",
+      "mechanism": "range proof",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child quota above parent",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=0 should be >= min=1\"))",
+      "mechanism": "range proof",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child expiry after parent",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=0 should be >= min=1\"))",
+      "mechanism": "range proof",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: depth skip (+2)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: SchnorrProofContributionFailed(7, InvalidResponse)",
+      "mechanism": "linear relation (depth)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: beyond maximum depth 4",
+      "by": "prover",
+      "class": "A2",
+      "detail": "deleg prove: BulletproofsPlusPlus(IncorrectBounds(\"value=5 should be < max=5\"))",
+      "mechanism": "range proof (depth)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: ancestry erasure (anc' cleared)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: SchnorrProofContributionFailed(6, InvalidResponse)",
+      "mechanism": "witness equality (ancestry)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: ancestry rewrite (wrong grandparent)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: SchnorrProofContributionFailed(6, InvalidResponse)",
+      "mechanism": "witness equality (ancestry)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation from a forged parent (attributes not signed)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "mechanism": "BBS+ signature",
+      "rejected": true
+    },
+    {
+      "attack": "delegation proof reused with another child commitment",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "expected_cause": "deleg verify",
+      "mechanism": "Fiat–Shamir context binding",
+      "rejected": true
+    },
+    {
+      "attack": "delegation request replayed in a new issuer session",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "deleg verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "expected_cause": "deleg verify",
+      "mechanism": "Fiat–Shamir context binding",
+      "rejected": true
+    },
+    {
+      "attack": "root issuance with a quota outside [1, 2^40)",
+      "by": "issuer",
+      "class": "A2",
+      "detail": "root: numeric attribute out of range",
+      "mechanism": "issuer check",
+      "rejected": true
+    },
+    {
+      "attack": "delegation: child budget wrapped around the group order (honest library)",
+      "by": "prover",
+      "class": "MP",
+      "detail": "deleg prove: UnsupportedValue(\"Only supports 64 bit values Bulletproofs++ range proof but found 52435875175126190479447740508185965837690552",
+      "mechanism": "range proof (prover-side)",
+      "rejected": true
+    },
+    {
+      "attack": "malicious parent: wrapped child budget, range statements re-bound to the parent's values",
+      "by": "issuer",
+      "class": "MP",
+      "detail": "deleg verify: SchnorrProofContributionFailed(55, InvalidResponse)",
+      "expected_cause": "deleg verify",
+      "mechanism": "issuer verifies the full statement",
+      "rejected": true
+    },
+    {
+      "attack": "malicious agent: amount above budget, proof built for amount bound 0",
+      "by": "verifier",
+      "class": "MP",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "verifier checks its own statement",
+      "rejected": true
+    },
+    {
+      "attack": "malicious agent: after expiry, proof built for time bound 0",
+      "by": "verifier",
+      "class": "MP",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "verifier checks its own statement",
+      "rejected": true
+    },
+    {
+      "attack": "malicious agent: class outside scope, proof reveals a class it holds",
+      "by": "verifier",
+      "class": "MP",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "verifier checks its own statement",
+      "rejected": true
+    },
+    {
+      "attack": "malicious agent: counter beyond quota, quota statement detached from the signed k",
+      "by": "verifier",
+      "class": "MP",
+      "detail": "verify: SchnorrProofContributionFailed(5, ExpectedSameSizeSequences(4, 3))",
+      "mechanism": "verifier checks its own statement",
+      "rejected": true
+    },
+    {
+      "attack": "same presentation, same tool (replay)",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "pseudonym replay (counter reused)",
+      "mechanism": "seen-set",
+      "rejected": true
+    },
+    {
+      "attack": "same presentation sent to another tool",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "tool identity in the pseudonym base",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, different call arguments",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "Fiat–Shamir context binding",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, different tool nonce",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "Fiat–Shamir context binding",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, another epoch",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "Fiat–Shamir context binding",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, larger amount",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "Fiat–Shamir context binding",
+      "rejected": true
+    },
+    {
+      "attack": "same proof, other action class",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "Fiat–Shamir context binding",
+      "rejected": true
+    },
+    {
+      "attack": "tool named like the delegation domain",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "distinct bases (nym true vs delegation)",
+      "mechanism": "domain separation",
+      "rejected": true
+    },
+    {
+      "attack": "reuse a counter j within the epoch (fresh proof)",
+      "by": "verifier",
+      "class": "A4",
+      "detail": "pseudonym replay (counter reused)",
+      "mechanism": "seen-set (DY pseudonym)",
+      "rejected": true
+    },
+    {
+      "attack": "counter j = k (beyond quota)",
+      "by": "prover",
+      "class": "A4",
+      "detail": "prove: UnsupportedValue(\"Only supports 64 bit values Bulletproofs++ range proof but found 52435875175126190479447740508185965837690552500527",
+      "mechanism": "range proof (hidden counter)",
+      "rejected": true
+    },
+    {
+      "attack": "counter j far beyond quota",
+      "by": "prover",
+      "class": "A4",
+      "detail": "prove: UnsupportedValue(\"Only supports 64 bit values Bulletproofs++ range proof but found 52435875175126190479447740508185965837690552500527",
+      "mechanism": "range proof (hidden counter)",
+      "rejected": true
+    },
+    {
+      "attack": "re-randomise the pseudonym of an accepted proof",
+      "by": "verifier",
+      "class": "A4",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "pseudonym statement",
+      "rejected": true
+    },
+    {
+      "attack": "parent uses a counter of its child's interval, then the child uses it",
+      "by": "verifier",
+      "class": "A4",
+      "detail": "pseudonym replay (counter reused)",
+      "mechanism": "seen-set (one pseudonym space per tree)",
+      "rejected": true
+    },
+    {
+      "attack": "siblings with overlapping intervals use the same counter",
+      "by": "verifier",
+      "class": "A4",
+      "detail": "pseudonym replay (counter reused)",
+      "mechanism": "seen-set (one pseudonym space per tree)",
+      "rejected": true
+    },
+    {
+      "attack": "child rewrites its interval to use counters reserved for the parent",
+      "by": "verifier",
+      "class": "A4",
+      "detail": "verify: BBSPlusProofContributionFailed(0, PairingCheckFailed)",
+      "mechanism": "BBS+ signature (interval is signed)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation pseudonym reuse (same epoch and counter)",
+      "by": "issuer",
+      "class": "A4",
+      "detail": "delegation pseudonym replay",
+      "mechanism": "issuer seen-set (DY pseudonym)",
+      "rejected": true
+    },
+    {
+      "attack": "delegation counter beyond the parent's quota",
+      "by": "prover",
+      "class": "A4",
+      "detail": "deleg prove: UnsupportedValue(\"Only supports 64 bit values Bulletproofs++ range proof but found 52435875175126190479447740508185965837690552",
+      "mechanism": "range proof (hidden counter)",
+      "rejected": true
+    },
+    {
+      "attack": "refresh the witness of a revoked id from public data",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "refreshed witness does not verify",
+      "mechanism": "accumulator security",
+      "rejected": true
+    },
+    {
+      "attack": "present after own revocation",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "verify: VBAccumProofContributionFailed(9, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(9,",
+      "mechanism": "non-membership (own id)",
+      "rejected": true
+    },
+    {
+      "attack": "present with a stale accumulator value",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "accumulator value not accepted",
+      "mechanism": "current accumulator value",
+      "rejected": true
+    },
+    {
+      "attack": "present after parent revocation (own witness up to date)",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "verify: VBAccumProofContributionFailed(10, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(10,",
+      "mechanism": "non-membership (parent)",
+      "rejected": true
+    },
+    {
+      "attack": "delegate after own revocation",
+      "by": "issuer",
+      "class": "A5",
+      "detail": "deleg verify: VBAccumProofContributionFailed(1, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(1,",
+      "mechanism": "non-membership (parent id)",
+      "rejected": true
+    },
+    {
+      "attack": "present after grandparent revocation (own and parent witnesses up to date)",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "verify: VBAccumProofContributionFailed(11, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(11,",
+      "mechanism": "non-membership (grandparent)",
+      "rejected": true
+    },
+    {
+      "attack": "child of a revoked root delegates a new sub-agent",
+      "by": "issuer",
+      "class": "A5",
+      "detail": "deleg verify: VBAccumProofContributionFailed(2, PairingResponseInvalid)",
+      "expected_cause": "VBAccumProofContributionFailed(2,",
+      "mechanism": "non-membership (parent's ancestor)",
+      "rejected": true
+    },
+    {
+      "attack": "escrow ciphertext encrypts another principal's key",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "verify: SchnorrProofContributionFailed(15, InvalidResponse)",
+      "mechanism": "witness equality (uid)",
+      "rejected": true
+    },
+    {
+      "attack": "escrow ciphertext encrypts another mandate id",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "verify: SchnorrProofContributionFailed(17, InvalidResponse)",
+      "mechanism": "witness equality (id)",
+      "rejected": true
+    },
+    {
+      "attack": "omit escrow where the tool requires it",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "escrow required",
+      "mechanism": "tool policy",
+      "rejected": true
+    },
+    {
+      "attack": "corrupt member forges the second share to frame principal 43 (reuses the honest proof)",
+      "by": "Judge",
+      "class": "A6",
+      "detail": "Judge: invalid share proof from member 2",
+      "expected_cause": "invalid share proof from member 2",
+      "mechanism": "Chaum–Pedersen share proof",
+      "rejected": true
+    },
+    {
+      "attack": "corrupt member forges the second share to frame principal 43 (random proof)",
+      "by": "Judge",
+      "class": "A6",
+      "detail": "Judge: invalid share proof from member 2",
+      "expected_cause": "invalid share proof from member 2",
+      "mechanism": "Chaum–Pedersen share proof",
+      "rejected": true
+    },
+    {
+      "attack": "malicious member submits a wrong decryption share",
+      "by": "Judge",
+      "class": "A6",
+      "detail": "Judge: invalid share proof from member 1",
+      "expected_cause": "invalid share proof from member 1",
+      "mechanism": "Chaum–Pedersen share proof",
+      "rejected": true
+    },
+    {
+      "attack": "share with a proof made for another member",
+      "by": "Judge",
+      "class": "A6",
+      "detail": "Judge: invalid share proof from member 2",
+      "expected_cause": "invalid share proof from member 2",
+      "mechanism": "Chaum–Pedersen share proof",
+      "rejected": true
+    },
+    {
+      "attack": "corrupt member submits its own share twice",
+      "by": "Judge",
+      "class": "A6",
+      "detail": "Judge: two distinct committee members required",
+      "expected_cause": "two distinct committee members",
+      "mechanism": "Judge: distinct members",
+      "rejected": true
+    },
+    {
+      "attack": "graft another presentation's escrow ciphertext",
+      "by": "verifier",
+      "class": "A6",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "Fiat–Shamir (escrow statements)",
+      "rejected": true
+    },
+    {
+      "attack": "malicious issuer signs a mandate in the name of principal 43 without its secret",
+      "by": "Judge",
+      "class": "A6",
+      "detail": "Judge: opening is no bound root tag (no registered principal)",
+      "expected_cause": "no registered principal",
+      "mechanism": "uid bound to the principal's registered key",
+      "rejected": true
+    },
+    {
+      "attack": "delegation request for an epoch other than the issuer's (quota replay across invented epochs)",
+      "by": "prover",
+      "class": "A4",
+      "detail": "delegation: epoch differs from the issuer's clock",
+      "expected_cause": "epoch differs",
+      "mechanism": "issuer clock (epoch)",
+      "rejected": true
+    },
+    {
+      "attack": "presentation for another epoch than the tool's",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "wrong epoch",
+      "expected_cause": "wrong epoch",
+      "mechanism": "tool clock (epoch)",
+      "rejected": true
+    },
+    {
+      "attack": "presentation with a time far from the tool's clock",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "time out of tolerance",
+      "expected_cause": "time out of tolerance",
+      "mechanism": "tool clock (time)",
+      "rejected": true
+    },
+    {
+      "attack": "presentation with a nonce the tool never issued",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "unknown or already used tool nonce",
+      "expected_cause": "unknown or already used tool nonce",
+      "mechanism": "tool nonce",
+      "rejected": true
+    },
+    {
+      "attack": "same nonce used twice (fresh proof, next counter)",
+      "by": "verifier",
+      "class": "A3",
+      "detail": "unknown or already used tool nonce",
+      "expected_cause": "unknown or already used tool nonce",
+      "mechanism": "tool nonce (single use)",
+      "rejected": true
+    },
+    {
+      "attack": "presentation against an accumulator value older than the grace window",
+      "by": "verifier",
+      "class": "A5",
+      "detail": "accumulator value not accepted",
+      "expected_cause": "accumulator value not accepted",
+      "mechanism": "accumulator window",
+      "rejected": true
+    },
+    {
+      "attack": "malicious issuer binds a tag of its choice to principal 77 and signs a mandate with it",
+      "by": "Judge",
+      "class": "A6",
+      "detail": "Judge: binding signature invalid",
+      "expected_cause": "binding signature invalid",
+      "mechanism": "binding signed by the principal's key",
+      "rejected": true
+    },
+    {
+      "attack": "bit-flip mutations of a valid presentation",
+      "by": "verifier",
+      "class": "PARSE",
+      "detail": "verify: all 2000 mutated presentations rejected, no panic",
+      "mechanism": "parser and verifier (2,000 single-bit mutations)",
+      "rejected": true
+    },
+    {
+      "attack": "truncated presentation",
+      "by": "verifier",
+      "class": "PARSE",
+      "detail": "verify: parse error I/O error: Error { kind: UnexpectedEof, message: \"failed to fill whole buffer\" }",
+      "mechanism": "parser",
+      "rejected": true
+    },
+    {
+      "attack": "presentation with trailing bytes",
+      "by": "verifier",
+      "class": "PARSE",
+      "detail": "verify: parse error trailing bytes",
+      "mechanism": "parser",
+      "rejected": true
+    },
+    {
+      "attack": "pseudonym taken from another valid presentation",
+      "by": "verifier",
+      "class": "PARSE",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "pseudonym statement",
+      "rejected": true
+    },
+    {
+      "attack": "escrow ciphertexts taken from another valid presentation",
+      "by": "verifier",
+      "class": "PARSE",
+      "detail": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+      "mechanism": "Fiat–Shamir (escrow statements)",
+      "rejected": true
+    }
+  ],
+  "checks": [
+    {
+      "check": "honest presentation, depth 0",
+      "ok": true
+    },
+    {
+      "check": "honest presentation, depth 1",
+      "ok": true
+    },
+    {
+      "check": "honest presentation, depth 2",
+      "ok": true
+    },
+    {
+      "check": "honest presentation, depth 3",
+      "ok": true
+    },
+    {
+      "check": "honest presentation, depth 4",
+      "ok": true
+    },
+    {
+      "check": "escrow presentation, root",
+      "ok": true
+    },
+    {
+      "check": "escrow presentation, depth 2",
+      "ok": true
+    },
+    {
+      "check": "every member uses its own disjoint part of the tree's counter interval (whole root quota usable, no collision)",
+      "ok": true
+    },
+    {
+      "check": "a tool holding only public data (serialized) verifies an honest presentation",
+      "ok": true
+    },
+    {
+      "check": "2-of-3 opening with members 1+2 returns the principal and the mandate to revoke",
+      "ok": true
+    },
+    {
+      "check": "2-of-3 opening with members 1+3 returns the principal and the mandate to revoke",
+      "ok": true
+    },
+    {
+      "check": "2-of-3 opening with members 2+3 returns the principal and the mandate to revoke",
+      "ok": true
+    },
+    {
+      "check": "identifiers are chosen by the issuer: non-zero and distinct (the requested value is ignored)",
+      "ok": true
+    },
+    {
+      "check": "after a revocation, the revoked holder cannot refresh its own witness (only position 0 is stuck)",
+      "ok": true
+    },
+    {
+      "check": "honest presentation after a revocation (sibling of the revoked mandate, refreshed witnesses)",
+      "ok": true
+    },
+    {
+      "check": "after a parent revocation, the child refreshes its own witness but not the parent's (only position 1 is stuck)",
+      "ok": true
+    },
+    {
+      "check": "after a root revocation, descendants refresh all witnesses except the root's (positions 1 and 2)",
+      "ok": true
+    },
+    {
+      "check": "identifier 0 (no ancestor) cannot be revoked",
+      "ok": true
+    },
+    {
+      "check": "a strict tool (epoch, time, own nonce) accepts an honest presentation",
+      "ok": true
+    },
+    {
+      "check": "grace window: a presentation against the previous accumulator value is still accepted (W = 1)",
+      "ok": true
+    },
+    {
+      "check": "public parameters carry no accumulator, signature or range-proof bases: tools re-derive them from labels (no issuer trapdoor)",
+      "ok": true
+    }
+  ],
+  "n_attacks": 70,
+  "n_checks": 21,
+  "n_checks_ok": 21,
+  "n_rejected": 70,
+  "seed": 20261109,
+  "version": 2
+}

@@ -1,8 +1,8 @@
 {
   "upload_type": "software",
   "title": "Masked Mandates: artifact (code, scripts and results)",
-  "version": "1.0.3",
-  "description": "Rust prototype, Python bindings, MCP harness, simulators, result files (with environment record and SHA-256 hashes) and the script that generates every number, table and figure of the paper <i>Masked Mandates: Unlinkable, Attenuable and Accountable Delegation for LLM Agents</i> (submitted to IEEE Open Journal of the Computer Society). Research prototype; not for production use. Code under MIT; result files and generated tables and figures under CC BY 4.0.",
+  "version": "2.2.1",
+  "description": "Rust prototype, Python bindings, MCP harness, simulators, result files (with environment record and SHA-256 hashes) and the script that generates every number, table and figure of the paper <i>Masked Mandates: Unlinkable, Attenuable and Accountable Delegation for LLM Agents</i> (revised version submitted to IEEE Open Journal of the Computer Society). Version 2.2.1: revised scheme (version 2.2 of the construction), every experiment re-run, attack suite of 96 attacks and 37 checks, and the LaTeX sources of the paper and its supplementary material. Research prototype; not for production use. Code under MIT; result files and generated tables and figures under CC BY 4.0.",
   "creators": [
     {
       "name": "Ameur, Yulliwas",
@@ -31,5 +31,5 @@
     "BBS+",
     "Model Context Protocol"
   ],
-  "notes": "Result files in code/results/ and generated files in manuscrit/ are licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)."
+  "notes": "Result files in code/results/ and generated files in manuscrit/ and paper-v2/ (numbers.tex, tab_*.tex, fig_*.pdf) are licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)."
 }

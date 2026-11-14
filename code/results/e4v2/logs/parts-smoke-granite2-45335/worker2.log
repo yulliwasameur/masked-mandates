@@ -1,0 +1,4 @@
+[w2] task48c t0 none: ok=False calls=6 turns=8 llm=2910 auth=0 lat=1099 wall=4035 err=None
+[w2] task48c t0 jwt: ok=False calls=6 turns=8 llm=3066 auth=21 lat=866 wall=3972 err=None
+[w2] task48c t0 mm: ok=False calls=6 turns=8 llm=2939 auth=5013 lat=864 wall=8910 err=None
+[w2] task48c t0 mm_esc: ok=False calls=6 turns=8 llm=3005 auth=5037 lat=864 wall=9000 err=None

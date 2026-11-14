@@ -1,0 +1,132 @@
+% Chantier 95 -- Masked Mandates -- supplementary material (full definitions and proofs), version 2.1.
+% Build: pdflatex supplement && bibtex supplement && pdflatex supplement && pdflatex supplement
+\documentclass[10pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{booktabs,array,graphicx}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{assumption}{Assumption}
+\newtheorem{remark}{Remark}
+\newcommand{\sys}{\textsc{Masked Mandates}}
+\newcommand{\Allow}{\mathsf{Allow}}
+\newcommand{\Live}{\mathsf{Live}}
+\newcommand{\Adv}{\mathsf{Adv}}
+\newcommand{\negl}{\mathsf{negl}}
+\newcommand{\ctx}{\mathsf{ctx}}
+\newcommand{\nym}{\mathit{nym}}
+\newcommand{\Zq}{\mathbb{Z}_q}
+\newcommand{\G}{\mathbb{G}_1}
+\newcommand{\Iss}{\mathcal{I}}
+\newcommand{\Esc}{\mathcal{E}}
+\newcommand{\Ext}{\mathsf{Ext}}
+\newcommand{\Sim}{\mathsf{Sim}}
+\newcommand{\PoK}{\mathsf{PoK}}
+\newcommand{\Lset}{\mathcal{L}}
+\newcommand{\Rset}{\mathcal{R}}
+\newcommand{\Log}{\mathsf{Log}}
+
+\title{Masked Mandates: Unlinkable, Attenuable and Accountable Delegation for LLM Agents\\[4pt]\large Supplementary material: definitions and security proofs}
+\author{Yulliwas Ameur, Samia Bouzefrane, Soumya Banerjee}
+\date{}
+
+\input{numbers}
+\makeatletter\let\inputtab\@@input\makeatother
+\begin{document}
+\maketitle
+
+\noindent This supplement gives the syntax, the security games and the proofs for the construction of the main paper. Section~\ref{s:prelim} lists every assumption, including how we extract witnesses from Fiat--Shamir proofs. Section~\ref{s:scheme} restates the construction at the level of the statements that are proved. Section~\ref{s:defs} gives the games, Section~\ref{s:lemmas} the arithmetic lemmas, and Sections~\ref{s:unf}--\ref{s:trace} the proofs. Section~\ref{s:scope} summarizes what is and is not covered.
+
+\input{supp_defs}
+\input{supp_games}
+\input{supp_proofs}
+\input{supp_deploy}
+\section{Additional evaluation results}\label{s:evalx}
+This section gives the attack taxonomy (Table~\ref{tab:attacks}), the ablation of a presentation (Table~\ref{tab:ablation}), a summary of which mechanism fits which requirement (Table~\ref{tab:decide}), the cost of a presentation and of delegation versus the number of signed messages (Fig.~\ref{fig:costs}), the effect of the revocation list (Table~\ref{tab:rev}), the E3 results with their ranges over seeds (Table~\ref{tab:linkranges}), the provenance of every experiment (Table~\ref{tab:prov}), E4 success per configuration (Table~\ref{tab:e4cfg}), and the dependence of E3 naming on load (Fig.~\ref{fig:e3load}). All numbers are generated from the result files of the artifact, like those of the main paper.
+
+\begin{table}[t]\centering\caption{Attack taxonomy: number of attacks per threat and the party that rejects them.}\label{tab:attacks}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrr@{}}\toprule Threat & $n$ & Prover & Issuer & Tool & Judge & Log\\\midrule
+\inputtab tab_attacks.tex \end{tabular}\end{table}
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.9\textwidth]{fig_costs}
+\caption{One server core. Left: presentation and verification time versus the number of signed messages. Right: delegation time for the parent; one range proof per action class.}\label{fig:costs}
+\end{figure}
+
+\begin{table}[t]\centering\caption{Revocation list size (medians, ms, one server core). Witness: issuer computes one witness; Batch: issuer revokes 100 more ids; Refresh: holder updates 5 witnesses.}\label{tab:rev}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrr@{}}\toprule $|\mathcal{R}|$ & Witness & Batch & Refresh & Present & Verify\\\midrule
+\inputtab tab_rev.tex \end{tabular}\end{table}
+
+\begin{table}[t]\centering\caption{Ablation of a presentation (medians, ms, one server core).}\label{tab:ablation}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrr@{}}\toprule Statements & Present & Verify & Bytes\\\midrule
+\inputtab tab_ablation.tex \end{tabular}\end{table}
+
+\begin{table}[t]\centering\caption{Which mechanism for which requirement.}\label{tab:decide}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.5\textwidth}>{\raggedright\arraybackslash}p{0.35\textwidth}@{}}\toprule
+Requirement & Mechanism\\\midrule
+Authority and audit; linkability acceptable & JWT/Biscuit chain\\
+Unlinkable by tools; issuer may see activity & batch one-time tokens\\
+Unlinkable by tools and issuer; flat authority & blind tokens with PoP key\\
+Abuse blocking without identification & anonymous blocklisting\\
+Plus delegation, tree quota, subtree revocation, escrow & \sys{}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.95\textwidth]{fig_e3_load}
+\caption{E3, \sys{} format, 5 seeds: naming of calls when one tool per task learns the identity, and profile recovery by attacker (d), against the task arrival rate across the coalition (tasks per minute, log scale), varied by population size and per-user task rate.}\label{fig:e3load}
+\end{figure}
+
+\begin{table}[t]\centering\caption{E3 collusion of 50 tools, \%, mean [min--max] over 5 seeds: profile recovery by attacker (d) and by the profile oracle at 1{,}000 users, (d) at 10{,}000 users, and naming of calls when one tool per task learns the user's identity, at 1{,}000 and 10{,}000 users.}\label{tab:linkranges}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrr@{}}\toprule & \multicolumn{3}{c}{Profile recovery} & \multicolumn{2}{c}{Naming}\\ Token format & (d) & Oracle & (d), $10^4$ & $10^3$ & $10^4$\\\midrule
+\inputtab tab_link_ranges.tex \end{tabular}\end{table}
+
+\begin{table}[t]\centering\caption{Provenance of the experiments: code commit, build or harness hash (prefix of the SHA-256), platform and jobs. \texttt{results/SHA256SUMS-v2.2} lists the hashes of all result files. E1 ran on v2.2.0 (\texttt{96a694d}); a first run of campaign 1 (job 1680010) was uniformly slower on every operation and was excluded by a rule fixed before its rerun (all medians more than 10\,\% off the other campaigns) and rerun on another node; it is kept in \texttt{results/v22/zen/excluded\_node068}. E1 times the honest prove and verify paths only; the wallet's witness and spot checks add five pairing equations per refresh and two per published update. Commits after E4 v2.1 added checks outside those paths (class index, root layout, wallet checks) and a carving order that does not affect E4, whose delegations are one level deep. v2.2.1 changes only the log's revocation rule, which only the attack suite exercises.}\label{tab:prov}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.3\textwidth}@{}}\toprule
+Experiment & Commit & Build / harness & Platform, jobs\\\midrule
+Attack suite & \texttt{cc54645} (v2.2.1) & \texttt{attacks} \texttt{163ed5ce} & Apple M5 Pro\\
+E1 & \texttt{96a694d} (v2.2.0) & \texttt{bench} \texttt{a24a9cd0} (Zen), \texttt{08cd38c6} (laptop) & AMD EPYC 9534 (Zen), 3 exclusive nodes, 1 pinned core, jobs 1680015, 1680011, 1680012 (excluded: 1680010), multi-core 1680013; Apple M5 Pro\\
+E2 & \texttt{02718067} (harness committed later) & \texttt{e2v21.py} \texttt{9a472e38} & Apple M5 Pro, 3 runs, load recorded\\
+E3 & \texttt{dacd3b3}, \texttt{3266003}, \texttt{12bdc01} & \texttt{sim/e3v22.py} & Zen, jobs 1679921--1680000\\
+E4 v2.1 & \texttt{060ced91} & mmpy \texttt{1ace11bf} & 1 H100 + Xeon Platinum 8462Y+ (Hedy), jobs 45427--45444, 48495, 48510\\
+E4 v2.2, scripted & \texttt{e340685}, \texttt{a4149d7} & mmpy \texttt{c3c54fbe}, \texttt{0b120113} & Hedy login node (Xeon Gold 6426Y, shared, niced)\\
+E4 v2.2, LLM & \texttt{a4149d7}, \texttt{df4f429} & mmpy \texttt{0b120113} & 1 H100 (Hedy), jobs 51013, 51014, 51052\\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering\caption{E4, success on the honest templates (a, b, d) per configuration, \%, without authorization (none) and with \sys{} (MM): temperature 0 with tool latency (t0), its replication (t0\_rep), without tool latency (t0\_nolat), and temperature 0.7 over three seeds (t07).}\label{tab:e4cfg}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrrr@{}}\toprule & \multicolumn{2}{c}{t0} & \multicolumn{2}{c}{t0\_rep} & \multicolumn{2}{c}{t0\_nolat} & \multicolumn{2}{c}{t07}\\ Model & none & MM & none & MM & none & MM & none & MM\\\midrule
+\inputtab tab_e4_cfg.tex \end{tabular}\end{table}
+
+\section{Evidence for Table 1}\label{s:table1}\sloppy
+Partial (\(\circ\)) and inferred (\(^*\)) cells of Table~1 of the main paper, with the source of each; the artifact's \texttt{related-audit.md} quotes the passages.
+\begin{itemize}[leftmargin=*]
+\item Agentic JWT: delegation \(\circ\), a chained assertion names the downstream agent but specifies no narrowing of scope; binding \(\circ\), the token is scoped to an agent, intent and workflow step and a proof-of-possession key signs the HTTP request, without a nonce or request hash.
+\item AP2 (v0.1.0): delegation \(\circ^*\), an intent mandate passes the user's authority to an agent, without multi-hop attenuation; binding \(\checkmark\), a cart mandate signs the specific purchase; traceable, mandates are shown to merchants.
+\item DAC (mercurial): delegation \(\circ\), level-based only, attributes left to future work; escrow/trace \(\circ\), an opener exists but registration is anonymous.
+\item UACS: delegation \(\circ^*\), the issuer updates hidden attributes under a proven relation, which can express attenuation; UACS does not claim delegation.
+\item DAC from JWTs: delegation \(\circ^*\), each level discloses attributes selectively, which can express attenuation; offline \(\checkmark^*\), delegation needs no change to issuer infrastructure.
+\item BBS per-verifier pseudonyms: unlinkable \(\circ\), only across verifiers; binding \(\circ^*\), a presentation header can carry a verifier challenge.
+\item BBA+, Clone Wars, dynamic \(k\)-TAA, BLAC/SNARKBlock: escrow/trace \(\circ\), misuse (double spending, over-use, blocklisting) reveals or blocks the user, which is accountability, not escrow.
+\item ACT, Privacy Pass, ARC: binding \(\circ\), the token binds a client message or the origin's challenge, not the call; Privacy Pass rate limit \(\circ\), rate-limited issuance is specified in an expired draft.
+\item SD-JWT batch: unlinkable \(\circ\), only with one-time batch credentials, and the issuer can link; binding \(\circ\), the key-binding JWT binds a nonce, the audience and a hash of the disclosures, not the call.
+\item Coconut: rate limit \(\circ\), a per-petition value prevents signing a petition twice.
+\end{itemize}
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs,refs2}
+\end{document}

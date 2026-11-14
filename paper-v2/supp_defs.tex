@@ -1,0 +1,86 @@
+% Supplement, part 1 (input by supplement.tex).
+\section{Preliminaries and assumptions}\label{s:prelim}
+\paragraph{Notation.} $(\G,\mathbb{G}_2,\mathbb{G}_T,e)$ is a type-3 pairing group of prime order $q$ (BLS12-381, $q\approx 2^{255}$). $g$ is a generator of $\G$ derived by hashing a public label. $H_{\mathsf{dom}}(\cdot)$ maps a domain tag and a length-prefixed list of byte strings to $\G$; distinct tags give independent random oracles, and length prefixes make the encoding injective. Integers in $[0,2^{40})$ are embedded in $\Zq$ without reduction.
+
+\paragraph{Public parameters.} The BBS+ bases, the accumulator parameters $(P,\tilde P)$, the non-membership proving key $(X,Y,Z,K)$ of the VB accumulator, the Bulletproofs++ bases and $g$ are all derived by hashing public labels. Tools and wallets re-derive them and never accept parameters from the issuer. This matters: an issuer that chose $X=aZ$, $Y=bZ$ could strip the randomization of non-membership proofs and recover the hidden witness and then the identifier. The issuer chooses only its BBS+ public key $w\in\mathbb{G}_2\setminus\{1\}$, its accumulator public key and the accumulator values.
+
+\paragraph{Assumptions.}
+\begin{itemize}[leftmargin=*]
+\item \textbf{q-SDH}: BBS+ signatures are existentially unforgeable under chosen-message attack, including when some messages are given as Pedersen commitments with a proof of opening~\cite{au2006bbsplus,camenisch2016bbsplus,tessaro2023bbs}; the VB accumulator is secure (no non-membership witness verifies for an accumulated element)~\cite{vitto2022vb}.
+\item \textbf{DL} in $\G$ (Pedersen binding; Schnorr signatures are EUF-CMA in the ROM~\cite{pointcheval2000}); \textbf{q-DL}: given $(g,g^{s},\dots,g^{s^{q'}})$, computing $s$ is hard.
+\item \textbf{DDH} and \textbf{q-DDHI} in $\G$: given $(g,g^{x},\dots,g^{x^{q'}})$, $g^{1/x}$ is indistinguishable from random. From q-DDHI, $j\mapsto B^{1/(s+j+1)}$ is a pseudorandom function on a polynomial domain~\cite{dodis2005vrf,camenisch2006clonewars}.
+\item \textbf{Bulletproofs++} range arguments are complete and honest-verifier zero knowledge, and \emph{knowledge sound} under DL: from an accepting prover one can extract an opening of the committed value that lies in the range~\cite{eagen2024bpp}. Plain soundness would not suffice: a Pedersen commitment has openings to every value, so the statement ``some opening is in range'' is trivially true.
+\end{itemize}
+
+\paragraph{The composite proof.} Each presentation, root request and delegation request is one Fiat--Shamir proof $\Pi$ for a conjunction of statements: a BBS+ proof of knowledge with selectively revealed messages, Pedersen openings, VB non-membership proofs and Bulletproofs++ bound checks, linked by witness equalities, with a context string $\ctx$ in the hash input~\cite{dockcrypto}. The transcript is built as follows (proof\_system~0.34, one Merlin transcript per proof): it absorbs a domain label, the nonce (the tool's nonce, or the issuer's for root and delegation requests) and the context $\ctx$, which for a presentation is an injective hash of $\iota$; then, in a fixed order, every sub-protocol appends its public statement and its first-round commitments (for the BBS+ proof the revealed messages and the randomized signature, for the accumulator the value $V$ and the blinded witness, for the pseudonym statement $\nym$ and its base, for the escrow the ciphertexts $E$, and for each range statement the commitment to the constrained value). One challenge $c$ is drawn from this transcript; the $\Sigma$ responses are computed from $c$; the Bulletproofs++ arguments then \emph{continue the same transcript}, so all their round challenges depend on $\iota$ (through $\ctx$), on the whole public statement $(V,\nym,E)$ and on $c$. Every constrained value is tied by an equality to a witness of the $\Sigma$ part. Extracting the $\Sigma$ part yields the value; knowledge soundness of the range argument yields an in-range opening of the same commitment, and the two openings agree unless DL is broken.
+
+\begin{assumption}[Extraction]\label{as:se}
+(i) \emph{Zero knowledge}: a simulator that programs the random oracle produces proofs indistinguishable from real ones, for every true statement, every issuer key $w\neq1$ and every accumulator public key and value chosen by the adversary, with the hash-derived non-membership proving key. Wallets check that keys are not the identity and that values are in $\Log$.
+(ii) \emph{Simulation-extractability with rewinding, for the whole composite proof}: for an adversary that receives simulated proofs and outputs an accepted proof whose (statement, $\ctx$) differs from every simulated one, a rewinding extractor obtains, in expected polynomial time, a witness of the $\Sigma$ part and, for every range statement, an in-range opening of its commitment. For the $\Sigma$ part this holds for Fiat--Shamir $\Sigma$-protocols with special soundness and unique responses~\cite{faust2012fsnm}. For the range part it needs knowledge soundness of the multi-round Fiat--Shamir transform, which holds with a polynomial loss in the number of rounds for arguments with special soundness over a tree of transcripts~\cite{attema2022fsmulti}; simulation extractability of Fiat--Shamir Bulletproofs is proved in~\cite{ganesh2022bpse,dao2023bpse}. For Bulletproofs++, Eagen et al.\ prove computational witness-extended emulation of the interactive protocols and note that knowledge soundness of the Fiat--Shamir version follows from~\cite{attema2022fsmulti} (see~\cite{eagen2024bpp}); we \emph{assume} simulation extractability inside the composite proof, for which we know no published proof.
+(iii) \emph{Sequential issuer sessions}: the issuer processes root and delegation requests one at a time. A reduction extracts the witness of each request as soon as the session ends, rewinding only that session. A deployment must serialize issuance, or use Fischlin-transformed issuance proofs~\cite{fischlin2005online}, which cost only the requester and the issuer.
+\end{assumption}
+
+Assumption~\ref{as:se}(ii) asks for one extraction at the end of an experiment, and (iii) for one extraction per issuer session, each from a single adversarial proof. The rewinding at the end may lead the adversary to open new issuer sessions in the rerun; each is extracted by rewinding that session only, so the nesting depth is at most two, and with sequential sessions and a polynomial number of them the expected running time stays polynomial. Extraction by forking succeeds with probability roughly $\epsilon^2/q_H$ for an adversary that succeeds with probability $\epsilon$, so the bounds below, written with an additive $\epsilon_{\mathrm{ext}}$, are asymptotic statements: they show that a non-negligible advantage yields a non-negligible advantage against an assumption, not tight concrete bounds. We do not claim straight-line (adaptive) extraction, which plain Fiat--Shamir does not give in the random-oracle model~\cite{bernhard2015apok}. Two places would need it: concurrent issuer sessions, and an opening oracle in the unlinkability game. For the first, the implementation's issuer is sequential. For the second, Theorem~\ref{th:unl} separates a CPA-style statement under the assumptions above from a CCA-style one under an additional assumption (Assumption~\ref{as:agm}).
+
+\begin{assumption}[CCA escrow]\label{as:agm}
+The escrow ciphertext $(g^{r},g^{m}X^{r})$ together with the composite Fiat--Shamir proof, which contains a Schnorr-type proof of knowledge of $r$ bound to $\ctx$, is IND-CCA secure. For signed ElGamal alone (ElGamal plus a Schnorr proof of $r$) this is proved in the algebraic group model with random oracles~\cite{fuchsbauer2020schnorr}; the composite proof adds statements about other witnesses under the same challenge, which that proof does not cover, so we state it as an assumption. Fischlin's transform on the $\Sigma$ part~\cite{fischlin2005online} would give it under standard assumptions at a higher cost.
+\end{assumption}
+
+\section{The scheme as analyzed}\label{s:scheme}
+Table~\ref{tab:notation} recalls the notation of the main paper.
+\begin{table}[t]\centering\caption{Notation.}\label{tab:notation}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.6\textwidth}@{}}\toprule
+$q$, $g$, $\mathbb{G}_1$ & group order, generator (BLS12-381)\\
+$u_P$, $pk_P=g^{u_P}$ & principal's long-term key\\
+$s$, $t$, $T=g^t$ & link secret and tag of a delegation tree\\
+$\mathit{id}$, $\mathit{anc}_{1..4}$, $\delta$ & mandate identifier, ancestors, depth\\
+$b_c$, $\beta$, $\tau$ & scope bit of class $c$, per-call cap, expiry\\
+$[\ell,k)$ & counter interval; root: $[\ell_0,k_0)$, cap $\beta_0$\\
+$\iota=(\theta,\mathsf{call},c,\mathit{amt},\mathit{cur},e,\mathit{tm},n_\theta)$ & invocation: tool, canonical call, class, amount, currency, epoch, time, tool nonce\\
+$j$ & hidden counter, $\ell\le j<k$\\
+$B_{\theta,e}$, $D_e$ & pseudonym bases for calls and delegations\\
+$\nym=B_{\theta,e}^{1/(s+j+1)}$ & call pseudonym\\
+$V$, $\mathsf{Acc}$, $W$ & accumulator value, revoked set, grace window\\
+$X=g^{x_{\mathcal{E}}}$, $E$ & escrow key, escrow ciphertexts $E_1..E_4$\\\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Parties and trust.} The \emph{issuer} $\Iss$ is a domain authorization service shared by many principals. It holds the BBS+ key $(x_\Iss, w=g_2^{x_\Iss})$ and the accumulator key, chooses every mandate identifier and blind-signs. It publishes its key, its accumulator values with their update data, and the root-tag bindings in an append-only public log $\Log$ without equivocation: every party sees the same sequence, and wallets refuse any value or key that is not in $\Log$. A \emph{principal} $P$ registers a long-term key $pk_P=g^{u_P}$ under a label by appending a self-signed entry (label, $pk_P$, Schnorr signature) to $\Log$; the first entry for a label is the registration, and $P$ monitors $\Log$ for later entries under its label. The domain's identity provider authenticates $P$ before the entry is appended; if that provider is the issuer, it could register a newcomer's label first, so non-frameability protects registered keys, and a first-entry-wins registry offers no key rotation without an additional, authenticated log rule. The registry is thus part of $\Log$, not held by the issuer. $u_P$ never leaves $P$'s wallet. The \emph{escrow committee} $\Esc$ has three members holding shares $x_1,x_2,x_3$ of $x_\Esc$ from the Pedersen-VSS-based DKG of Gennaro et al.~\cite{gennaro2007dkg}, with $X=g^{x_\Esc}$ and $X_i=g^{x_i}$. A \emph{wallet} holds a tree's secrets and produces presentations for the agents it serves. \emph{Tools} hold public data, a clock (epoch and time) and the nonces they issued. Root issuance requires that $P$ authenticate to $\Iss$ by the domain's ordinary means.
+
+\paragraph{Mandate.} A mandate is a BBS+ signature on $L=13+n$ messages
+\[
+(m_0,\dots,m_{L-1})=(s,\ \mathit{id},\ \mathit{anc}_{1..4},\ \delta,\ b_{1..n},\ \beta,\ \ell,\ k,\ \tau,\ t,\ \mathit{ver}),
+\]
+with link secret $s$, identifier $\mathit{id}\neq0$, ancestors, depth $\delta$, scope bits, per-call cap $\beta$, counter interval $[\ell,k)$, expiry $\tau$, per-root tag $t$ and a key-version tag. All mandates of a tree share $s$ and $t$.
+
+\paragraph{Invocation.} An invocation is $\iota=(\theta,\mathsf{call},c,\mathit{amt},\mathit{cur},e,\mathit{tm},n_\theta)$: authenticated tool identity, RFC~8785 canonical call, class, amount and currency, epoch, time and the tool's nonce. $\ctx(\iota)$ is a domain-separated SHA-256 of an injective encoding. $\Allow(a,\iota)$: $b_c=1\wedge\beta\ge\mathit{amt}\wedge\tau\ge\mathit{tm}$. $\Live(a,\Rset)$: $\{\mathit{id},\mathit{anc}_1,\dots,\mathit{anc}_4\}\cap\Rset=\emptyset$.
+
+\paragraph{Pseudonyms.} $\mathrm{DY}_B(s,j)=B^{1/(s+j+1)}$; the call bases are $B_{\theta,e}=H_{\text{nym-tool}}(\theta,e)$, and the delegation bases are $D_e=H_{\text{nym-deleg}}(e)$. The pseudonym proof with a hidden counter in $[\ell,k)$ is
+\begin{multline*}
+\nym^{w}=B\ \wedge\ w-s-j=1\ \wedge\ d_0+\ell-j=1\ \wedge\ d_0\in[1,2^{40})\\ \wedge\ d+j-k=-1\ \wedge\ d\in[0,2^{40}),\tag{DY}
+\end{multline*}
+with $s,\ell,k$ tied to the signed messages by witness equalities.
+
+\paragraph{IssueRoot.} $P$ draws $s,t,r$, sets $T=g^{t}$, signs $\sigma_P=\mathsf{Sig}_{u_P}(\text{label}\,\|\,T)$ (Schnorr), sends $C=h_0^{r}h_s^{s}h_t^{t}$, $T$, $\sigma_P$ and $\Pi_{\mathrm{root}}=\PoK\{(r,s,t):C=h_0^rh_s^sh_t^t\wedge T=g^t\}$ with context $H(n_\Iss\|C\|T)$ for a fresh issuer nonce $n_\Iss$. $\Iss$ authenticates $P$ and checks the proof, $\sigma_P$ under $pk_P$, that $T$ is new, $\delta=0$, $\mathit{anc}=0^4$, the scope bits are in $\{0,1\}$, $\beta,k,\tau<2^{40}$, $\ell<k$ and $k-\ell\le Q$ for a public policy bound $Q$ ($2^{20}$ in the implementation); it also limits roots per principal. It draws a fresh non-zero $\mathit{id}$, blind-signs, and appends $(T,\text{label},\sigma_P)$ to $\Log$.
+
+\paragraph{Present and Verify.} The wallet picks an unused counter $j$ in the mandate's own part of $[\ell,k)$ for $(\theta,e)$ and computes $\nym=\mathrm{DY}_{B_{\theta,e}}(s,j)$. If required, it also computes $E=(g^{r_1},g^{t}X^{r_1},g^{r_2},g^{\mathit{id}}X^{r_2})$. It proves with context $\ctx(\iota)$, against the accumulator value $V$ it holds:
+\begin{multline*}
+\PoK\{\text{BBS+ signature with } m_{6+c}=1\ \wedge\ (\mathrm{DY})\ \wedge\ \beta\in[\mathit{amt},2^{40})\ \wedge\ \tau\in[\mathit{tm},2^{40})\\ \wedge\ \mathit{id},\mathit{anc}_{1..4}\notin_{V}\mathsf{Acc}\ \wedge\ [E\text{ encrypts } g^{t},g^{\mathit{id}}]\}.
+\end{multline*}
+The output is $(V,\nym,[E],\pi)$. The tool checks that $e$ is its current epoch, that $\mathit{tm}$ is within its tolerance, that $n_\theta$ is one of its unused nonces (consumed), and that $V$ is the current value or one of the $W$ previous values in $\Log$. It reserves $(e,\nym)$ in its seen-set, verifies $\pi$, and releases the reservation on failure. Errors are uniform.
+
+\paragraph{Delegate.} The issuer sends a nonce. The parent chooses the child's attributes with $[\ell',k')\subseteq[\ell,k)$, normally a sub-interval disjoint from the parent's own part and from its other children. It commits to all child messages except $\mathit{id}'$ and $\mathit{ver}$ in $C_p$, computes $\nym_D=\mathrm{DY}_{D_e}(s,j_D)$ for an unused $j_D$ in its own part, and proves with context $H(n_\Iss\|C_p)$:
+\begin{itemize}[leftmargin=*]
+\item a BBS+ signature and the non-membership of its five identifiers;
+\item equalities $s'=s$, $t'=t$, $\mathit{anc}'=(\mathit{id},\mathit{anc}_1,\mathit{anc}_2,\mathit{anc}_3)$;
+\item $\delta'-\delta=1$, $\delta'\in[1,4]$;
+\item for $x\in\{\beta,k,\tau\}$: $d_x+x'-x=1$, $d_x\in[1,2^{40})$; and $d_\ell+\ell-\ell'=1$, $d_\ell\in[1,2^{40})$;
+\item the child values $\beta',\ell',k',\tau'\in[0,2^{40})$;
+\item for each class $c$: $d_c+b'_c-b_c=1$, $d_c\in[1,3)$;
+\item (DY) for $\nym_D$ on $D_e$.
+\end{itemize}
+$\Iss$ checks that $e$ is its own current epoch, verifies, rejects a seen $(e,\nym_D)$, draws a fresh $\mathit{id}'$ and blind-signs.
+
+\paragraph{Revoke, Open, Judge.} The log accepts a revocation of $X\neq0$ only with an authorization: either a Fiat--Shamir proof, with context $H(\text{revoke}\|X\|n_{\Log})$, of a BBS+ signature on a vector whose identifier equals $X$ (revealing only that position; held by the mandate's holder and by the parent that obtained it when delegating, never by a descendant) together with the five non-membership proofs against the current value, or Schnorr signatures on $(X,n_{\Log})$ by two distinct committee members. Revocation appends identifiers to the accumulator (append-only) and the new value, the update data $\Omega$ and the spot check (witnesses for $y^*=H(V_{\text{old}},V_{\text{new}},\text{additions},\Omega)$ under both values) to $\Log$; wallets refresh only after checking it. Member $i$ opens $E_1$ (resp.\ $E_3$) with $E_1^{x_i}$ and a Chaum--Pedersen proof. $\mathsf{Judge}$ checks two shares of distinct members and interpolates $g^{t}$ and $g^{\mathit{id}}$. It looks up the binding $(T=g^t,\text{label},\sigma_P)$ in $\Log$, re-verifies $\sigma_P$ under the key registered for label in $\Log$, and outputs (label, $\mathit{id}$).
+

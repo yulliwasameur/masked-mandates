@@ -1,0 +1,5 @@
+[w2] RERUN task81 t07_s3 jwt: ok=True err=None
+[w2] RERUN task82 t07_s3 mm_esc: ok=False err=None
+[w2] RERUN task87 t0 jwt: ok=True err=None
+[w2] RERUN task87 t0_nolat mm_esc: ok=True err=None
+[w2] RERUN task78 t07_s3 jwt: ok=True err=None

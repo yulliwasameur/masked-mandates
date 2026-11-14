@@ -1,0 +1,33 @@
+[w4] task4a t0 none: ok=True calls=4 turns=4 llm=3627 auth=0 lat=609 wall=4250 canon_mm=0 churn=0 err=None
+[w4] task4a t0 jwt: ok=True calls=4 turns=4 llm=3215 auth=9 lat=608 wall=3839 canon_mm=0 churn=0 err=None
+[w4] task4a t0 mm: ok=True calls=4 turns=4 llm=3208 auth=1793 lat=608 wall=5618 canon_mm=0 churn=0 err=None
+[w4] task4a t0 mm_esc: ok=True calls=4 turns=4 llm=3189 auth=1812 lat=608 wall=5617 canon_mm=0 churn=0 err=None
+[w4] task4a t0_rep jwt: ok=True calls=4 turns=4 llm=3208 auth=9 lat=368 wall=3592 canon_mm=0 churn=0 err=None
+[w4] task4a t0_rep mm: ok=True calls=4 turns=4 llm=3206 auth=1790 lat=367 wall=5372 canon_mm=0 churn=0 err=None
+[w4] task4a t0_rep mm_esc: ok=True calls=4 turns=4 llm=3200 auth=1810 lat=366 wall=5385 canon_mm=0 churn=0 err=None
+[w4] task4a t0_rep none: ok=True calls=4 turns=4 llm=3193 auth=0 lat=367 wall=3567 canon_mm=0 churn=0 err=None
+[w4] task4a t0_nolat mm: ok=True calls=4 turns=4 llm=3183 auth=1794 lat=0 wall=4985 canon_mm=0 churn=0 err=None
+[w4] task4a t0_nolat mm_esc: ok=True calls=4 turns=4 llm=3206 auth=1813 lat=0 wall=5028 canon_mm=0 churn=0 err=None
+[w4] task4a t0_nolat none: ok=True calls=4 turns=4 llm=3216 auth=0 lat=0 wall=3223 canon_mm=0 churn=0 err=None
+[w4] task4a t0_nolat jwt: ok=True calls=4 turns=4 llm=3381 auth=8 lat=0 wall=3397 canon_mm=0 churn=0 err=None
+[w4] task4a t07_s1 mm_esc: ok=False calls=4 turns=2 llm=3224 auth=1814 lat=453 wall=5499 canon_mm=0 churn=0 err=None
+[w4] task4a t07_s1 none: ok=False calls=4 turns=2 llm=3143 auth=0 lat=453 wall=3603 canon_mm=0 churn=0 err=None
+[w4] task4a t07_s1 jwt: ok=False calls=4 turns=2 llm=3130 auth=8 lat=454 wall=3599 canon_mm=0 churn=0 err=None
+[w4] task4a t07_s1 mm: ok=False calls=4 turns=2 llm=3125 auth=1796 lat=453 wall=5382 canon_mm=0 churn=0 err=None
+[w4] task4a t07_s2 none: ok=True calls=4 turns=4 llm=3225 auth=0 lat=372 wall=3604 canon_mm=0 churn=0 err=None
+[w4] task4a t07_s2 jwt: ok=True calls=4 turns=4 llm=3253 auth=8 lat=372 wall=3641 canon_mm=0 churn=0 err=None
+[w4] task4a t07_s2 mm: ok=True calls=4 turns=4 llm=3164 auth=1795 lat=372 wall=5339 canon_mm=0 churn=0 err=None
+[w4] task4a t07_s2 mm_esc: ok=False calls=1 turns=1 llm=748 auth=454 lat=42 wall=3251 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task4a t07_s3 jwt: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task4a t07_s3 mm: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task4a t07_s3 mm_esc: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task4a t07_s3 none: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0 jwt: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0 mm: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0 mm_esc: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0 none: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0_rep mm: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0_rep mm_esc: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0_rep none: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0_rep jwt: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w4] task9a t0_nolat mm_esc: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed

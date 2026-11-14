@@ -1,0 +1,12 @@
+Per-operation median ratio: node068 campaign (job 1680010) / mean of the medians of c2 (node061) and c3 (node062); same binary, seed of campaign 1
+costs.issue_root: 22.87 ms / 15.10 ms = 1.515
+costs.present: 589.46 ms / 390.01 ms = 1.511
+costs.verify: 129.08 ms / 85.41 ms = 1.511
+costs.verify_bytes: 157.40 ms / 104.18 ms = 1.511
+costs.present_esc: 592.85 ms / 392.39 ms = 1.511
+costs.verify_esc: 132.19 ms / 87.41 ms = 1.512
+costs.deleg_parent: 3442.84 ms / 2277.14 ms = 1.512
+costs.deleg_issuer: 640.42 ms / 423.40 ms = 1.513
+costs.open: 9.86 ms / 6.50 ms = 1.517
+throughput.verify_valid: 157.39 / 104.20 = 1.510
+depth.present (all depths): 589.07 / 389.92 = 1.511

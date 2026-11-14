@@ -1,0 +1,2 @@
+job 45426 node m-gpu01 cpus vllm=1,3,5,7,9 orchestrator=11 agents=13,15,17,19,21 servers=23,25,27,29,31 RAYON_NUM_THREADS=1
+[2026-11-13T13:53:25.154] error: *** JOB 45426 ON m-gpu01 CANCELLED AT 2026-11-13T13:53:25 DUE to SIGNAL Terminated ***

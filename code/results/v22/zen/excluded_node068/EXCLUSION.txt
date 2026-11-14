@@ -1,0 +1,16 @@
+E1 v2.2.0, Zen campaign 1, first run: EXCLUDED (kept here for disclosure; not read by gen_tex_v21.py).
+
+Job 1680010, node068 (AMD EPYC 9534, same lscpu as node061/node062 except BogoMIPS 4900.00 vs 4899.86), exclusive node,
+core 8 pinned, RAYON_NUM_THREADS=1, binary bench sha256 a24a9cd0...7f54 (identical to c2, c3), seed 20261110.
+Wall time 49 min 35 s versus 32 min 49 s / 32 min 50 s for campaigns 2 (node061) and 3 (node062) submitted at the same time.
+
+Evidence (ratios.txt): every operation is slower by the same factor, 1.510-1.517 (median node068 / mean of the c2, c3
+medians), from 6.5 ms (escrow opening) to 2.3 s (delegation): a uniform slowdown of the node, not of an operation.
+The factor matches max/nominal clock in lscpu (3718.0659 / 2450 = 1.518), consistent with that core running without
+boost (frequency or power capping); this is an inference, the node's actual frequency was not recorded during the job.
+After the job, `scontrol show node node068` reported State=IDLE, CPUAlloc=0, CPULoad=1.13 (node062/node063 idle: 0.02/0.00).
+
+Rule (fixed when the anomaly was found, before the rerun's results were known): a campaign whose per-operation medians
+all deviate by more than 10 % from those of the other campaigns on identical hardware is excluded and rerun once, on
+another node (sbatch --exclude=node068); the rerun is used as is. Rerun: job 1680015 (see ../c1/provenance.txt).
+Rerun outcome: job 1680015 on node005, 32 min 49 s; per-operation medians within 0.1 % of c2 and c3 (e.g. Present 390.1 / 390.0 / 390.1 ms).

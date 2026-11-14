@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/code21/e4v21fix/e4v21.py", line 1885, in <module>
+    if a.cmd == "run": main_run(a)
+                       ^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/code21/e4v21fix/e4v21.py", line 1194, in main_run
+    raise RuntimeError(f"server {w}/{i} not up")
+RuntimeError: server 0/0 not up

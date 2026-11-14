@@ -1,0 +1,3 @@
+job 45425 node m-gpu01 cpus vllm=0,2,4,6,8 orchestrator=10 agents=12,14,16,18,20 servers=22,24,26,28,30 RAYON_NUM_THREADS=1
+[2026-11-13T13:53:25.154] error: *** JOB 45425 ON m-gpu01 CANCELLED AT 2026-11-13T13:53:25 DUE to SIGNAL Terminated ***
+Terminated

@@ -1,0 +1,5 @@
+{"jobs": [
+ {"id": "51013", "purpose": "Qwen2.5-72B-AWQ: retry0, d1000, sparse_w2, sparse_d1000, dw; then Qwen2.5-7B dw (invalid: vLLM port collision with 51014, re-run in 51052)", "state": "COMPLETED", "elapsed": "54:33", "elapsed_s": 3273, "start": "2026-11-14T07:53:47", "node": "m-gpu01"},
+ {"id": "51014", "purpose": "gpt-oss-20b: retry0, d1000, sparse_w2, sparse_d1000, dw; then Hermes-3 dw, Granite-3.3 dw", "state": "COMPLETED", "elapsed": "1:01:07", "elapsed_s": 3667, "start": "2026-11-14T08:14:36", "node": "m-gpu01"},
+ {"id": "51052", "purpose": "Qwen2.5-7B dw (re-run)", "state": "COMPLETED", "elapsed": "4:44", "elapsed_s": 284, "start": "2026-11-14T11:11:29", "node": "m-gpu01"}
+]}

@@ -1,0 +1,6 @@
+job 48496 node m-gpu01 cpus vllm=32,34,36,38,40 orchestrator=42 agents=44,46,48,50,52 servers=54,56,58,60,62 RAYON_NUM_THREADS=1
+    if a.cmd == "run": main_run(a)
+                       ^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/code21/e4v21fix/e4v21.py", line 1194, in main_run
+    raise RuntimeError(f"server {w}/{i} not up")
+RuntimeError: server 0/0 not up

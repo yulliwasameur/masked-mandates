@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/code/e4v2/e4v2.py", line 1201, in <module>
+    elif a.cmd == "bench": main_bench(a)
+                           ^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/code/e4v2/e4v2.py", line 933, in main_bench
+    t0 = time.perf_counter(); b = A.present(idx, tool, call, 2, 32000, EPOCH, 1000, f"child{i}", False); t1 = time.perf_counter()
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: prove: UnsupportedValue("Only supports 64 bit values Bulletproofs++ range proof but found 52435875175126190479447740508185965837690552500527637822603658699938581184498")
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/code/e4v2/e4v2.py", line 1201, in <module>
+    elif a.cmd == "bench": main_bench(a)
+                           ^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/code/e4v2/e4v2.py", line 933, in main_bench
+    t0 = time.perf_counter(); b = A.present(idx, tool, call, 2, 32000, EPOCH, 1000, f"child{i}", False); t1 = time.perf_counter()
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: prove: UnsupportedValue("Only supports 64 bit values Bulletproofs++ range proof but found 52435875175126190479447740508185965837690552500527637822603658699938581184512")

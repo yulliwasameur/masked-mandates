@@ -1,0 +1,6 @@
+git_commit=96a694d14ca42d93f2d0fa6fd9b5253edd01f515
+git_tag=v2.2.0
+a24a9cd06579eac2e785716814f911b09dea46298fc608797740f58ed8ad7f54  target/release/bench
+rayon=1
+node=node063
+job=1680013

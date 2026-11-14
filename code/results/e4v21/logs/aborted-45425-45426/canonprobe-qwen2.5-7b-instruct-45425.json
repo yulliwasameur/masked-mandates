@@ -1,0 +1,1173 @@
+{
+ "provenance": {
+  "git_commit": "060ced918f45da9e26641d9da8870f59612dfc36",
+  "git_status_code": "",
+  "src_lib_rs_sha256": "409f6dc9563fa6700f37281dd4b4eedfb189e052120fe00bca1b2eb695d4f057",
+  "mmpy_lib_rs_sha256": "18d07df65589bf672c37d2a1be3a9bfcb791af017ebcf06c21db461f54baa5e9",
+  "copied_to_hedy": "2026-11-13T13:42:52+0100",
+  "note": "e4v21/ itself is new and untracked at run time; its sha256 is recorded separately",
+  "git_commit_note": "HEAD when code/src, code/mmpy, Cargo.toml, Cargo.lock were copied to Hedy and mmpy was built (13:2x); HEAD moved to 690add5a2eb8fb012f5756d31be719a919a47f4a during the session (paper-only commit, code/ identical: git diff 060ced9 690add5 -- code is empty)",
+  "mmpy_so": "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mmpy/mmpy.cpython-312-x86_64-linux-gnu.so",
+  "mmpy_so_sha256": "1ace11bfcc7238df93b96d77a7c5960d995e455bddebb1f7b0a17ed03fb34d25",
+  "e4v21_py_sha256": "487f16a4a5fad565d5673a3a22bec35c60266932f180f2c2a15bb3d82a21d10c"
+ },
+ "rows": [
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320.1}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320.1,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.1,
+    "receipt": "R-B8525525"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 0.30000000000000004}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":0.30000000000000004,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 0.3,
+    "receipt": "R-3645E790"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": \"320\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":\"320\",\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \" Grand Plaza Rome \", \"amount\": 100.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":100,\"merchant\":\" Grand Plaza Rome \"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Grand Plaza Rome",
+    "amount_eur": 100.0,
+    "receipt": "R-B417C707"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Caf\\u00e9 Z\\u00fcrich \\u00e9\\u0301 \\ud83d\\ude00\", \"amount\": 12.5}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":12.5,\"merchant\":\"Caf\u00e9 Z\u00fcrich \u00e9\u0301 \ud83d\ude00\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Caf\u00e9 Z\u00fcrich \u00e9\u0301 \ud83d\ude00",
+    "amount_eur": 12.5,
+    "receipt": "R-CD830F7B"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"A\\u0000B\\n\\t\\\"q\\\"\", \"amount\": 1}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":1,\"merchant\":\"A\\u0000B\\n\\t\\\"q\\\"\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "A\u0000B\n\t\"q\"",
+    "amount_eur": 1.0,
+    "receipt": "R-2A9BE6FF"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 5, \"note\": null}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":5,\"merchant\":\"x\",\"note\":null},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 5, \"extra\": {\"b\": [1, 2.5, null, true], \"a\": \"z\"}}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":5,\"extra\":{\"a\":\"z\",\"b\":[1,2.5,null,true]},\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"amount\": 5, \"merchant\": \"x\", \"\\u20ac\": 1, \"\\r\": 2, \"1\": 3}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"\\r\":2,\"1\":3,\"amount\":5,\"merchant\":\"x\",\"\u20ac\":1},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 1e+21}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":1e+21,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 9.999999999999999e+20,
+    "receipt": "R-55869DA1"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 123456789012.34}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":123456789012.34,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 123456789012.34,
+    "receipt": "R-F7B27342"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": -0.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":0,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 0.0,
+    "receipt": "R-CB202185"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 9007199254740993}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":9007199254740993,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 9007199254740992.0,
+    "receipt": "R-B0F43AE6"
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "search_flights",
+   "raw": "{\"destination\": \"Rome\", \"max_price\": 300}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"destination\":\"Rome\",\"max_price\":300},\"currency\":\"EUR\",\"name\":\"search_flights\"}",
+   "server_canon": null,
+   "result": {
+    "destination": "Rome",
+    "flights": [
+     {
+      "flight": "ROM100",
+      "airline": "AirNova",
+      "price": 296
+     },
+     {
+      "flight": "ROM107",
+      "airline": "SkyLine",
+      "price": 140
+     },
+     {
+      "flight": "ROM114",
+      "airline": "EuroJet",
+      "price": 259
+     }
+    ]
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "search_flights",
+   "raw": "{\"destination\": \"rome \", \"max_price\": 299.99}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"destination\":\"rome \",\"max_price\":299.99},\"currency\":\"EUR\",\"name\":\"search_flights\"}",
+   "server_canon": null,
+   "result": {
+    "destination": "Rome",
+    "flights": [
+     {
+      "flight": "ROM100",
+      "airline": "AirNova",
+      "price": 296
+     },
+     {
+      "flight": "ROM107",
+      "airline": "SkyLine",
+      "price": 140
+     },
+     {
+      "flight": "ROM114",
+      "airline": "EuroJet",
+      "price": 259
+     }
+    ]
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "search_hotels",
+   "raw": "{\"city\": \"Rome\", \"nights\": 2, \"max_price_per_night\": 160}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Rome\",\"max_price_per_night\":160,\"nights\":2},\"currency\":\"EUR\",\"name\":\"search_hotels\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Rome",
+    "hotels": [
+     {
+      "hotel": "Grand Plaza Rome",
+      "price_per_night": 113,
+      "nights": 2,
+      "total": 226
+     }
+    ]
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "search_hotels",
+   "raw": "{\"city\": \"Rome\", \"nights\": 2.0, \"max_price_per_night\": \"160\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Rome\",\"max_price_per_night\":\"160\",\"nights\":2},\"currency\":\"EUR\",\"name\":\"search_hotels\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Rome",
+    "hotels": [
+     {
+      "hotel": "Grand Plaza Rome",
+      "price_per_night": 113,
+      "nights": 2,
+      "total": 226
+     }
+    ]
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "get_weather",
+   "raw": "{\"city\": \"Oslo\", \"date\": \"2026-12-03\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Oslo\",\"date\":\"2026-12-03\"},\"currency\":\"EUR\",\"name\":\"get_weather\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Oslo",
+    "date": "2026-12-03",
+    "forecast": "rain",
+    "temperature_c": 26
+   }
+  },
+  {
+   "mode": "none",
+   "tool": "search_transfers",
+   "raw": "{\"city\": \"Porto\", \"unexpected\": [null, {}]}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Porto\",\"unexpected\":[null,{}]},\"currency\":\"EUR\",\"name\":\"search_transfers\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Porto",
+    "transfers": [
+     {
+      "company": "Porto Airport Shuttle",
+      "price": 48
+     },
+     {
+      "company": "Porto City Taxi",
+      "price": 36
+     },
+     {
+      "company": "Blue Cab Porto",
+      "price": 63
+     }
+    ]
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320.1}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320.1,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.1,
+    "receipt": "R-B8525525"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 0.30000000000000004}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":0.30000000000000004,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 0.3,
+    "receipt": "R-3645E790"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": \"320\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":\"320\",\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \" Grand Plaza Rome \", \"amount\": 100.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":100,\"merchant\":\" Grand Plaza Rome \"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Grand Plaza Rome",
+    "amount_eur": 100.0,
+    "receipt": "R-B417C707"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Caf\\u00e9 Z\\u00fcrich \\u00e9\\u0301 \\ud83d\\ude00\", \"amount\": 12.5}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":12.5,\"merchant\":\"Caf\u00e9 Z\u00fcrich \u00e9\u0301 \ud83d\ude00\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Caf\u00e9 Z\u00fcrich \u00e9\u0301 \ud83d\ude00",
+    "amount_eur": 12.5,
+    "receipt": "R-CD830F7B"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"A\\u0000B\\n\\t\\\"q\\\"\", \"amount\": 1}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":1,\"merchant\":\"A\\u0000B\\n\\t\\\"q\\\"\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "A\u0000B\n\t\"q\"",
+    "amount_eur": 1.0,
+    "receipt": "R-2A9BE6FF"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 5, \"note\": null}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":5,\"merchant\":\"x\",\"note\":null},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 5, \"extra\": {\"b\": [1, 2.5, null, true], \"a\": \"z\"}}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":5,\"extra\":{\"a\":\"z\",\"b\":[1,2.5,null,true]},\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"amount\": 5, \"merchant\": \"x\", \"\\u20ac\": 1, \"\\r\": 2, \"1\": 3}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"\\r\":2,\"1\":3,\"amount\":5,\"merchant\":\"x\",\"\u20ac\":1},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 1e+21}",
+   "valid": true,
+   "accepted": false,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":1e+21,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "error": "authorisation rejected: the tool refused this call (the agent is not authorised to make it)"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 123456789012.34}",
+   "valid": true,
+   "accepted": false,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":123456789012.34,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "error": "authorisation rejected: the tool refused this call (the agent is not authorised to make it)"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": -0.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":0,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 0.0,
+    "receipt": "R-CB202185"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 9007199254740993}",
+   "valid": true,
+   "accepted": false,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":9007199254740993,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "error": "authorisation rejected: the tool refused this call (the agent is not authorised to make it)"
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "search_flights",
+   "raw": "{\"destination\": \"Rome\", \"max_price\": 300}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"destination\":\"Rome\",\"max_price\":300},\"currency\":\"EUR\",\"name\":\"search_flights\"}",
+   "server_canon": null,
+   "result": {
+    "destination": "Rome",
+    "flights": [
+     {
+      "flight": "ROM100",
+      "airline": "AirNova",
+      "price": 296
+     },
+     {
+      "flight": "ROM107",
+      "airline": "SkyLine",
+      "price": 140
+     },
+     {
+      "flight": "ROM114",
+      "airline": "EuroJet",
+      "price": 259
+     }
+    ]
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "search_flights",
+   "raw": "{\"destination\": \"rome \", \"max_price\": 299.99}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"destination\":\"rome \",\"max_price\":299.99},\"currency\":\"EUR\",\"name\":\"search_flights\"}",
+   "server_canon": null,
+   "result": {
+    "destination": "Rome",
+    "flights": [
+     {
+      "flight": "ROM100",
+      "airline": "AirNova",
+      "price": 296
+     },
+     {
+      "flight": "ROM107",
+      "airline": "SkyLine",
+      "price": 140
+     },
+     {
+      "flight": "ROM114",
+      "airline": "EuroJet",
+      "price": 259
+     }
+    ]
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "search_hotels",
+   "raw": "{\"city\": \"Rome\", \"nights\": 2, \"max_price_per_night\": 160}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Rome\",\"max_price_per_night\":160,\"nights\":2},\"currency\":\"EUR\",\"name\":\"search_hotels\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Rome",
+    "hotels": [
+     {
+      "hotel": "Grand Plaza Rome",
+      "price_per_night": 113,
+      "nights": 2,
+      "total": 226
+     }
+    ]
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "search_hotels",
+   "raw": "{\"city\": \"Rome\", \"nights\": 2.0, \"max_price_per_night\": \"160\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Rome\",\"max_price_per_night\":\"160\",\"nights\":2},\"currency\":\"EUR\",\"name\":\"search_hotels\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Rome",
+    "hotels": [
+     {
+      "hotel": "Grand Plaza Rome",
+      "price_per_night": 113,
+      "nights": 2,
+      "total": 226
+     }
+    ]
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "get_weather",
+   "raw": "{\"city\": \"Oslo\", \"date\": \"2026-12-03\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Oslo\",\"date\":\"2026-12-03\"},\"currency\":\"EUR\",\"name\":\"get_weather\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Oslo",
+    "date": "2026-12-03",
+    "forecast": "rain",
+    "temperature_c": 26
+   }
+  },
+  {
+   "mode": "jwt",
+   "tool": "search_transfers",
+   "raw": "{\"city\": \"Porto\", \"unexpected\": [null, {}]}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Porto\",\"unexpected\":[null,{}]},\"currency\":\"EUR\",\"name\":\"search_transfers\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Porto",
+    "transfers": [
+     {
+      "company": "Porto Airport Shuttle",
+      "price": 48
+     },
+     {
+      "company": "Porto City Taxi",
+      "price": 36
+     },
+     {
+      "company": "Blue Cab Porto",
+      "price": 63
+     }
+    ]
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 320.1}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":320.1,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.1,
+    "receipt": "R-B8525525"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": 0.30000000000000004}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":0.30000000000000004,\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 0.3,
+    "receipt": "R-3645E790"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Hotel Central Rome\", \"amount\": \"320\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":\"320\",\"merchant\":\"Hotel Central Rome\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Hotel Central Rome",
+    "amount_eur": 320.0,
+    "receipt": "R-A0E2D93B"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \" Grand Plaza Rome \", \"amount\": 100.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":100,\"merchant\":\" Grand Plaza Rome \"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Grand Plaza Rome",
+    "amount_eur": 100.0,
+    "receipt": "R-B417C707"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"Caf\\u00e9 Z\\u00fcrich \\u00e9\\u0301 \\ud83d\\ude00\", \"amount\": 12.5}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":12.5,\"merchant\":\"Caf\u00e9 Z\u00fcrich \u00e9\u0301 \ud83d\ude00\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "Caf\u00e9 Z\u00fcrich \u00e9\u0301 \ud83d\ude00",
+    "amount_eur": 12.5,
+    "receipt": "R-CD830F7B"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"A\\u0000B\\n\\t\\\"q\\\"\", \"amount\": 1}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":1,\"merchant\":\"A\\u0000B\\n\\t\\\"q\\\"\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "A\u0000B\n\t\"q\"",
+    "amount_eur": 1.0,
+    "receipt": "R-2A9BE6FF"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 5, \"note\": null}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":5,\"merchant\":\"x\",\"note\":null},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 5, \"extra\": {\"b\": [1, 2.5, null, true], \"a\": \"z\"}}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":5,\"extra\":{\"a\":\"z\",\"b\":[1,2.5,null,true]},\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"amount\": 5, \"merchant\": \"x\", \"\\u20ac\": 1, \"\\r\": 2, \"1\": 3}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"\\r\":2,\"1\":3,\"amount\":5,\"merchant\":\"x\",\"\u20ac\":1},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 5.0,
+    "receipt": "R-90F232A6"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 1e+21}",
+   "valid": true,
+   "accepted": false,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":1e+21,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "error": "authorisation rejected: the tool refused this call (the agent is not authorised to make it)"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 123456789012.34}",
+   "valid": true,
+   "accepted": false,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":123456789012.34,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "error": "authorisation rejected: the tool refused this call (the agent is not authorised to make it)"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": -0.0}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":0,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "status": "paid",
+    "merchant": "x",
+    "amount_eur": 0.0,
+    "receipt": "R-CB202185"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "pay",
+   "raw": "{\"merchant\": \"x\", \"amount\": 9007199254740993}",
+   "valid": true,
+   "accepted": false,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"amount\":9007199254740993,\"merchant\":\"x\"},\"currency\":\"EUR\",\"name\":\"pay\"}",
+   "server_canon": null,
+   "result": {
+    "error": "authorisation rejected: the tool refused this call (the agent is not authorised to make it)"
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "search_flights",
+   "raw": "{\"destination\": \"Rome\", \"max_price\": 300}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"destination\":\"Rome\",\"max_price\":300},\"currency\":\"EUR\",\"name\":\"search_flights\"}",
+   "server_canon": null,
+   "result": {
+    "destination": "Rome",
+    "flights": [
+     {
+      "flight": "ROM100",
+      "airline": "AirNova",
+      "price": 296
+     },
+     {
+      "flight": "ROM107",
+      "airline": "SkyLine",
+      "price": 140
+     },
+     {
+      "flight": "ROM114",
+      "airline": "EuroJet",
+      "price": 259
+     }
+    ]
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "search_flights",
+   "raw": "{\"destination\": \"rome \", \"max_price\": 299.99}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"destination\":\"rome \",\"max_price\":299.99},\"currency\":\"EUR\",\"name\":\"search_flights\"}",
+   "server_canon": null,
+   "result": {
+    "destination": "Rome",
+    "flights": [
+     {
+      "flight": "ROM100",
+      "airline": "AirNova",
+      "price": 296
+     },
+     {
+      "flight": "ROM107",
+      "airline": "SkyLine",
+      "price": 140
+     },
+     {
+      "flight": "ROM114",
+      "airline": "EuroJet",
+      "price": 259
+     }
+    ]
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "search_hotels",
+   "raw": "{\"city\": \"Rome\", \"nights\": 2, \"max_price_per_night\": 160}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Rome\",\"max_price_per_night\":160,\"nights\":2},\"currency\":\"EUR\",\"name\":\"search_hotels\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Rome",
+    "hotels": [
+     {
+      "hotel": "Grand Plaza Rome",
+      "price_per_night": 113,
+      "nights": 2,
+      "total": 226
+     }
+    ]
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "search_hotels",
+   "raw": "{\"city\": \"Rome\", \"nights\": 2.0, \"max_price_per_night\": \"160\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Rome\",\"max_price_per_night\":\"160\",\"nights\":2},\"currency\":\"EUR\",\"name\":\"search_hotels\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Rome",
+    "hotels": [
+     {
+      "hotel": "Grand Plaza Rome",
+      "price_per_night": 113,
+      "nights": 2,
+      "total": 226
+     }
+    ]
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "get_weather",
+   "raw": "{\"city\": \"Oslo\", \"date\": \"2026-12-03\"}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Oslo\",\"date\":\"2026-12-03\"},\"currency\":\"EUR\",\"name\":\"get_weather\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Oslo",
+    "date": "2026-12-03",
+    "forecast": "rain",
+    "temperature_c": 26
+   }
+  },
+  {
+   "mode": "mm",
+   "tool": "search_transfers",
+   "raw": "{\"city\": \"Porto\", \"unexpected\": [null, {}]}",
+   "valid": true,
+   "accepted": true,
+   "canon_match": true,
+   "client_canon": "{\"arguments\":{\"city\":\"Porto\",\"unexpected\":[null,{}]},\"currency\":\"EUR\",\"name\":\"search_transfers\"}",
+   "server_canon": null,
+   "result": {
+    "city": "Porto",
+    "transfers": [
+     {
+      "company": "Porto Airport Shuttle",
+      "price": 48
+     },
+     {
+      "company": "Porto City Taxi",
+      "price": 36
+     },
+     {
+      "company": "Blue Cab Porto",
+      "price": 63
+     }
+    ]
+   }
+  }
+ ],
+ "summary": {
+  "none": {
+   "probes": 21,
+   "valid": 21,
+   "canon_mismatch": 0,
+   "valid_rejected": 0
+  },
+  "jwt": {
+   "probes": 21,
+   "valid": 21,
+   "canon_mismatch": 0,
+   "valid_rejected": 3
+  },
+  "mm": {
+   "probes": 21,
+   "valid": 21,
+   "canon_mismatch": 0,
+   "valid_rejected": 3
+  }
+ }
+}

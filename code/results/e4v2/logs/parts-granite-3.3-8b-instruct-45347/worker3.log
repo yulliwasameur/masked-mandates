@@ -1,0 +1,191 @@
+[w3] task3a t0 mm_esc: ok=True calls=4 turns=4 llm=1690 auth=1846 lat=416 wall=3966 err=None
+[w3] task3a t0 none: ok=True calls=4 turns=4 llm=2031 auth=0 lat=417 wall=2459 err=None
+[w3] task3a t0 jwt: ok=True calls=4 turns=4 llm=1655 auth=14 lat=416 wall=2097 err=None
+[w3] task3a t0 mm: ok=True calls=4 turns=4 llm=1662 auth=1820 lat=416 wall=3912 err=None
+[w3] task3a t0_nolat none: ok=True calls=4 turns=4 llm=1655 auth=0 lat=0 wall=1667 err=None
+[w3] task3a t0_nolat jwt: ok=True calls=4 turns=4 llm=1651 auth=13 lat=0 wall=1675 err=None
+[w3] task3a t0_nolat mm: ok=True calls=4 turns=4 llm=1665 auth=1827 lat=0 wall=3506 err=None
+[w3] task3a t0_nolat mm_esc: ok=True calls=4 turns=4 llm=1951 auth=1840 lat=0 wall=3804 err=None
+[w3] task3a t07_s1 jwt: ok=True calls=4 turns=3 llm=2100 auth=13 lat=528 wall=2653 err=None
+[w3] task3a t07_s1 mm: ok=True calls=4 turns=3 llm=1897 auth=1821 lat=528 wall=4259 err=None
+[w3] task3a t07_s1 mm_esc: ok=True calls=4 turns=3 llm=1905 auth=1838 lat=528 wall=4284 err=None
+[w3] task3a t07_s1 none: ok=True calls=4 turns=3 llm=1892 auth=0 lat=528 wall=2432 err=None
+[w3] task3a t07_s2 mm: ok=False calls=3 turns=2 llm=2817 auth=1368 lat=383 wall=4578 err=None
+[w3] task3a t07_s2 mm_esc: ok=False calls=3 turns=2 llm=2112 auth=1383 lat=383 wall=3888 err=None
+[w3] task3a t07_s2 none: ok=True calls=4 turns=4 llm=3251 auth=0 lat=424 wall=3688 err=None
+[w3] task3a t07_s2 jwt: ok=False calls=3 turns=2 llm=2095 auth=10 lat=381 wall=2494 err=None
+[w3] task3a t07_s3 mm_esc: ok=True calls=4 turns=3 llm=1770 auth=1840 lat=549 wall=4173 err=None
+[w3] task3a t07_s3 none: ok=True calls=4 turns=3 llm=1757 auth=0 lat=549 wall=2318 err=None
+[w3] task3a t07_s3 jwt: ok=True calls=4 turns=3 llm=1759 auth=13 lat=548 wall=2332 err=None
+[w3] task3a t07_s3 mm: ok=True calls=4 turns=3 llm=1776 auth=1821 lat=550 wall=4161 err=None
+[w3] task8a t0 none: ok=False calls=4 turns=3 llm=1558 auth=0 lat=553 wall=2123 err=None
+[w3] task8a t0 jwt: ok=True calls=4 turns=3 llm=1608 auth=13 lat=553 wall=2186 err=None
+[w3] task8a t0 mm: ok=False calls=4 turns=7 llm=2433 auth=1823 lat=554 wall=4823 err=None
+[w3] task8a t0 mm_esc: ok=False calls=4 turns=7 llm=2463 auth=1840 lat=553 wall=4870 err=None
+[w3] task8a t0_nolat jwt: ok=False calls=4 turns=3 llm=1542 auth=13 lat=0 wall=1567 err=None
+[w3] task8a t0_nolat mm: ok=True calls=4 turns=7 llm=2605 auth=1822 lat=0 wall=4441 err=None
+[w3] task8a t0_nolat mm_esc: ok=False calls=4 turns=3 llm=1547 auth=1841 lat=0 wall=3401 err=None
+[w3] task8a t0_nolat none: ok=False calls=4 turns=7 llm=2448 auth=0 lat=0 wall=2459 err=None
+[w3] task8a t07_s1 mm: ok=False calls=4 turns=6 llm=2190 auth=1822 lat=469 wall=4495 err=None
+[w3] task8a t07_s1 mm_esc: ok=False calls=4 turns=6 llm=2308 auth=1844 lat=469 wall=4634 err=None
+[w3] task8a t07_s1 none: ok=False calls=4 turns=6 llm=2207 auth=0 lat=468 wall=2687 err=None
+[w3] task8a t07_s1 jwt: ok=False calls=4 turns=6 llm=2301 auth=13 lat=467 wall=2793 err=None
+[w3] task8a t07_s2 mm_esc: ok=False calls=4 turns=3 llm=2178 auth=1843 lat=459 wall=4493 err=None
+[w3] task8a t07_s2 none: ok=False calls=3 turns=2 llm=2547 auth=0 lat=430 wall=2987 err=None
+[w3] task8a t07_s2 jwt: ok=False calls=4 turns=5 llm=2498 auth=14 lat=459 wall=2983 err=None
+[w3] task8a t07_s2 mm: ok=False calls=4 turns=5 llm=2513 auth=1823 lat=459 wall=4809 err=None
+[w3] task8a t07_s3 none: ok=False calls=4 turns=3 llm=2082 auth=0 lat=441 wall=2536 err=None
+[w3] task8a t07_s3 jwt: ok=False calls=4 turns=3 llm=2090 auth=13 lat=442 wall=2557 err=None
+[w3] task8a t07_s3 mm: ok=False calls=4 turns=3 llm=2095 auth=1823 lat=441 wall=4373 err=None
+[w3] task8a t07_s3 mm_esc: ok=False calls=4 turns=3 llm=2104 auth=1836 lat=440 wall=4395 err=None
+[w3] task13a t0 jwt: ok=False calls=4 turns=4 llm=1982 auth=13 lat=1014 wall=3020 err=None
+[w3] task13a t0 mm: ok=False calls=4 turns=4 llm=1644 auth=1820 lat=1012 wall=4489 err=None
+[w3] task13a t0 mm_esc: ok=False calls=4 turns=4 llm=1648 auth=1840 lat=1013 wall=4514 err=None
+[w3] task13a t0 none: ok=False calls=4 turns=4 llm=1639 auth=0 lat=1013 wall=2664 err=None
+[w3] task13a t0_nolat mm: ok=False calls=4 turns=3 llm=1497 auth=1823 lat=0 wall=3333 err=None
+[w3] task13a t0_nolat mm_esc: ok=False calls=4 turns=4 llm=2037 auth=1841 lat=0 wall=3892 err=None
+[w3] task13a t0_nolat none: ok=False calls=4 turns=4 llm=1654 auth=0 lat=0 wall=1665 err=None
+[w3] task13a t0_nolat jwt: ok=False calls=4 turns=4 llm=1651 auth=13 lat=0 wall=1675 err=None
+[w3] task13a t07_s1 mm_esc: ok=False calls=4 turns=3 llm=2043 auth=1841 lat=479 wall=4376 err=None
+[w3] task13a t07_s1 none: ok=False calls=4 turns=3 llm=2006 auth=0 lat=480 wall=2498 err=None
+[w3] task13a t07_s1 jwt: ok=False calls=4 turns=3 llm=2005 auth=13 lat=481 wall=2511 err=None
+[w3] task13a t07_s1 mm: ok=False calls=4 turns=3 llm=2037 auth=1822 lat=480 wall=4353 err=None
+[w3] task13a t07_s2 none: ok=False calls=4 turns=4 llm=1693 auth=0 lat=537 wall=2242 err=None
+[w3] task13a t07_s2 jwt: ok=False calls=4 turns=4 llm=1688 auth=14 lat=536 wall=2249 err=None
+[w3] task13a t07_s2 mm: ok=False calls=4 turns=4 llm=1692 auth=1821 lat=537 wall=4064 err=None
+[w3] task13a t07_s2 mm_esc: ok=False calls=4 turns=4 llm=1701 auth=1841 lat=537 wall=4093 err=None
+[w3] task13a t07_s3 jwt: ok=False calls=4 turns=5 llm=2198 auth=13 lat=675 wall=2899 err=None
+[w3] task13a t07_s3 mm: ok=False calls=4 turns=5 llm=4178 auth=1825 lat=675 wall=6692 err=None
+[w3] task13a t07_s3 mm_esc: ok=False calls=4 turns=5 llm=4095 auth=1845 lat=675 wall=6628 err=None
+[w3] task13a t07_s3 none: ok=False calls=4 turns=5 llm=4074 auth=0 lat=676 wall=4764 err=None
+[w3] task18a t0 mm: ok=True calls=4 turns=5 llm=2696 auth=1820 lat=525 wall=5055 err=None
+[w3] task18a t0 mm_esc: ok=True calls=4 turns=5 llm=2690 auth=1839 lat=525 wall=5067 err=None
+[w3] task18a t0 none: ok=True calls=4 turns=5 llm=2683 auth=0 lat=526 wall=3222 err=None
+[w3] task18a t0 jwt: ok=True calls=4 turns=5 llm=2685 auth=14 lat=526 wall=3236 err=None
+[w3] task18a t0_nolat mm_esc: ok=True calls=4 turns=5 llm=2692 auth=1841 lat=0 wall=4547 err=None
+[w3] task18a t0_nolat none: ok=True calls=4 turns=5 llm=2695 auth=0 lat=0 wall=2707 err=None
+[w3] task18a t0_nolat jwt: ok=True calls=4 turns=5 llm=2675 auth=13 lat=0 wall=2700 err=None
+[w3] task18a t0_nolat mm: ok=True calls=4 turns=5 llm=2719 auth=1819 lat=0 wall=4552 err=None
+[w3] task18a t07_s1 none: ok=False calls=4 turns=3 llm=1706 auth=0 lat=629 wall=2347 err=None
+[w3] task18a t07_s1 jwt: ok=False calls=4 turns=3 llm=1689 auth=13 lat=629 wall=2343 err=None
+[w3] task18a t07_s1 mm: ok=False calls=4 turns=3 llm=1676 auth=1823 lat=629 wall=4141 err=None
+[w3] task18a t07_s1 mm_esc: ok=False calls=4 turns=3 llm=1689 auth=1842 lat=630 wall=4175 err=None
+[w3] task18a t07_s2 jwt: ok=False calls=4 turns=3 llm=1471 auth=13 lat=553 wall=2049 err=None
+[w3] task18a t07_s2 mm: ok=False calls=4 turns=3 llm=1472 auth=1824 lat=552 wall=3862 err=None
+[w3] task18a t07_s2 mm_esc: ok=False calls=4 turns=3 llm=1465 auth=1839 lat=552 wall=3870 err=None
+[w3] task18a t07_s2 none: ok=False calls=4 turns=3 llm=1474 auth=0 lat=552 wall=2038 err=None
+[w3] task18a t07_s3 mm: ok=True calls=4 turns=5 llm=2703 auth=1823 lat=570 wall=5110 err=None
+[w3] task18a t07_s3 mm_esc: ok=True calls=4 turns=5 llm=2707 auth=1841 lat=569 wall=5131 err=None
+[w3] task18a t07_s3 none: ok=True calls=4 turns=5 llm=2708 auth=0 lat=569 wall=3289 err=None
+[w3] task18a t07_s3 jwt: ok=True calls=4 turns=5 llm=2710 auth=14 lat=569 wall=3304 err=None
+[w3] task23a t0 mm_esc: ok=False calls=4 turns=4 llm=2553 auth=1840 lat=487 wall=4893 err=None
+[w3] task23a t0 none: ok=False calls=4 turns=4 llm=2569 auth=0 lat=488 wall=3069 err=None
+[w3] task23a t0 jwt: ok=False calls=4 turns=4 llm=2535 auth=13 lat=487 wall=3047 err=None
+[w3] task23a t0 mm: ok=False calls=4 turns=4 llm=2536 auth=1824 lat=487 wall=4861 err=None
+[w3] task23a t0_nolat none: ok=False calls=4 turns=4 llm=2537 auth=0 lat=0 wall=2549 err=None
+[w3] task23a t0_nolat jwt: ok=False calls=4 turns=4 llm=2723 auth=13 lat=0 wall=2747 err=None
+[w3] task23a t0_nolat mm: ok=False calls=4 turns=4 llm=2538 auth=1822 lat=0 wall=4374 err=None
+[w3] task23a t0_nolat mm_esc: ok=False calls=4 turns=4 llm=2718 auth=1841 lat=0 wall=4572 err=None
+[w3] task23a t07_s1 jwt: ok=False calls=4 turns=4 llm=2317 auth=14 lat=530 wall=2872 err=None
+[w3] task23a t07_s1 mm: ok=False calls=4 turns=6 llm=3069 auth=1821 lat=583 wall=5486 err=None
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/yulameur1/masked-mandates-95/code/e4v2/e4v2.py", line 1204, in <module>
+  |     elif a.cmd == "worker": asyncio.run(worker_main(a))
+  |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/asyncio/runners.py", line 194, in run
+  |     return runner.run(main)
+  |            ^^^^^^^^^^^^^^^^
+  |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/asyncio/runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+  |     return future.result()
+  |            ^^^^^^^^^^^^^^^
+  |   File "/home/yulameur1/masked-mandates-95/code/e4v2/e4v2.py", line 805, in worker_main
+  |     async with AsyncExitStack() as st, httpx.AsyncClient(timeout=60) as admin:
+  |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/contextlib.py", line 754, in __aexit__
+  |     raise exc_details[1]
+  |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/contextlib.py", line 737, in __aexit__
+  |     cb_suppress = await cb(*exc_details)
+  |                   ^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/client/streamable_http.py", line 742, in streamablehttp_client
+  |     async with streamable_http_client(
+  |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/client/streamable_http.py", line 672, in streamable_http_client
+  |     async with anyio.create_task_group() as tg:
+  |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 871, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    |     yield
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    |     resp = await self._pool.handle_async_request(req)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    |     raise exc from None
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    |     response = await connection.handle_async_request(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    |     return await self._connection.handle_async_request(request)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    |     raise exc
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    |     ) = await self._receive_response_headers(**kwargs)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    |     event = await self._receive_event(timeout=timeout)
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    |     data = await self._network_stream.read(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 32, in read
+    |     with map_exceptions(exc_map):
+    |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    |     raise to_exc(exc) from exc
+    | httpcore.ReadError
+    | 
+    | The above exception was the direct cause of the following exception:
+    | 
+    | Traceback (most recent call last):
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/_core/_tasks.py", line 327, in _run_coro
+    |     retval = await self._coro
+    |              ^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/client/streamable_http.py", line 583, in handle_request_async
+    |     await self._handle_post_request(ctx)
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/client/streamable_http.py", line 361, in _handle_post_request
+    |     async with stream_within_origin(
+    |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/contextlib.py", line 210, in __aenter__
+    |     return await anext(self.gen)
+    |            ^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/shared/_httpx_utils.py", line 132, in stream_within_origin
+    |     response = await client.send(request, stream=True, follow_redirects=False)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    |     response = await self._send_handling_auth(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    |     response = await self._send_handling_redirects(
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    |     response = await self._send_single_request(request)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    |     response = await transport.handle_async_request(request)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    |     with map_httpcore_exceptions():
+    |   File "/opt/ohpc/pub/apps/python/3.12.4/lib/python3.12/contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    |     raise mapped_exc(message) from exc
+    | httpx.ReadError
+    +------------------------------------

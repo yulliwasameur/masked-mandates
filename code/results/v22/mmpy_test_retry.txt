@@ -1,0 +1,39 @@
+{
+ "case1_same_call": {
+  "first_rejected_reason": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+  "state_after_release": [
+   1,
+   0,
+   []
+  ],
+  "same_pseudonym": true,
+  "retry_accepted": true,
+  "state_after_retry": [
+   1,
+   null,
+   []
+  ]
+ },
+ "case2_other_call": {
+  "first_rejected_reason": "verify: BBSPlusProofContributionFailed(0, FirstSchnorrVerificationFailed)",
+  "distinct_pseudonyms": true,
+  "other_call_accepted": true,
+  "state_after_other_call": [
+   2,
+   null,
+   [
+    0
+   ]
+  ],
+  "original_call_later_accepted": true,
+  "state_after_original_call": [
+   3,
+   null,
+   [
+    0
+   ]
+  ]
+ },
+ "release_without_presentation": false
+}
+test_retry: OK

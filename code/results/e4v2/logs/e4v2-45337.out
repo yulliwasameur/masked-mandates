@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+AssertionError: (16, 8)
+job 45337 node m-gpu04 cpus vllm= orchestrator= agents= servers= RAYON_NUM_THREADS=1
+[2026-11-13T11:26:28.358] error: *** JOB 45337 ON m-gpu04 CANCELLED AT 2026-11-13T11:26:28 DUE to SIGNAL Terminated ***
+Terminated

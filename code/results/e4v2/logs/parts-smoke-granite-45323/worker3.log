@@ -1,0 +1,4 @@
+[w3] task72d t0 none: ok=False calls=3 turns=1 llm=846 auth=0 lat=577 wall=1441 err=RuntimeError: HTTP 400: {"error":{"message":"access to attribute 'append' of 'list' object is unsafe.","type":"BadRequestError","param":null,"code":400}}
+[w3] task72d t0 jwt: ok=False calls=3 turns=1 llm=777 auth=11 lat=577 wall=1377 err=RuntimeError: HTTP 400: {"error":{"message":"access to attribute 'append' of 'list' object is unsafe.","type":"BadRequestError","param":null,"code":400}}
+[w3] task72d t0 mm: ok=False calls=3 turns=1 llm=771 auth=1370 lat=577 wall=2735 err=RuntimeError: HTTP 400: {"error":{"message":"access to attribute 'append' of 'list' object is unsafe.","type":"BadRequestError","param":null,"code":400}}
+[w3] task72d t0 mm_esc: ok=False calls=3 turns=1 llm=771 auth=1399 lat=576 wall=2760 err=RuntimeError: HTTP 400: {"error":{"message":"access to attribute 'append' of 'list' object is unsafe.","type":"BadRequestError","param":null,"code":400}}

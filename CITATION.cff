@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this artifact, please cite the paper and this archived version."
 title: "Masked Mandates: artifact (code, scripts and results)"
 type: software
-version: 1.0.3
-date-released: 2026-11-13
+version: 2.2.1
+date-released: 2026-11-14
 license: MIT
 authors:
   - family-names: Ameur
@@ -25,7 +25,10 @@ identifiers:
     description: "Concept DOI (all versions)"
   - type: doi
     value: "10.5281/zenodo.24182546"
-    description: "Version 1.0.2, cited in the paper (OJ-CS submission)"
+    description: "Version 1.0.2, cited in the first OJ-CS submission"
+  - type: doi
+    value: "10.5281/zenodo.24222783"
+    description: "Version 2.2.1, cited in the revised paper"
 keywords:
   - anonymous credentials
   - delegation

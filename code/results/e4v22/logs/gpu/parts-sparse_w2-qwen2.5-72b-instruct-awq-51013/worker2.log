@@ -1,0 +1,8 @@
+[w2] shared issuer: 24 dummy mandates in 60 s
+[w2] task2a t0 mm: ok=True calls=4 turns=4 llm=3479 auth=1843 lat=494 wall=5824 canon_mm=0 churn=0 err=None
+[w2] task25b t0 mm: ok=True calls=4 turns=6 llm=4460 auth=4340 lat=700 wall=9508 canon_mm=0 churn=0 err=None
+[w2] task48c t0 mm: ok=True calls=6 turns=6 llm=6333 auth=4806 lat=864 wall=12155 canon_mm=0 churn=0 err=None
+[w2] task53c t0 mm: ok=True calls=6 turns=6 llm=6291 auth=4798 lat=705 wall=11946 canon_mm=0 churn=0 err=None
+[w2] task76d t0 mm: ok=False calls=9 turns=4 llm=7309 auth=4142 lat=1078 wall=12548 canon_mm=0 churn=0 err=None
+[w2] task99e t0 mm: ok=False calls=7 turns=4 llm=10812 auth=4804 lat=919 wall=16549 canon_mm=0 churn=0 err=None
+[w2] tasks done; revoker keeps running 531 s (min duration)

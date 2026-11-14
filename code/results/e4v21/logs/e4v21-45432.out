@@ -1,0 +1,11 @@
+job 45432 node m-gpu01 cpus vllm=0,2,4,6,8 orchestrator=10 agents=12,14,16,18,20 servers=22,24,26,28,30 RAYON_NUM_THREADS=1
+   0.7294810046710389
+  ],
+  "errors": 0
+ }
+}
+   0.588061295261986
+  ],
+  "errors": 0
+ }
+}

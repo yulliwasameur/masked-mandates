@@ -1,0 +1,42 @@
+% Sections 3 (deployment, threat model, properties) of the revised OJ-CS manuscript.
+\section{Deployment, Threat Model and Properties}\label{sec:model}
+\subsection{Deployment}
+The parties are as follows (a figure is in the supplementary material).
+\begin{itemize}
+\item \emph{Issuer} $\mathcal{I}$: a domain authorization service shared by many principals, for example the authorization server of an enterprise or of a federation of agent platforms. It must not be the agent host, which sees the conversations anyway. It publishes its public key, every accumulator value and every root-tag binding in an append-only log; wallets accept nothing that is not in the log, so the issuer cannot tag wallets with private values.
+\item \emph{Principal} $P$: registers once a long-term key $pk_P=g^{u_P}$, kept in its \emph{wallet}, by a self-signed entry in the log, which it monitors; the registry is therefore not in the issuer's hands. To obtain a root mandate, $P$ authenticates to $\mathcal{I}$ as usual and signs a fresh per-root tag $T=g^{t}$ with $u_P$.
+\item \emph{Wallet}: keeps the tree's secrets and produces presentations when an \emph{agent} asks for one. The agent is an LLM-driven process that never sees the secrets. The wallet enforces a policy: the time must be close to its clock, the amount must equal the amount in the call and be in the stated currency, and an optional allow-list of tools applies.
+\item \emph{Sub-agents}: each receives a delegated mandate with its own disjoint interval of counters. Cryptographic attenuation matters when a sub-agent runs its own wallet (threat A2), which then holds the tree's secrets and can link its calls; with a shared wallet, attenuation could be wallet policy (E4's delegations ran in one process).
+\item \emph{Tools} (MCP servers, A2A agents): verify presentations with public data, their clock, their nonces and a seen-set of pseudonyms. Each tool publishes a fixed descriptor: its action class, the JSON path of the amount, the currency, and whether it requires escrow.
+\item \emph{Escrow committee}: three members, which we recommend be independent of the issuer and of the platform, hold shares of a decryption key from a distributed key generation (DKG).
+\end{itemize}
+
+\paragraph*{Defaults and anonymity set} Epochs last one hour; roots are long-lived (say one per principal and month). The issuer limits roots per principal and bounds each root's interval by a public $Q$ ($2^{20}$ here): root issuance is the Sybil boundary. The anonymity set of a presentation is the set of principals of the same issuer whose mandates allow the same call in the same epoch, against the same accumulator value. A tool learns that the caller is authorized by $\mathcal{I}$, the action class, and the values it set itself (time, amount). It does not learn the principal, the mandate or its position in the tree; it can learn the remaining quota only by probing until refused.
+
+\paragraph*{Where it fits} The scheme pays off when one issuer serves many principals that tools must not tell apart: a platform or federation that imposes data minimization on third-party tools, or tools that sell per-call access; for an enterprise issuer, tools still learn the employer. Tools that need the user's name (payment, delivery) gain nothing for their own calls, and should be called in a separate session at another time, carrying no value echoed from the task (such as a quoted price), which in E3 cuts naming from \NameMM{} to \NameDecHourFree{} (\NameDecHourEvery{} if every task needs such a tool); in our travel example, \sys{} protects the searches and the sub-agent's activity, not the payment. The supplementary material details these settings and the GDPR roles.
+
+\paragraph*{Running example} Alice's wallet obtains a root mandate for classes \{search, pay\}, a cap of 1{,}000~EUR per call and counters $[0,100)$ per tool and hour.
+Her travel agent delegates hotel booking to a sub-agent with class \{search\}, a cap of 300~EUR and counters $[80,100)$; the hotel tool sees only a 13.5-kB proof that some mandate of its issuer allows this exact call, and a fresh pseudonym; Alice's tree makes at most 100 calls per hour at each tool, however many sub-agents it has; revoking the sub-agent or the root stops it or the whole tree everywhere; after abuse, two escrow members can name Alice and the mandate.
+
+\subsection{Threat model}
+A1: \emph{Linking}: any coalition of tools, possibly with the issuer and one escrow member, tries to link presentations to each other or to a principal. A2: \emph{Misbehaving agent}: a compromised or prompt-injected agent~\cite{greshake2023injection}, or a malicious wallet, tries to act beyond its mandate, give a sub-agent more than it holds, or forge proofs. A3: \emph{Replay} to another tool, call, epoch or nonce. A4: \emph{Rate abuse}, including minting sub-agents or inventing epochs to multiply quotas. A5: \emph{Use after revocation} of a mandate or an ancestor. A6: \emph{Framing}: the issuer, tools and one escrow member try to attribute a presentation to an innocent principal.
+
+\paragraph*{Outside the cryptographic model} Unlinkability concerns the authorization material only. Call content (measured in E3), network addresses (use a relay such as Oblivious HTTP~\cite{rfc9458}), MCP session state (use one stateless session per call; E2 measures its cost), per-client OAuth tokens~\cite{mcpauth}, and the issuer's view of identified root issuance and delegation times can still identify callers; the supplementary material lists the countermeasures. The agent host and LLM provider see the conversation and are trusted by the principal.
+Prompt injection itself is out of scope; \sys{} bounds what an injected agent can do. We assume TLS and authenticated tool identities.
+
+\subsection{Properties}\label{sec:defs}
+Table~\ref{tab:props} states the six properties informally, with the coalition each one resists and its assumptions; the supplementary material gives the games and proofs. All proofs use random oracles. Extraction uses rewinding with sequential issuer sessions, so a deployment must serialize issuance. The composite Fiat--Shamir proof is assumed simulation-extractable, for its $\Sigma$-protocol part~\cite{faust2012fsnm} and for the range arguments, which need knowledge soundness rather than plain soundness~\cite{attema2022fsmulti,ganesh2022bpse}. Unlinkability with an opening oracle additionally needs a chosen-ciphertext-secure escrow, which holds for signed ElGamal in the algebraic group model~\cite{fuchsbauer2020schnorr}.
+
+\begin{table*}[t]\centering\caption{Security properties (games and proofs in the supplementary material). q-SDH: strong Diffie--Hellman; DL: discrete logarithm; q-DDHI: decisional Diffie--Hellman inversion; ZK: zero knowledge; SE: simulation extractability.}\label{tab:props}
+\scriptsize
+\begin{tabular}{@{}p{0.1\textwidth}p{0.42\textwidth}p{0.2\textwidth}p{0.2\textwidth}@{}}\toprule
+Property & Statement & Adversary & Assumptions\\\midrule
+UNF & Every accepted call extracts to a mandate that descends by attenuation from a root the issuer signed, allows the call, and is live (no revoked ancestor). & all agents, tools, escrow; honest issuer & q-SDH, DL, SE (incl.\ range arguments)\\
+RL & Per root, tool and epoch of the tool's clock: at most $k_0-\ell_0$ accepted calls by the whole tree, and as many delegations per issuer epoch. & as UNF & as UNF\\
+INV & A presentation cannot be used for another call, tool, epoch or nonce. & issuer, tools, other principals & q-DL, ZK, SE\\
+UNL & Presentations by two honest mandates are indistinguishable when the leakage $\Lambda$ (allowed, live, accumulator value, valid witness, quota left) is equal; many challenges, each advancing both mandates; with or without opening oracle. & issuer, all tools, one escrow member & ZK, DDH, $(Q{+}1)$-DDHI, consistent log (CCA: signed ElGamal)\\
+TRACE & Two escrow members open every accepted call to its principal and mandate. & agents, tools, one escrow member; honest issuer & as UNF, Schnorr\\
+NF & No coalition can make a presentation open to an honest principal. & issuer, tools, one escrow member & DL, Schnorr, ZK, SE, consistent log\\\bottomrule
+\end{tabular}
+\end{table*}
+

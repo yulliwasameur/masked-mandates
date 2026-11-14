@@ -9,3 +9,4 @@ crate-type = ["cdylib"]
 pyo3 = { version = "0.22", features = ["extension-module"] }
 mmcore = { path = ".." }
 rand = "0.8"
+sha2 = "0.10"

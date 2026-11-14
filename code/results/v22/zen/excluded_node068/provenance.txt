@@ -1,0 +1,9 @@
+git_commit=96a694d14ca42d93f2d0fa6fd9b5253edd01f515
+git_tag=v2.2.0
+a24a9cd06579eac2e785716814f911b09dea46298fc608797740f58ed8ad7f54  target/release/bench
+cefc0d399d2ca9d956085b255b257ae6f51523914365806159a53b440e9ec043  target/release/attacks
+574a8f23583a95c7afc8e2fd4d89e033b5dde9ce21d764b778cf6a11ec7957a3  target/release/smoke
+pin=taskset -c 8
+rayon=1
+node=node068
+job=1680010

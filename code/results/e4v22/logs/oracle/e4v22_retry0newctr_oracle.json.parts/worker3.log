@@ -1,0 +1,25 @@
+[w3] shared issuer: 200 dummy mandates in 539 s
+[w3] task3a t0 mm: ok=True calls=4 turns=5 llm=0 auth=2402 lat=418 wall=3053 canon_mm=0 churn=0 err=None
+[w3] task8a t0 mm: ok=True calls=4 turns=5 llm=0 auth=2803 lat=552 wall=3813 canon_mm=0 churn=0 err=None
+[w3] task13a t0 mm: ok=True calls=4 turns=5 llm=0 auth=2529 lat=1015 wall=3853 canon_mm=0 churn=0 err=None
+[w3] task18a t0 mm: ok=True calls=4 turns=5 llm=0 auth=2804 lat=527 wall=3802 canon_mm=0 churn=0 err=None
+[w3] task23a t0 mm: ok=True calls=4 turns=5 llm=0 auth=2808 lat=488 wall=3766 canon_mm=0 churn=0 err=None
+[w3] task28b t0 mm: ok=True calls=4 turns=7 llm=0 auth=5729 lat=675 wall=6882 canon_mm=0 churn=0 err=None
+[w3] task33b t0 mm: ok=True calls=4 turns=7 llm=0 auth=5360 lat=752 wall=6122 canon_mm=0 churn=0 err=None
+[w3] task38b t0 mm: ok=True calls=4 turns=7 llm=0 auth=5162 lat=721 wall=5893 canon_mm=0 churn=0 err=None
+[w3] task43b t0 mm: ok=True calls=4 turns=7 llm=0 auth=5147 lat=370 wall=5527 canon_mm=0 churn=0 err=None
+[w3] task48c t0 mm: ok=True calls=6 turns=9 llm=0 auth=5998 lat=865 wall=7122 canon_mm=0 churn=0 err=None
+[w3] task53c t0 mm: ok=True calls=6 turns=9 llm=0 auth=6479 lat=705 wall=7896 canon_mm=0 churn=0 err=None
+[w3] task58c t0 mm: ok=True calls=6 turns=9 llm=0 auth=6462 lat=783 wall=7979 canon_mm=0 churn=0 err=None
+[w3] task63c t0 mm: ok=True calls=6 turns=9 llm=0 auth=6361 lat=701 wall=7882 canon_mm=0 churn=0 err=None
+[w3] task68c t0 mm: ok=True calls=6 turns=9 llm=0 auth=6227 lat=789 wall=7746 canon_mm=0 churn=0 err=None
+[w3] task73d t0 mm: ok=True calls=11 turns=12 llm=0 auth=7101 lat=1515 wall=9599 canon_mm=0 churn=0 err=None
+[w3] task78d t0 mm: ok=True calls=11 turns=12 llm=0 auth=6142 lat=1256 wall=7724 canon_mm=0 churn=0 err=None
+[w3] task83d t0 mm: ok=True calls=11 turns=12 llm=0 auth=6286 lat=1842 wall=8611 canon_mm=0 churn=0 err=None
+[w3] task88d t0 mm: ok=True calls=11 turns=12 llm=0 auth=6691 lat=1802 wall=9356 canon_mm=0 churn=0 err=None
+[w3] task93d t0 mm: ok=True calls=11 turns=12 llm=0 auth=7509 lat=1589 wall=10316 canon_mm=0 churn=0 err=None
+[w3] task98e t0 mm: ok=True calls=5 turns=8 llm=0 auth=5956 lat=546 wall=6982 canon_mm=0 churn=0 err=None
+[w3] task103e t0 mm: ok=True calls=6 turns=9 llm=0 auth=5406 lat=606 wall=6028 canon_mm=0 churn=0 err=None
+[w3] task108e t0 mm: ok=True calls=5 turns=8 llm=0 auth=5745 lat=523 wall=6800 canon_mm=0 churn=0 err=None
+[w3] task113e t0 mm: ok=True calls=6 turns=9 llm=0 auth=6082 lat=869 wall=7196 canon_mm=0 churn=0 err=None
+[w3] task118e t0 mm: ok=True calls=5 turns=8 llm=0 auth=5739 lat=403 wall=6621 canon_mm=0 churn=0 err=None

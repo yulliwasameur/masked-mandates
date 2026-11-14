@@ -1,0 +1,48 @@
+[w1] task1a t0 jwt: ok=True calls=4 turns=4 llm=1117 auth=15 lat=428 wall=1568 canon_mm=0 churn=0 err=None
+[w1] task1a t0 mm: ok=True calls=4 turns=4 llm=1109 auth=1813 lat=427 wall=3358 canon_mm=0 churn=0 err=None
+[w1] task1a t0 mm_esc: ok=True calls=4 turns=4 llm=1088 auth=1812 lat=427 wall=3336 canon_mm=0 churn=0 err=None
+[w1] task1a t0 none: ok=True calls=4 turns=4 llm=1093 auth=0 lat=427 wall=1527 canon_mm=0 churn=0 err=None
+[w1] task1a t0_rep mm: ok=True calls=4 turns=4 llm=1102 auth=1818 lat=455 wall=3384 canon_mm=0 churn=0 err=None
+[w1] task1a t0_rep mm_esc: ok=True calls=4 turns=4 llm=1102 auth=1836 lat=455 wall=3401 canon_mm=0 churn=0 err=None
+[w1] task1a t0_rep none: ok=True calls=4 turns=4 llm=1106 auth=0 lat=457 wall=1570 canon_mm=0 churn=0 err=None
+[w1] task1a t0_rep jwt: ok=True calls=4 turns=4 llm=1116 auth=8 lat=455 wall=1586 canon_mm=0 churn=0 err=None
+[w1] task1a t0_nolat mm_esc: ok=True calls=4 turns=4 llm=1115 auth=1845 lat=0 wall=2969 canon_mm=0 churn=0 err=None
+[w1] task1a t0_nolat none: ok=True calls=4 turns=4 llm=1102 auth=0 lat=0 wall=1108 canon_mm=0 churn=0 err=None
+[w1] task1a t0_nolat jwt: ok=True calls=4 turns=4 llm=1120 auth=8 lat=0 wall=1135 canon_mm=0 churn=0 err=None
+[w1] task1a t0_nolat mm: ok=True calls=4 turns=4 llm=2672 auth=1794 lat=0 wall=4476 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s1 none: ok=False calls=4 turns=4 llm=1269 auth=0 lat=663 wall=1940 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s1 jwt: ok=False calls=5 turns=4 llm=1921 auth=10 lat=826 wall=2766 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s1 mm: ok=False calls=4 turns=4 llm=1272 auth=1807 lat=663 wall=3750 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s1 mm_esc: ok=True calls=4 turns=4 llm=1080 auth=1807 lat=663 wall=3559 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s2 jwt: ok=False calls=45 turns=4 llm=8887 auth=94 lat=6110 wall=15171 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s2 mm: ok=True calls=4 turns=4 llm=1050 auth=1829 lat=530 wall=3418 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s2 mm_esc: ok=False calls=2 turns=4 llm=1181 auth=904 lat=349 wall=2439 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s2 none: ok=True calls=4 turns=4 llm=1057 auth=0 lat=530 wall=1594 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s3 mm: ok=True calls=4 turns=4 llm=1052 auth=1814 lat=477 wall=3352 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s3 mm_esc: ok=True calls=4 turns=4 llm=1075 auth=1811 lat=477 wall=3371 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s3 none: ok=True calls=4 turns=4 llm=1086 auth=0 lat=477 wall=1571 canon_mm=0 churn=0 err=None
+[w1] task1a t07_s3 jwt: ok=True calls=4 turns=4 llm=1079 auth=8 lat=477 wall=1571 canon_mm=0 churn=0 err=None
+[w1] task6a t0 mm: ok=True calls=4 turns=5 llm=852 auth=1805 lat=501 wall=3165 canon_mm=0 churn=0 err=None
+[w1] task6a t0 mm_esc: ok=True calls=4 turns=5 llm=850 auth=1827 lat=502 wall=3188 canon_mm=0 churn=0 err=None
+[w1] task6a t0 none: ok=True calls=4 turns=5 llm=860 auth=0 lat=502 wall=1369 canon_mm=0 churn=0 err=None
+[w1] task6a t0 jwt: ok=True calls=4 turns=5 llm=838 auth=8 lat=502 wall=1355 canon_mm=0 churn=0 err=None
+[w1] task6a t0_rep mm_esc: ok=True calls=4 turns=5 llm=848 auth=1835 lat=418 wall=3109 canon_mm=0 churn=0 err=None
+[w1] task6a t0_rep none: ok=True calls=4 turns=5 llm=851 auth=0 lat=418 wall=1275 canon_mm=0 churn=0 err=None
+[w1] task6a t0_rep jwt: ok=True calls=4 turns=5 llm=858 auth=8 lat=421 wall=1294 canon_mm=0 churn=0 err=None
+[w1] task6a t0_rep mm: ok=True calls=4 turns=5 llm=866 auth=1814 lat=418 wall=3106 canon_mm=0 churn=0 err=None
+[w1] task6a t0_nolat none: ok=True calls=4 turns=5 llm=849 auth=0 lat=0 wall=856 canon_mm=0 churn=0 err=None
+[w1] task6a t0_nolat jwt: ok=True calls=4 turns=5 llm=847 auth=8 lat=0 wall=862 canon_mm=0 churn=0 err=None
+[w1] task6a t0_nolat mm: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t0_nolat mm_esc: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s1 jwt: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s1 mm: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s1 mm_esc: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2006 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s1 none: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s2 mm: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s2 mm_esc: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s2 none: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s2 jwt: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s3 mm_esc: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s3 none: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s3 jwt: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed
+[w1] task6a t07_s3 mm: ok=False calls=0 turns=0 llm=0 auth=0 lat=0 wall=2004 canon_mm=0 churn=0 err=ConnectError: All connection attempts failed

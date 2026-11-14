@@ -1,0 +1,33 @@
+% Evaluation section of the revised OJ-CS manuscript (input by main-ojcs.tex). Every number is a macro from numbers.tex.
+\section{Evaluation}\label{sec:eval}
+\paragraph*{Setup} Cryptographic costs (E1) are measured with one thread (\texttt{RAYON\_NUM\_THREADS=1}) on two platforms. The server platform is a core of an \CpuZen{} (MesoNET Zen): each of three independent campaigns ran with its own seed on its own exclusive node, with the process pinned to one core, and all three used one binary built from commit \texttt{\GitCommit}, whose hash is recorded with the results. A uniformly slower first run of one campaign was excluded by a rule fixed before its rerun and rerun on another node (supplementary material; both runs are in the artifact). For comparison, the laptop platform is one core of an \CpuMac{}; the laptop was not idle during the measurements, and its load is recorded with the results. Each point has \Warmup{} warm-up runs and at least 30 measured runs (\BenchN{} for presentation and verification). We report medians with 95\,\% confidence intervals from a hierarchical bootstrap, which resamples campaigns and then runs. Campaign medians differ by at most \CampSpread{} for every operation. A script generates every number, table and figure from the result files.
+
+\subsection{Attack suite}
+All \NAttacks{} attacks are rejected and all \NChecks{} correctness checks pass; \NAttReach{} attacks reach a verifier (a tool, or anyone checking published data), the issuer, the revocation log or Judge, and \NAttProver{} are refused by the honest prover library, which shows nothing about verifier soundness. The supplementary material classifies them by threat and rejecting party. The checks cover honest presentations at depths 0 to 4 with and without escrow, every member of a tree using its own part of the interval, a strict tool, the grace window, 2-of-3 openings, and tools re-deriving every proof parameter from public labels.
+
+\paragraph*{Malicious provers and delegators} \NAttMPReach{} of the \NAttMP{} malicious-prover attacks bypass every client-side check and are rejected by the tool or the issuer, which rebuild the statement from their own inputs. Tools reject proofs for a weaker statement (amount or time bound 0), for another revealed class, or with a quota statement detached from the signed interval. For \NAttMDel{} malicious delegations, one per attenuation relation (child budget, interval bounds, expiry, scope bit or depth beyond the parent's, delegation counter beyond its quota), the prover's statement for that relation is re-bound to the parent's own value; the issuer, which rebuilds the statement, rejects each one, and a debug issuer that omits only the binding of that relation to the child's commitment accepts it (positive control). These tests show that every relation is bound to the child's committed values; the relation itself rests on the knowledge soundness of the range arguments, which a test cannot exercise.
+
+\paragraph*{Deployment and framing attacks} The issuer rejects a delegation for another epoch, a root interval wider than its bound $Q$, a root beyond its per-principal limit, and a root request whose attribute layout is shifted by an extra scope entry (which would otherwise move every later field and evade $Q$ and tracing). Tools reject a presentation for another epoch, at a time far from their clock, with a nonce they never issued or already consumed, or against an accumulator value older than the grace window. The log rejects unauthorized, forged, replayed or stale revocations, a descendant revoking its ancestor, and identifier 0. Judge rejects a tag that the issuer binds to a principal without the principal's signature, and, with the registry taken from the log, a key that the issuer substitutes for the principal's. Finally, \NBitFlips{} random single-bit flips over the whole presentation are all rejected.
+
+\subsection{Costs (E1)}
+Table~\ref{tab:costs} gives each operation for the default layout (\NMsgs{} messages).
+\begin{itemize}
+\item \emph{Presentation}: \PresMs{}~ms to produce and \VerMs{}~ms to verify on the server core (\VerBytesMs{}~ms including deserialization and subgroup checks), and \PresMacMs{} and \VerMacMs{}~ms on the laptop core. A presentation is \PresB{} bytes; escrow adds \EscExtraB{} bytes.
+\item \emph{Delegation}: \DelParentS{}~s for the parent and \DelIssuerMs{}~ms for the issuer, once per sub-agent.
+\item \emph{Public data}: a tool needs \PubParamsKB{}~kB of public data. Everything else is derived from labels.
+\end{itemize}
+
+\begin{table}[t]\centering\caption{Costs, default layout, one core: median [95\,\% CI] on the server core, median on the laptop core (ms); bytes.}\label{tab:costs}
+\footnotesize\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}lrrr@{}}\toprule Operation & Server & Laptop & Bytes\\\midrule
+\inputtab tab_costs.tex \end{tabular}\end{table}
+
+\paragraph*{Where the time goes} Adding the statement groups one by one (table in the supplementary material): The BBS+ proof alone costs \AblBbsPres{}~ms. A pseudonym with a counter checked against the signed interval adds \AblRevAdd{}~ms if the counter is revealed, as in $k$-TAA, and \AblDyAdd{}~ms if it is hidden: hiding the counter costs \AblHideCost{}~ms, spent in the two range proofs of the interval. The cap and expiry ranges add \AblRangeAdd{}~ms, and the five non-membership proofs for chained revocation \AblNmAdd{}~ms. The four range proofs dominate; each uses two 64-bit Bulletproofs++ arguments in the library we use, so aggregating them is the obvious optimization.
+
+\paragraph*{Scaling} Presentation cost does not depend on the size of the mandate, its depth or the revocation list: \MsgPresMin{}--\MsgPresMax{}~ms from \MsgLo{} to \MsgHi{} signed messages, \DepthPresMin{}--\DepthPresMax{}~ms for depths 0 to 4, and \RevPresMin{}--\RevPresMax{}~ms up to \RevMax{} revoked entries (figure and table in the supplementary material). Delegation grows linearly with the number of classes (\DelMsgLoMs{}~ms at \MsgLo{} messages, \DelMsgHiS{}~s at \MsgHi{}); after 100 revocations, each holder refreshes its five witnesses in \RevRefreshMs{}~ms.
+
+\paragraph*{Throughput} Deserializing and verifying a presentation takes \ThrVerMs{}~ms, so one core verifies about \ThrPerCore{} presentations per second. Independent single-threaded verifiers scale almost linearly: \ThrMpRate{} per second on \ThrMpCores{} cores, a parallel efficiency of \ThrMpEff{}. A presentation with one flipped bit is rejected after \ThrBadMs{}~ms, and random bytes of the right length are rejected by the parser in about \ThrGarbageUs{}~$\mu$s.
+
+\input{sec_eval_e2e}
+\input{sec_eval_link}
+\input{sec_eval_e4}

@@ -1,0 +1,112 @@
+{
+ "mm_root": {
+  "prep_ms_median": 352.117578004254,
+  "verify_ms_median": 94.34611350297928
+ },
+ "mm_esc_root": {
+  "prep_ms_median": 354.7276594908908,
+  "verify_ms_median": 96.75181450438686
+ },
+ "mm_delegate": {
+  "wall_ms_median": 2447.2277575114276,
+  "parent_ms_median": 2056.4596524999997,
+  "issuer_ms_median": 385.0154885
+ },
+ "mm_child": {
+  "prep_ms_median": 352.1891399868764,
+  "verify_ms_median": 94.3813935155049
+ },
+ "mm_revoke": [
+  {
+   "revoke_ms": 6.269898032769561,
+   "verifier_update_ms": 23.9349749754183,
+   "pp_bytes": 456,
+   "mandates": 8
+  },
+  {
+   "revoke_ms": 5.218958016484976,
+   "verifier_update_ms": 23.91597197856754,
+   "pp_bytes": 456,
+   "mandates": 9
+  },
+  {
+   "revoke_ms": 7.163248024880886,
+   "verifier_update_ms": 23.911388008855283,
+   "pp_bytes": 456,
+   "mandates": 10
+  }
+ ],
+ "jwt": {
+  "prep_ms_median": 0.04323950270190835,
+  "verify_ms_median": 0.24777199723757803
+ }
+}
+{
+ "mm_root": {
+  "prep_ms_median": 121.08487298246473,
+  "verify_ms_median": 62.60294298408553
+ },
+ "mm_esc_root": {
+  "prep_ms_median": 123.74113203259185,
+  "verify_ms_median": 64.80069598183036
+ },
+ "mm_delegate": {
+  "wall_ms_median": 738.8770609977655,
+  "parent_ms_median": 565.632524,
+  "issuer_ms_median": 172.512447
+ },
+ "mm_child": {
+  "prep_ms_median": 120.91800000052899,
+  "verify_ms_median": 62.71230202401057
+ },
+ "mm_revoke": [
+  {
+   "revoke_ms": 4.423340025823563,
+   "verifier_update_ms": 5.404817988164723,
+   "pp_bytes": 456,
+   "mandates": 5
+  },
+  {
+   "revoke_ms": 5.707223026547581,
+   "verifier_update_ms": 5.5666189873591065,
+   "pp_bytes": 456,
+   "mandates": 6
+  },
+  {
+   "revoke_ms": 5.355084023904055,
+   "verifier_update_ms": 5.294743983540684,
+   "pp_bytes": 456,
+   "mandates": 7
+  }
+ ],
+ "jwt": {
+  "prep_ms_median": 0.043752952478826046,
+  "verify_ms_median": 0.2476609661243856
+ }
+}
+{
+ "none": {
+  "probes": 21,
+  "valid": 21,
+  "canon_mismatch": 0,
+  "valid_rejected": 0
+ },
+ "jwt": {
+  "probes": 21,
+  "valid": 21,
+  "canon_mismatch": 0,
+  "valid_rejected": 3
+ },
+ "mm": {
+  "probes": 21,
+  "valid": 21,
+  "canon_mismatch": 0,
+  "valid_rejected": 3
+ }
+}
+MISMATCH/REJECT jwt pay {"merchant": "x", "amount": 1e+21} {"arguments":{"amount":1e+21,"merchant":"x"},"currency":"EUR","name":"pay"} None
+MISMATCH/REJECT jwt pay {"merchant": "x", "amount": 123456789012.34} {"arguments":{"amount":123456789012.34,"merchant":"x"},"currency":"EUR","name":"pay"} None
+MISMATCH/REJECT jwt pay {"merchant": "x", "amount": 9007199254740993} {"arguments":{"amount":9007199254740993,"merchant":"x"},"currency":"EUR","name":"pay"} None
+MISMATCH/REJECT mm pay {"merchant": "x", "amount": 1e+21} {"arguments":{"amount":1e+21,"merchant":"x"},"currency":"EUR","name":"pay"} None
+MISMATCH/REJECT mm pay {"merchant": "x", "amount": 123456789012.34} {"arguments":{"amount":123456789012.34,"merchant":"x"},"currency":"EUR","name":"pay"} None
+MISMATCH/REJECT mm pay {"merchant": "x", "amount": 9007199254740993} {"arguments":{"amount":9007199254740993,"merchant":"x"},"currency":"EUR","name":"pay"} None

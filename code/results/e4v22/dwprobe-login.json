@@ -1,0 +1,185 @@
+{
+ "provenance": {
+  "git_commit": "e340685",
+  "git_commit_note": "local HEAD e340685 (job script) when the tree was copied; code/src, code/mmpy, Cargo.toml, Cargo.lock, e2, e4v22 identical to that commit (sha256 checked on both sides). mmpy v2.2 changes are in e05a059 (committed by another session together with its own files), the harness in 41a28df, the multi-model job script in e340685.",
+  "src_lib_rs_sha256": "6c894bb7a4fd51bce52c0bfc106ee1bdf674805493d8c8ee70af927eb2580784",
+  "mmpy_lib_rs_sha256": "2c166b9fc4404ba3707c7307b2d1bcc5f47375848f166c064006ff66e7af1143",
+  "build": "maturin build --release on the Hedy login node, target dir on /scratch, wheel unpacked into code22/pylib (PYTHONPATH)",
+  "copied_to_hedy": "2026-11-14",
+  "mmpy_so": "/home/yulameur1/masked-mandates-95/code22/pylib/mmpy/mmpy.cpython-312-x86_64-linux-gnu.so",
+  "mmpy_so_sha256": "c3c54fbe39f1f33dc649bc56c6737e71530d2c75f94cc395ab1f34b82163020e",
+  "e4v22_py_sha256": "3100540aa8fe39db980f5b3ec66cf2e4d7ed663d8169b1fdc82cc255c3e44404"
+ },
+ "cases": [
+  {
+   "case": "baseline_child_honest",
+   "result": [
+    true,
+    ""
+   ]
+  },
+  {
+   "case": "revoked_W0_honest_wallet",
+   "result": [
+    "wallet_refused",
+    "wallet: mandate revoked or witnesses stale"
+   ]
+  },
+  {
+   "case": "revoked_W0_dishonest_staleV",
+   "acc": "stale",
+   "counter": "reuse",
+   "j": 1,
+   "path": "stale_snapshot",
+   "bypass": "revoked",
+   "prove_ms": 393.96935142576694,
+   "accepted": false,
+   "uniform_error": "rejected",
+   "internal_reason": "accumulator value not accepted",
+   "accept_path": ""
+  },
+  {
+   "case": "revoked_W0_dishonest_currentV_stale_witness",
+   "acc": "current",
+   "counter": "reuse",
+   "j": 2,
+   "path": "current_with_stale_witness",
+   "bypass": "revoked",
+   "prove_ms": 394.38653364777565,
+   "accepted": false,
+   "uniform_error": "rejected",
+   "internal_reason": "verify: VBAccumProofContributionFailed(9, PairingResponseInvalid)",
+   "accept_path": ""
+  },
+  {
+   "case": "revoked_W2_dishonest_staleV_after_0_more_updates",
+   "acc": "stale",
+   "counter": "reuse",
+   "j": 0,
+   "path": "stale_snapshot",
+   "bypass": "revoked",
+   "prove_ms": 394.26693320274353,
+   "accepted": true,
+   "uniform_error": "",
+   "internal_reason": "",
+   "accept_path": "count_window"
+  },
+  {
+   "case": "revoked_W2_dishonest_currentV_stale_witness",
+   "acc": "current",
+   "counter": "reuse",
+   "j": 1,
+   "path": "current_with_stale_witness",
+   "bypass": "revoked",
+   "prove_ms": 394.1182931885123,
+   "accepted": false,
+   "uniform_error": "rejected",
+   "internal_reason": "verify: VBAccumProofContributionFailed(9, PairingResponseInvalid)",
+   "accept_path": ""
+  },
+  {
+   "case": "revoked_W2_dishonest_staleV_after_1_more_update",
+   "acc": "stale",
+   "counter": "reuse",
+   "j": 2,
+   "path": "stale_snapshot",
+   "bypass": "revoked",
+   "prove_ms": 393.115671351552,
+   "accepted": true,
+   "uniform_error": "",
+   "internal_reason": "",
+   "accept_path": "count_window"
+  },
+  {
+   "case": "revoked_W2_dishonest_staleV_after_2_more_updates",
+   "acc": "stale",
+   "counter": "reuse",
+   "j": 3,
+   "path": "stale_snapshot",
+   "bypass": "revoked",
+   "prove_ms": 396.50836307555437,
+   "accepted": false,
+   "uniform_error": "rejected",
+   "internal_reason": "accumulator value not accepted",
+   "accept_path": ""
+  },
+  {
+   "case": "revoked_D1000_dishonest_staleV_verified_right_after_install",
+   "ms_since_install": 105.12499418109655,
+   "acc": "stale",
+   "counter": "reuse",
+   "j": 0,
+   "path": "stale_snapshot",
+   "bypass": "revoked",
+   "prove_ms": 394.70282569527626,
+   "accepted": true,
+   "uniform_error": "",
+   "internal_reason": "",
+   "accept_path": "time_window"
+  },
+  {
+   "case": "D1000_honest_presentation_built_before_install_verified_after",
+   "accepted": true,
+   "uniform_error": "",
+   "internal_reason": "",
+   "accept_path": "time_window"
+  },
+  {
+   "case": "revoked_D1000_dishonest_staleV_verified_1050ms_after_install",
+   "accepted": false,
+   "uniform_error": "rejected",
+   "internal_reason": "accumulator value not accepted",
+   "ms_since_install": 1068.594517186284,
+   "path": "stale_snapshot"
+  },
+  {
+   "case": "quota_calls_1_to_3_honest",
+   "results": [
+    [
+     true,
+     ""
+    ],
+    [
+     true,
+     ""
+    ],
+    [
+     true,
+     ""
+    ]
+   ],
+   "interval": [
+    99997,
+    100000,
+    100000
+   ]
+  },
+  {
+   "case": "quota_call_4_honest_wallet",
+   "result": [
+    "wallet_refused",
+    "wallet: quota exhausted for this tool and epoch"
+   ]
+  },
+  {
+   "case": "quota_call_4_dishonest_reuse_own_counter",
+   "acc": "stale",
+   "counter": "reuse",
+   "j": 0,
+   "path": "current",
+   "bypass": "quota",
+   "prove_ms": 394.4616373628378,
+   "accepted": false,
+   "uniform_error": "rejected",
+   "internal_reason": "pseudonym replay (counter reused)",
+   "accept_path": ""
+  },
+  {
+   "case": "quota_call_4_dishonest_counter_outside_interval",
+   "acc": "stale",
+   "counter": "beyond",
+   "prove_error": "prove: UnsupportedValue(\"Only supports 64 bit values Bulletproofs++ range proof but found 52435875175126190479447740508185965837690552500527637822603658699938581184512\")",
+   "prove_ms": 8.367779664695263
+  }
+ ]
+}

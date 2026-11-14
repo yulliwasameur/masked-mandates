@@ -1,0 +1,7 @@
+job 51052 node m-gpu01 cpus vllm=0,2,4,6,8 orchestrator=10 agents=12,14,16,18,20 servers=22,24,26,28,30 RAYON_NUM_THREADS=1 runs=Qwen2.5-7B-Instruct|qwen2.5-7b-instruct|hermes|-|dw
+mmpy /home/yulameur1/masked-mandates-95/code22/pylib/mmpy/__init__.py
+11:11:31 model qwen2.5-7b-instruct: starting vLLM (phases: dw)
+11:11:31 phase dw -> /tmp/yul-e4v22-51052/results/e4v22_dw_qwen2.5-7b-instruct.json
+  "errors": 0
+ }
+}

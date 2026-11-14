@@ -1,0 +1,80 @@
+Error in standalone SSE writer
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/server/streamable_http.py", line 765, in standalone_sse_writer
+    async for event_message in standalone_stream_reader:
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/abc/_streams.py", line 37, in __anext__
+    return await self.receive()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/streams/memory.py", line 141, in receive
+    raise ClosedResourceError from None
+anyio.ClosedResourceError
+Error in standalone SSE writer
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/server/streamable_http.py", line 765, in standalone_sse_writer
+    async for event_message in standalone_stream_reader:
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/abc/_streams.py", line 37, in __anext__
+    return await self.receive()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/streams/memory.py", line 141, in receive
+    raise ClosedResourceError from None
+anyio.ClosedResourceError
+Error in standalone SSE writer
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/server/streamable_http.py", line 765, in standalone_sse_writer
+    async for event_message in standalone_stream_reader:
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/abc/_streams.py", line 37, in __anext__
+    return await self.receive()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/streams/memory.py", line 141, in receive
+    raise ClosedResourceError from None
+anyio.ClosedResourceError
+Error in standalone SSE writer
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/server/streamable_http.py", line 765, in standalone_sse_writer
+    async for event_message in standalone_stream_reader:
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/abc/_streams.py", line 37, in __anext__
+    return await self.receive()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/streams/memory.py", line 141, in receive
+    raise ClosedResourceError from None
+anyio.ClosedResourceError
+Error in standalone SSE writer
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/server/streamable_http.py", line 765, in standalone_sse_writer
+    async for event_message in standalone_stream_reader:
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/abc/_streams.py", line 37, in __anext__
+    return await self.receive()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/streams/memory.py", line 141, in receive
+    raise ClosedResourceError from None
+anyio.ClosedResourceError
+Error in standalone SSE writer
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/server/streamable_http.py", line 765, in standalone_sse_writer
+    async for event_message in standalone_stream_reader:
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/abc/_streams.py", line 37, in __anext__
+    return await self.receive()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/streams/memory.py", line 141, in receive
+    raise ClosedResourceError from None
+anyio.ClosedResourceError
+Error in standalone SSE writer
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/server/streamable_http.py", line 765, in standalone_sse_writer
+    async for event_message in standalone_stream_reader:
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/abc/_streams.py", line 37, in __anext__
+    return await self.receive()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/streams/memory.py", line 141, in receive
+    raise ClosedResourceError from None
+anyio.ClosedResourceError
+Error in standalone SSE writer
+Traceback (most recent call last):
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/mcp/server/streamable_http.py", line 765, in standalone_sse_writer
+    async for event_message in standalone_stream_reader:
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/abc/_streams.py", line 37, in __anext__
+    return await self.receive()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/yulameur1/masked-mandates-95/agentenv/lib/python3.12/site-packages/anyio/streams/memory.py", line 141, in receive
+    raise ClosedResourceError from None
+anyio.ClosedResourceError

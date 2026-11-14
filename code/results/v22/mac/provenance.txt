@@ -1,0 +1,8 @@
+git_commit=96a694d14ca42d93f2d0fa6fd9b5253edd01f515
+git_tag=v2.2.0
+08cd38c6a1fd1b5c12560dd5daab68939f91f97660896b08157ca99cfdc9fe96  target/release/bench
+2a85eadc78f6c6f04070bd2fe1336049fccad60867fcbd136a6c04d5a8942c13  target/release/attacks
+a20379d2de1110b1e2e7c7062be87bc8f6dd0d4f9a8fd4d48c9c85324c87676e  target/release/smoke
+pin=none (macOS)
+rayon=1
+host=laptop

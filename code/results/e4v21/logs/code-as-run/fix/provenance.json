@@ -1,0 +1,9 @@
+{
+ "git_commit": "060ced918f45da9e26641d9da8870f59612dfc36",
+ "git_status_code": "",
+ "src_lib_rs_sha256": "409f6dc9563fa6700f37281dd4b4eedfb189e052120fe00bca1b2eb695d4f057",
+ "mmpy_lib_rs_sha256": "18d07df65589bf672c37d2a1be3a9bfcb791af017ebcf06c21db461f54baa5e9",
+ "copied_to_hedy": "2026-11-13T13:42:52+0100",
+ "note": "e4v21/ itself is new and untracked at run time; its sha256 is recorded separately",
+ "git_commit_note": "HEAD when code/src, code/mmpy, Cargo.toml, Cargo.lock were copied to Hedy and mmpy was built (13:2x); HEAD moved to 690add5a2eb8fb012f5756d31be719a919a47f4a during the session (paper-only commit, code/ identical: git diff 060ced9 690add5 -- code is empty)"
+}

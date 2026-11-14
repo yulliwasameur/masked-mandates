@@ -1,0 +1,44 @@
+## Key results
+
+**Evidence base.**
+* All the runs below use the scripted policy (`--base-url oracle`, no LLM; the harness self-test policy that follows each task's reference plan and replies FAILED at the first rejection). The decision to present belongs to the wallet, and the decision to accept belongs to the tool, so these mechanisms do not depend on the LLM.
+* The runs were on the Hedy login node (niced; 5 workers, 1 agent core and 1 tool-server core each, `RAYON_NUM_THREADS=1`), with the real MCP client and servers, the real mmpy proofs and the same tasks, tools and scoring as E4 v2.1.
+* LLM confirmation: the Slurm jobs (51013, 51014, 51052; 2.01 GPU-hours) started after the scripted-policy runs, at 07:53 and 08:14. They were not cancelled because they had started by the time this session could check again (it was cut off by a network error from ~07:05 to 11:05). They ran the same configurations with the five models. Their results confirm the scripted-policy ones in every respect and are reported in the tables below, and under new keys `dw.llm.*`, `grace.llm.*` and `probe.llm.*` in the key file; the oracle keys are unchanged.
+
+**R2-B1, dishonest wallet.** The wallet ignores revocation and quota, but its proofs are real (`Authority.present_dishonest`). Templates c and e, 24 tasks each, per-task issuer (W = 0).
+* **Revoked sub-agent, template c.**
+  * Stale V (`mm_dw`: pre-revocation witnesses against the pre-revocation accumulator value): 24 presentations sent, 24 rejected by the tools, all with the uniform error `rejected`, 0 accepted. The tool's internal reason was "accumulator value not accepted".
+  * Current V with a stale witness (`mm_dw_cv`): the proof can be built (the prover does not check the witness), but the tool rejects it in the pairing check of the non-membership proof ("VBAccumProofContributionFailed(9, PairingResponseInvalid)"): 24 of 24 rejected, uniform error, 0 accepted.
+* **Beyond quota, template e (k = 3 searches).** Reusing a counter of its own part: 48 of 48 presentations (both modes) rejected by the tool's seen-set ("pseudonym replay (counter reused)"), uniform error, 0 accepted.
+* **Counter outside the interval.** The library refuses to prove: Bulletproofs++ "Only supports 64 bit values", because k - j - 1 wraps modulo p. Nothing can be sent (deterministic check `dwprobe`).
+* **Honest calls in these runs:** 0 of 480 rejected.
+* **The per-task issuer has W = 0, so a stale-V presentation is never accepted.** With a count window W the same stale-V presentation *is* accepted until W further accumulator updates (`dwprobe`: accepted after 0 and 1 further updates, rejected after 2). With a time window D it is accepted only within D of the installation (accepted at 105 ms, rejected at 1,069 ms with D = 1,000 ms). The grace window is therefore exactly the dishonest holder's revocation delay.
+
+**R2-B3, shared issuer, one dummy revocation every 2 s per worker** (120 tasks, mode mm, t0, 200 dummies per worker, publish-then-refresh).
+* **W = 0, no retry:** 80 of 460 honest calls rejected, all from accumulator churn; success 57.5 %. The oracle stops at the first rejection, hence fewer calls.
+* **W = 0 + wallet retry:** 192 first attempts rejected (all churn), all 192 retries accepted, 0 of 696 honest calls rejected in the end; success 100 %. Revocation delay 0.24 s median (0.28 s p95), 0 updates.
+* **Time window D = 1,000 ms, no retry:** 0 of 696 rejected; success 100 %; delay 1.25 s median (1.28 s p95), 0 updates median (1 at p95).
+* **W = 2, no retry:** 0 of 696 rejected; success 100 %; delay 4.24 s median (6.02 s p95), 2 updates.
+* **No revoked or beyond-quota call was accepted in any run.**
+* **First retry variant:** the retry consumed a new hidden counter, which wasted quota (template e, k = 3): 18 of 696 honest calls ended rejected (14 later calls refused by the wallet for exhausted quota, 4 retries refused for quota). The harness now reuses the rejected presentation's counter (`Authority.release_counter`; a tool never records a rejected pseudonym). Both runs are reported.
+
+**R2-B3, sparse schedule** (one dummy revocation every 60 s per worker; 30 tasks; revoker kept running at least 600 s; 45 dummy + 6 task revocations per configuration).
+* **W = 2:** revocation delay 120.15 s median (120.16 s p95), i.e. W x the revocation interval; 2 updates. The count-based delay scales with the interval.
+* **D = 1,000 ms:** 1.15 s median (1.16 s p95), 0 updates. The time-based delay is bounded by D plus the push time, whatever the interval.
+* **Dishonest-wallet probes** of the revoked dummies (stale V):
+  * Under W = 2: accepted right after installation (45 of 45), accepted again ~61 s later after one more update (40 of 40), rejected after the second update ~122 s later (0 of 35 accepted), and accepted 2.4 s after installation (45 of 45).
+  * Under D = 1,000 ms: accepted right after installation (45 of 45, ~0.75 s after the request), rejected ~2 s after the request (0 of 45), and rejected at every later probe (0 of 40, 0 of 35).
+* **Honest calls:** 0 of 174 rejected in both configurations.
+
+**LLM confirmation (t0, 24 tasks per template; dense: 120 tasks; sparse: 30 tasks; one job per model group).**
+* **Dishonest wallet**, 5 models x {mm_dw, mm_dw_cv} x {c, e}:
+  * Template c: 0 of 215 presentations by revoked sub-agents accepted (215 rejected, all with the uniform error).
+  * Template e: 0 of 414 beyond-quota presentations accepted (414 rejected, all with the uniform error).
+  * No proof failed to build, and 0 of 2,147 honest calls were rejected.
+  * The tools' internal reasons are the same as with the scripted policy.
+* **Dense schedule.**
+  * W = 0 + retry: 0 of 629 honest calls rejected for both Qwen2.5-72B-AWQ and gpt-oss-20b (first attempts rejected by churn and all accepted on retry: 102 and 124). Success 89.2 % and 94.2 %, against 65.0 % and 52.5 % for W = 0 without retry in v2.1. Revocation delay 0.24 s median.
+  * D = 1,000 ms: 0 of 629 and 0 of 631 rejected; success 89.2 % and 95.0 %; delay 1.24 s median (1.27 s p95).
+* **Sparse schedule:** W = 2 delay 120.14 s median for both models, D = 1,000 ms 1.14 s. The probes reproduce the oracle pattern exactly, 45/40/0/45 accepted for W = 2 and 45/0/0/0 for D. 0 honest calls rejected.
+
+**Disclosure (E4 v2.1).** The v2.1 W = 0 and W = 2 shared-issuer runs came from different jobs and two harness versions (e4v21.py sha256 487f16a4... vs 3ce67f88...). Details are in the dedicated section below. In v2.2 all oracle configurations ran in one session with one harness and mmpy build, except the same-counter retry run (one later build that adds only `release_counter`; see Provenance).

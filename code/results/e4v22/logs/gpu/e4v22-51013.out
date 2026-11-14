@@ -1,0 +1,28 @@
+job 51013 node m-gpu01 cpus vllm=1,3,5,7,9 orchestrator=11 agents=13,15,17,19,21 servers=23,25,27,29,31 RAYON_NUM_THREADS=1 runs=Qwen2.5-72B-Instruct-AWQ|qwen2.5-72b-instruct-awq|hermes|-|retry0 d1000 sparse_w2 sparse_d1000 dw;Qwen2.5-7B-Instruct|qwen2.5-7b-instruct|hermes|-|dw
+mmpy /home/yulameur1/masked-mandates-95/code22/pylib/mmpy/__init__.py
+07:53:49 model qwen2.5-72b-instruct-awq: starting vLLM (phases: retry0 d1000 sparse_w2 sparse_d1000 dw)
+07:53:49 phase retry0 -> /tmp/yul-e4v22-51013/results/e4v22_retry0_qwen2.5-72b-instruct-awq.json
+  "errors": 0
+ }
+}
+08:07:19 phase d1000 -> /tmp/yul-e4v22-51013/results/e4v22_d1000_qwen2.5-72b-instruct-awq.json
+  "errors": 0
+ }
+}
+08:20:38 phase sparse_w2 -> /tmp/yul-e4v22-51013/results/e4v22_sparse_w2_qwen2.5-72b-instruct-awq.json
+  "errors": 0
+ }
+}
+08:31:41 phase sparse_d1000 -> /tmp/yul-e4v22-51013/results/e4v22_sparse_d1000_qwen2.5-72b-instruct-awq.json
+  "errors": 0
+ }
+}
+08:42:44 phase dw -> /tmp/yul-e4v22-51013/results/e4v22_dw_qwen2.5-72b-instruct-awq.json
+  "errors": 0
+ }
+}
+08:47:58 model qwen2.5-7b-instruct: starting vLLM (phases: dw)
+08:47:58 phase dw -> /tmp/yul-e4v22-51013/results/e4v22_dw_qwen2.5-7b-instruct.json
+  "errors": 48
+ }
+}

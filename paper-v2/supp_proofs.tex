@@ -1,0 +1,94 @@
+% Supplement, part 3 (input by supplement.tex).
+\section{Unforgeability}\label{s:unf}
+\begin{theorem}\label{th:unf}
+Under q-SDH, DL, Bulletproofs++ knowledge soundness and Assumption~\ref{as:se}, for $\mathcal{A}$ making $q_R$ root and $q_D$ delegation sessions and $q_V$ verification queries,
+$\Adv^{\mathrm{unf}}\le (q_V+q_D)\big(\Adv^{\mathrm{euf}}_{\mathrm{BBS+}}+(q_R+q_D+1)\,\epsilon_{\mathrm{ext}}+\Adv^{\mathrm{dl}}+\Adv^{\mathrm{acc}}\big)+\negl$, where $\epsilon_{\mathrm{ext}}$ is the failure probability of the extractor of Assumption~\ref{as:se}(ii) (including the range arguments) and the factor $q_V+q_D$ is the guess of the winning verification query or delegation session.
+\end{theorem}
+\begin{proof}
+The reduction guesses the winning verification query, or the winning delegation session. At the end of each issuer session it extracts the request's $\Sigma$ witness by rewinding that session only (Assumption~\ref{as:se}(iii)); at the end of the experiment it extracts the winning proof. We list the bad events.
+\begin{itemize}[leftmargin=*]
+\item $F_0$: an extraction fails.
+\item $F_1$: an extracted BBS+ signature is valid on a vector never signed. For blind issuance, the signed vector is the one fixed by the extracted opening.
+\item $F_2$: a commitment has two openings, or a linear relation fails.
+\item $F_3$: a constrained value is out of range.
+\item $F_4$: a non-membership proof is accepted for an accumulated element.
+\end{itemize}
+How each event is bounded:
+\begin{itemize}[leftmargin=*]
+\item $F_1$: $\mathcal{B}_1$ answers blind requests through its signing oracle on the extracted vector and returns $(A,\epsilon,\varsigma-r)$, which is distributed as a blind signature; a signature on an unqueried vector is a forgery.
+\item $F_2$: breaks DL (one hashed base is the challenge).
+\item $F_3$: the extractor returns, for each range statement, an in-range opening of its commitment (Assumption~\ref{as:se}(ii)); the $\Sigma$ part yields an opening of the same commitment by equality. If the two openings differ, the reduction breaks DL (one hashed base is the challenge); otherwise the value is in range. $F_3$ is therefore covered by $\epsilon_{\mathrm{ext}}$ and $\Adv^{\mathrm{dl}}$.
+\item $F_4$: breaks the accumulator.
+\end{itemize}
+If none of these events occurs, the conclusion follows by induction on the issuance order. Every signed vector is in $\Lset$, and every child satisfies $a'\preceq a$ (Lemmas~\ref{lem:att}--\ref{lem:anc}). A presentation's vector is signed, reveals $b_c=1$, satisfies $\beta\ge\mathit{amt}$ and $\tau\ge\mathit{tm}$ (Lemma~\ref{lem:range}), and is live at the value used. A proof is bound to $(n_\Iss,C_p)$ or to $\ctx(\iota)$, so it cannot be reused in another session or for another invocation.
+\end{proof}
+
+\section{Rate-limit soundness}\label{s:rl}
+\begin{theorem}\label{th:rl}
+Under the assumptions of Theorem~\ref{th:unf}, \sys{} satisfies RL, with $\Adv^{\mathrm{rl}}\le q_V\,(\Adv^{\mathrm{unf}}+\epsilon_{\mathrm{ext}}+\Adv^{\mathrm{dl}})$.
+\end{theorem}
+\begin{proof}
+The win condition concerns a single accepted presentation, so the reduction guesses it (factor $q_V$) and extracts only that proof, as in Theorem~\ref{th:unf}. By Theorem~\ref{th:unf} its witness is a vector in $\Lset$ that descends from $a_0$: it has link secret $s_0$ (equality) and an interval inside $[\ell_0,k_0)$ (Lemma~\ref{lem:att}). By Lemma~\ref{lem:ctr} its pseudonym is $B_{\theta,e}^{1/(s_0+j+1)}$ with $j\in[\ell_0,k_0)$, hence in $N(a_0,\theta,e)$. The counting statement follows deterministically: the map $j\mapsto B_{\theta,e}^{1/(s_0+j+1)}$ is injective, $N(a_0,\theta,e)$ has $k_0-\ell_0$ elements, and the tool rejects repeated pseudonyms within its epoch, which is its own, so the adversary cannot multiply epochs. The same argument applies at the issuer with $D_e$ and the issuer's epoch. Two roots with the same $s$, which only the adversary could create, share pseudonyms and can only lose quota. No multiple extraction is needed.
+\end{proof}
+Disjoint sub-intervals give children quotas that add up to the root's without coordination. A parent that hands out overlapping intervals only causes rejections inside its own tree. A compromised child can exhaust only its own interval. A compromised parent, however, can use its children's counters, since its signed interval contains theirs, and so starve them; quotas protect the tools, not one member of a tree from another.
+
+\section{Invocation binding}\label{s:inv}
+\begin{theorem}\label{th:inv}
+Under q-DL and Assumption~\ref{as:se}(i)--(ii), \sys{} satisfies INV.
+\end{theorem}
+\begin{proof}
+Simulate every proof of honest wallets (loss $q_P\epsilon_{\mathrm{zk}}$) and guess the honest tree whose link secret the winning proof uses (loss $n_h$). That tree's $s$ then appears only in perfectly hiding commitments and in pseudonyms. $\mathcal{B}$ receives $(g,g^{x},\dots,g^{x^{Q}})$ and sets $s=x-\ell_0-1$ implicitly; as in $G_3$ of Theorem~\ref{th:unl}, it uses $h=g^{f(x)}$ with $f(X)=\prod_{i<Q}(X+i)$, programs every call and delegation base as $h^{\rho}$ with known $\rho$ (the bases may be queried before the tree exists, which is why $f$ covers all $Q$ shifts) and $h_s$ as $g^{\gamma}$, so that it can compute $B^{1/(s+j+1)}$ for every counter and every commitment involving $s$. A winning $(\iota',\pi)$ has a context that differs from every simulated one, because $\ctx$ is an injective hash of $\iota'$, and the statement contains $\nym$, $V$ and $E$. Simulation-sound extraction therefore yields $s$, and hence $x$.
+\end{proof}
+
+\section{Unlinkability}\label{s:unl}
+\begin{theorem}\label{th:unl}
+Assume zero knowledge (Assumption~\ref{as:se}(i)), DDH and q-DDHI in $\G$, the consistency of $\Log$, and the DKG of~\cite{gennaro2007dkg} (one corrupted member learns nothing about $x_\Esc$ beyond $X$). Then UNL-CPA holds with
+$\Adv\le q_P\epsilon_{\mathrm{zk}}+2q_P\Adv^{\mathrm{ddh}}+n_h^2 Q\,\Adv^{(Q+1)\text{-ddhi}}+\Adv^{\mathrm{ddh}}+\negl$, where $n_h$ is the number of honest trees, $Q$ is the public bound on root intervals ($k_0-\ell_0\le Q$, enforced by honest wallets and by the issuer), and the pseudonym domains are the call and delegation domains of each tree. With Assumption~\ref{as:agm} as well, UNL-CCA holds with an additional $q_P\Adv^{\mathrm{cca}}$ term.
+\end{theorem}
+\begin{proof}
+We go through a sequence of games.
+\begin{itemize}[leftmargin=*]
+\item $G_1$: every proof of an honest wallet is simulated. Commitments are perfectly hiding. The issuer sees $\mathit{id}'$ (which it chose), $\nym_D$, the epoch and the time, and nothing else.
+\item $G_2$: escrow plaintexts of challenge outputs become $g^0$; one hybrid per pair, under DDH.
+  \begin{itemize}[leftmargin=*]
+  \item UNL-CPA has no opening oracle, so the reduction needs no decryption key.
+  \item In UNL-CCA, openings of non-challenge ciphertexts are answered by the IND-CCA decryption oracle of Assumption~\ref{as:agm}. The exclusion of challenge components makes this legitimate.
+  \end{itemize}
+\item $G_3$: the trees that appear in challenges are switched one after the other. Such trees are never corrupted (Def.~\ref{def:unl}); a tree that is corrupted later was never in a challenge, and its values are never switched. For each hybrid step the reduction guesses which honest tree is the next to appear in a challenge (a factor $n_h$ per step, absorbed in the bound below) and aborts if that tree is ever corrupted, which happens only after a wrong guess. Fix the guessed tree $\tau$ with root interval $[\ell_0,k_0)$, $m=k_0-\ell_0\le Q$. Shared bases may be queried before $\tau$ exists, so the reduction works with all $Q$ possible shifts $\{0,\dots,Q-1\}$ from the start, which needs no foreknowledge of $m$. The reduction receives $(g,g^{x},\dots,g^{x^{Q+1}})$ and a candidate $Z$ for $g^{1/x}$. In a hybrid over the shift $i^*$, it sets implicitly $s+\ell_0+1+i^*=x$, so that $s+j+1=x+(i-i^*)$ for $j=\ell_0+i$. It uses $h=g^{f(x)}$ with $f(X)=\prod_{i\in\{0,\dots,Q-1\},\,i\neq i^*}(X+i-i^*)$, computable from the powers, for which $h^{1/(x+i-i^*)}$ is computable for $i\neq i^*$, while $h^{1/x}=g^{f(x)/x}=g^{q(x)}\cdot(g^{1/x})^{f(0)}$ with $f(0)\neq0$ uses the challenge. Every base (call bases $B_{\theta,e}$ and delegation bases $D_e$, which are shared by all trees) is programmed as $h^{\rho}$ with fresh known $\rho$, and every other use of $s$ by the wallet is computed from $g^{x}$: $h_s$ is programmed as $g^{\gamma}$, so $h_s^{s}=(g^{x})^{\gamma}g^{-\gamma(\ell_0+1+i^*)}$, which suffices for the root commitment, for $C_p$ and for checking blind signatures. The value $h^{1/(s+j+1)}$ at the shift $i^*$ is then replaced by $h^{r}$ for a fresh known $r$; a hybrid over the $m\le Q$ shifts switches all of $\tau$'s values. Values already switched in earlier trees are of the form $B^{r}$ with known $r$ and remain computable whatever the later programming of the bases, so the trees can be switched sequentially. Loss: $n_h\,Q\,\Adv^{(Q+1)\text{-ddhi}}$.
+\item $G_4$: the values $B_{\theta,e}^{r_{\tau,j}}$ of all honest trees, across tools and epochs, are replaced by independent random elements; this is one DDH step in matrix form (random self-reducibility), since the bases are independent random-oracle outputs and the exponents $r_{\tau,j}$ are independent.
+\end{itemize}
+In $G_4$ a challenge output is a simulated proof of a statement whose public part is $(\iota,V,\nym,E)$. Here $\nym$ is uniform, $E$ encrypts $g^0$, and $V$ is equal for both handles by $\Lambda$. Because the challenge advances both handles and $\Lambda$ fixes their numbers of free counters, both handles answer every challenge and every later query in the same way, so no state of the game depends on $b$ outside the challenge outputs themselves. The output is therefore independent of $b$.
+\end{proof}
+
+\paragraph{Concrete security.} The pseudonym argument rests on $(Q+1)$-DDHI. On BLS12-381, $2^{32}$ divides $r-1$, so Cheon's attack with $Q$ auxiliary powers lowers the generic cost of the underlying discrete logarithm from about $2^{127.5}$ to about $2^{127.5-\frac12\log_2 Q}$, i.e.\ $2^{117.5}$ for $Q=2^{20}$; the reduction loses a further factor $n_h^2Q$ (the guess of the challenge tree in each of $n_h$ steps, times $Q$ shifts). The bound is therefore loose at deployment scale: with $Q=2^{20}$ it stays above $2^{80}$ only for $n_h\le 2^{8}$ honest trees, and with $Q=2^{12}$ for $n_h\le 2^{14}$. These are limits of the proof technique, not known attacks, but they mean the theorem gives meaningful concrete guarantees only for small populations per issuer key. A deployment should keep $Q$ as small as its quotas allow and rotate the issuer key per period so that each key signs a bounded number of roots; a tighter reduction is left open.
+
+\section{Traceability and non-frameability}\label{s:trace}
+\begin{theorem}[TRACE]\label{th:trace}
+Under the assumptions of Theorem~\ref{th:unf}, Chaum--Pedersen soundness and EUF-CMA of Schnorr signatures, \sys{} is traceable against coalitions with at most one escrow member.
+\end{theorem}
+\begin{proof}
+By Theorem~\ref{th:unf} the extracted vector is in $\Lset$, so its tag $t$ is the tag of a root that $\Iss$ issued after checking $\sigma_P$ for the label of the authenticated principal; children inherit $t$ by equality. The escrow statements give $E_2=g^{t}X^{r_1}$ and $E_4=g^{\mathit{id}}X^{r_2}$. With two valid shares of distinct members, one of them honest and the other correct by Chaum--Pedersen soundness, interpolation gives $g^{t}$ and $g^{\mathit{id}}$. $\mathsf{Judge}$ then finds the binding in $\Log$ and the identifier among the issued ones (Lemma~\ref{lem:anc}).
+\end{proof}
+
+\begin{theorem}[NF]\label{th:nf}
+Under DL, Assumption~\ref{as:se}(i)--(ii), Chaum--Pedersen soundness and EUF-CMA of Schnorr signatures, \sys{} is non-frameable, even if the issuer is corrupted.
+\end{theorem}
+\begin{proof}
+Simulate $P$'s proofs. The challenger runs the two honest members and knows their shares, so it answers the opening oracle; openings of $P$'s own presentations reveal $g^{t}=T$, which is public, and $g^{\mathit{id}}$, which the issuer chose. $\mathsf{Judge}$ outputs $P$ only for a tag $T=g^{t}$ with a binding in $\Log$ whose $\sigma_P$ verifies under the key registered for $P$ in $\Log$; since $\Log$ is consistent and $P$'s registration is its first entry for that label, this key is $pk_P$, whoever runs the issuer. There are two cases.
+\begin{itemize}[leftmargin=*]
+\item $T$ was never signed by $P$. Then $\sigma_P$ is a Schnorr forgery under $pk_P$.
+\item $T$ is a tag of one of $P$'s roots. Two valid shares decrypt correctly, so the extracted witness of the non-simulated $\pi$ contains $t=\log_g T$. $T$ is public, and $t$ appears elsewhere only in perfectly hiding commitments and simulated proofs. A reduction that embeds a DL challenge as one of $P$'s tags therefore solves DL, with a loss factor equal to the number of $P$'s roots.
+\end{itemize}
+\end{proof}
+A delegate that runs its own wallet receives one tree's $s$ and $t$, never $u_P$. It can link and act within that tree, and its actions open to $P$, which is the intended attribution; it cannot obtain roots, forge bindings or affect $P$'s other trees.
+
+\section{Scope}\label{s:scope}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Extraction.} We use rewinding extraction with sequential issuer sessions, and an extra assumption (AGM or Fischlin's transform) only for UNL with an opening oracle. Plain Fiat--Shamir, as implemented, does not give straight-line extraction.
+\item \textbf{Consistency.} UNL and NF assume that all parties see one consistent log of keys, registrations, bindings and accumulator values. The implementation publishes the values and its Judge takes the registrations as an input independent of the issuer; it does not implement gossip or a transparency service.
+\item \textbf{Counter domain.} The pseudonym argument needs a polynomial counter domain fixed at root time; the issuer enforces $k_0-\ell_0\le Q$ ($Q=2^{20}$ in the implementation), and the reduction loses a factor $Q+1$ per honest tree.
+\item \textbf{Escrow.} TRACE holds for tools that require escrow. The DKG of the implementation follows Gennaro et al.\ (Pedersen-VSS sharing, then Feldman extraction), run here by one process for the three members.
+\item \textbf{Grace window.} With $W>0$, revocation is delayed by up to $W$ accumulator updates, and the anonymity set splits by accumulator value.
+\item \textbf{Shared secrets.} Members of one tree that hold its secrets can link the tree's calls. Delegation to a wallet in another trust domain gives up unlinkability of that tree towards the delegate.
+\end{itemize}
+

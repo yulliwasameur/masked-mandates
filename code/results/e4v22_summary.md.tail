@@ -1,0 +1,51 @@
+## Design (what changed with respect to E4 v2.1)
+
+* **mmpy v2.2** (`code/mmpy/src/lib.rs`; the core crate `code/src/lib.rs` is unchanged). `Authority.present_dishonest(idx, tool, call, class_, amt, epoch, t, nonce, escrow, cur, acc, counter)` is a test/debug method. It bypasses only the wallet's policy checks (stale or revoked mandate, quota exhausted) and builds a real proof with the witnesses the wallet holds:
+  * `acc="stale"`: uses the snapshot taken in `Authority.revoke` just before the revocation that made the mandate stale, against the accumulator value of that moment (`Cheat{acc_value}` of the core).
+  * `acc="current"`: uses the current, partially refreshed witnesses against the current value.
+  * `counter="reuse"`: reuses the counters of the mandate's own part cyclically.
+  * `counter="beyond"`: uses the counters after its own part.
+  * It returns the presentation, the counter offset, the accumulator path and the policy checks it bypassed.
+* **Tool-side changes.** `Verifier(..., grace_ms=D)` records the installation instant of every new accumulator value in `update`. Before each `verify` it rebuilds the accepted window: the issuer's count window, plus every previous value whose successor was installed at this tool less than D ms earlier. `Verifier.last_reason()` and `last_path()` give the tool's internal reason and acceptance path (current, count window, or time window). The caller still receives only the uniform error `rejected`.
+* **Harness** `code/e4v22/e4v22.py`, derived from `e4v21.py` (unchanged):
+  * Modes `mm_dw` (stale V) and `mm_dw_cv` (current V). Both reuse counters beyond the quota, and the tools are configured exactly as in `mm`.
+  * `--grace-ms`.
+  * `--retry`: if an honest call is rejected and the wallet has since received a newer accumulator version than the one it presented against, it gets a fresh nonce from the tool, rebuilds once and resends. The condition uses only the wallet's own view of the issuer's version.
+  * `--probe`, `--probe-late-ms`, `--dummy-k` and `--min-duration` for the sparse schedule; `--templates`.
+  * Shared-issuer runs keep the tool verifiers across tasks: parameters are updated rather than the verifiers re-created. The time-window history, seen-sets and nonce stores therefore persist for the whole run. In v2.1 the verifiers were re-created at each task start.
+  * Workers wait for the LLM endpoint after setup, so the 200 dummy delegations per worker (about 8 min) overlap with model loading.
+* **Unchanged from v2.1:** tasks, prompts, scoring, the nudge rule, the tool latency model, 5 workers with one agent core and one tool-server core each, `RAYON_NUM_THREADS=1`, vLLM 0.33.0 with the same parsers and chat templates, the dummy revocation schedule (2 s, 200 dummies, k = 1) and publish-then-refresh ordering.
+* **Build.** mmpy v2.2 was built on the Hedy login node with maturin, release mode, the target directory on `/scratch` and the wheel unpacked into `~/masked-mandates-95/code22/pylib` (PYTHONPATH). The v2.1 `agentenv` and its mmpy were left untouched. Harness self-tests (oracle policy, 2 workers) and `dwprobe` ran on the login node before any GPU job.
+
+## Problems met and how they were handled
+
+* **GPU queue.**
+  * Account m26297 allows 4 running and 10 submitted jobs per user, and another project's queue occupied them. The two LLM jobs were submitted at 04:58 and 05:01 and started only at 07:53 and 08:14.
+  * The scripted-policy runs were therefore done first and are the primary evidence.
+  * The coordinator asked to cancel the LLM jobs if they had not started within ~2 h. This session lost contact from about 07:05 to 11:05 (network error); by then both jobs had run to completion, so they were kept as the LLM confirmation.
+* **vLLM port collision (Qwen2.5-7B, job 51013).**
+  * Both jobs ran on m-gpu01, and the port formula `8000 + id % 900 + model index` gave job 51013's second model (Qwen2.5-7B) the port of job 51014's first model (gpt-oss-20b, 8614). The Qwen-7B vLLM could not bind, and its workers found the other job's healthy endpoint: all 96 Qwen-7B runs ended with HTTP 404 ("model does not exist").
+  * That file is kept in `results/e4v22/invalid_port_collision/` and excluded.
+  * The run was repeated in job 51052 after two fixes: a per-job block of 10 vLLM ports, and workers that require their own model in `/v1/models`.
+  * The tool-server port ranges of the two jobs were disjoint (`20000 + (id % 40) * 300`), and the other files report 0 errors. gpt-oss received at most 96 rejected requests within a few seconds at 08:48.
+* **Hedy home quota.** It was 444 GB of 450 at 11:05 (432 GB at the start of this session), above the 440 GB cap. This session's files on Hedy total ~70 MB (`code22` 37 MB, results 15 MB, logs 16 MB), and builds went to `/scratch`. The increase comes from elsewhere, presumably the other project's jobs; nothing was deleted.
+* **No CPU partition.** The `genoa` partition is not open to account m26297. The Mac toolchain cannot link mmpy: the Command Line Tools SDK 27 `.tbd` files are rejected by the linker, and an older SDK produced a library for a different Python ABI. `taskset` is also Linux-only. The scripted-policy runs therefore ran on the Hedy login node: niced, 10 of 32 cores, about 85 min in total, with the node otherwise idle (as for the v2.1 self-tests).
+* **Retry consumed a counter.** In the first retry variant the rebuilt presentation used a new hidden counter, so a churn rejection wasted one unit of quota: 18 of 696 honest calls ended rejected in template e. This was fixed by `Authority.release_counter`: the retry reuses the rejected presentation's counter, which is sound because the core verifier checks the accumulator value before the seen-set and releases its reservation on any failure, so a rejected pseudonym is never recorded. Both runs are kept (`e4v22_retry0newctr_oracle.json`, `e4v22_retry0_oracle.json`). Caveat: against a malicious tool that records rejected pseudonyms, the retry would be rejected as a replay and the two attempts would be linkable to each other (they are the same call).
+* **Commit mix-up.** The first mmpy v2.2 changes (`present_dishonest`, `grace_ms`, `last_reason`/`last_path`) were committed by another session in e05a059, together with that session's own files, before this session committed. The content is identical: the sha256 of `code/mmpy/src/lib.rs` was checked against the copy built on Hedy.
+* **Oracle scope.** The scripted policy replies FAILED at the first rejection. Each template c and e run therefore produces exactly one policy-violating call, and W = 0 without retry produces fewer honest calls (460) than the other configurations (696).
+
+## Files
+
+* Code:
+  * `code/mmpy/src/lib.rs`: `present_dishonest`, `release_counter`, `Verifier(grace_ms)`, `last_reason`, `last_path`.
+  * `code/e4v22/e4v22.py`: harness, `dwprobe`, `analyse22`.
+  * `code/e4v22/hedy_e4v22.sbatch`: LLM jobs, several models per job.
+  * `code/e4v22/oracle_login.sh`: scripted-policy runs.
+  * `code/e4v22/build_mmpy_hedy.sh`.
+* Results:
+  * `code/results/e4v22/e4v22_{dw,retry0,d1000,sparse_w2,sparse_d1000}_<model>.json`: LLM confirmation (jobs 51013, 51014, 51052; `jobs.json`; `logs/gpu/`: Slurm, orchestrator, worker and vLLM logs, per-worker parts with LLM-visible transcripts).
+  * `code/results/e4v22/e4v22_{dw,w0,retry0newctr,retry0,w2,d1000,sparse_w2,sparse_d1000}_oracle.json`: every run and call, provenance, revocation logs, probe logs.
+  * `dwprobe-login.json`.
+  * `logs/oracle/`: orchestrator and worker logs, per-worker parts.
+* Key numbers: `code/results/e4v22_key.json`.
+* Regenerate: `cd code && R=results/e4v22 && M="qwen2.5-7b-instruct qwen2.5-72b-instruct-awq gpt-oss-20b hermes-3-llama-3.1-8b granite-3.3-8b-instruct" && python3 e4v22/e4v22.py analyse22 --dw $R/e4v22_dw_oracle.json $(for m in $M; do echo $R/e4v22_dw_$m.json; done) --shared $R/e4v22_{w0,retry0newctr,retry0,w2,d1000,sparse_w2,sparse_d1000}_oracle.json $R/e4v22_{retry0,d1000,sparse_w2,sparse_d1000}_{qwen2.5-72b-instruct-awq,gpt-oss-20b}.json --dwprobe $R/dwprobe-login.json --v21 results/e4v21 --jobs $R/jobs.json --md results/e4v22_summary.md --key results/e4v22_key.json`. The `.head` and `.tail` files next to the summary are included.
